@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* fitandfightTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* fitandfightTests.m */; };
-		08A3370F2301B15B002BB590 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08A3370E2301B15B002BB590 /* GoogleService-Info.plist */; };
+		08F71C092372BB2100171C10 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08F71C082372BB2100171C10 /* GoogleService-Info.plist */; };
 		093FD86081134DBF8242ADE6 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96333446DA0449DAAF072B39 /* Entypo.ttf */; };
 		0A2569B35FF24A8A8329F82D /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 774D82C8EB6F433EBEEABBF7 /* AntDesign.ttf */; };
 		1375A6DB089142768F3A6D5C /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6621EE7AF3B84F77B679FDD8 /* FontAwesome.ttf */; };
@@ -61,7 +61,7 @@
 		00E356EE1AD99517003FC87E /* fitandfightTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fitandfightTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* fitandfightTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = fitandfightTests.m; sourceTree = "<group>"; };
-		08A3370E2301B15B002BB590 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		08F71C082372BB2100171C10 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		124DE8994DA6456E487A95DC /* Pods-fitandfightTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fitandfightTests.release.xcconfig"; path = "Target Support Files/Pods-fitandfightTests/Pods-fitandfightTests.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* fitandfight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fitandfight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = fitandfight/AppDelegate.h; sourceTree = "<group>"; };
@@ -208,7 +208,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				08A3370E2301B15B002BB590 /* GoogleService-Info.plist */,
+				08F71C082372BB2100171C10 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* fitandfight */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* fitandfightTests */,
@@ -344,7 +344,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 940;
+				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -364,10 +364,9 @@
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "fitandfight" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -407,7 +406,7 @@
 				25562B5613CA45889A4CB064 /* FontAwesome5_Regular.ttf in Resources */,
 				BBF54438BEED4CCB8D0267E7 /* FontAwesome5_Solid.ttf in Resources */,
 				13FE47EEA44F436E81B98B53 /* Fontisto.ttf in Resources */,
-				08A3370F2301B15B002BB590 /* GoogleService-Info.plist in Resources */,
+				08F71C092372BB2100171C10 /* GoogleService-Info.plist in Resources */,
 				8D8A8E8B8F0F4251B5D68A87 /* Foundation.ttf in Resources */,
 				3773FACAA280427FA5F59964 /* Ionicons.ttf in Resources */,
 				47199EA129FA4D28AA6EE4A1 /* MaterialCommunityIcons.ttf in Resources */,

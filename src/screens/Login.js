@@ -3,9 +3,10 @@ import React, { Component } from 'react';
 import {Text, TouchableOpacity, SafeAreaView, View, StyleSheet, Dimensions} from 'react-native';
 import CardView from 'react-native-cardview'
 import { TextInput } from 'react-native-paper';
-import Video from "react-native-video";
 import firebase from 'react-native-firebase';
 const { height } = Dimensions.get("window");
+import SplashScreen from 'react-native-splash-screen';
+
 
 
 export default class Login extends Component {
@@ -23,8 +24,10 @@ export default class Login extends Component {
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
+                SplashScreen.hide();
                 this.props.navigation.replace('Welcome')
             } else {
+                SplashScreen.hide();
                 this.setState({
                     isAuth: true
                 })
@@ -39,15 +42,12 @@ export default class Login extends Component {
             email: '',
             password: ''
         });
-
-        this.player.dismissFullscreenPlayer()
     }
 
 
     login() {
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((user) => {
             this.setState({isAuth: true});
-            this.player.dismissFullscreenPlayer();
         }).catch(err => {
             this.setState({
                 email: err,
@@ -60,18 +60,6 @@ export default class Login extends Component {
     render() {
         return (
             <SafeAreaView backgroundColor={'#D8D8D8'} style={{flexDirection: 'column-reverse', flex: 1}}>
-                <Video
-                    source={require("./../assets/videoplayback.mp4")}
-                    style={styles.backgroundVideo}
-                    muted={true}
-                    ref={(ref) => {
-                        this.player = ref
-                    }}
-                    repeat={true}
-                    resizeMode={"cover"}
-                    rate={1.0}
-                    ignoreSilentSwitch={"obey"}/>
-
                 <CardView
                     cardElevation={7}
                     cardMaxElevation={2}

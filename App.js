@@ -14,6 +14,9 @@ import TrainOrCourse from './src/screens/TrainOrCourse';
 import TrainOrCourseNav from './src/components/headers/TrainOrCourseNav';
 import Courses from './src/screens/Courses';
 import StockNav from './src/components/headers/StockNav';
+import {SafeAreaView} from "react-native";
+
+
 
 class App extends Component {
     render() {
@@ -40,27 +43,28 @@ const AppNavigator = createStackNavigator(
                 header: navigationProps => {
                     navigationProps;
                 },
+
             },
         },
 
         Profile: {
             screen: Profile,
             navigationOptions: {
-                header: navigationProps => <StockNav {...navigationProps} />
+                header: navigationProps => <SafeAreaView><StockNav {...navigationProps} /></SafeAreaView>
             }
         },
 
         Welcome: {
             screen: Welcome,
             navigationOptions: {
-                header: navigationProps => <WelcomeNav {...navigationProps} />
+                header: navigationProps => <SafeAreaView><WelcomeNav {...navigationProps} /></SafeAreaView>
             }
         },
 
         StartWorkout: {
             screen: StartWorkouts,
             navigationOptions: {
-                header: navigationProps => <StockNav {...navigationProps} />
+                header: navigationProps => <SafeAreaView><StockNav {...navigationProps} /></SafeAreaView>
             }
         },
 
@@ -74,20 +78,20 @@ const AppNavigator = createStackNavigator(
         TrainOrCourse: {
             screen: TrainOrCourse,
             navigationOptions: {
-                header: navigationProps => <TrainOrCourseNav {...navigationProps} />
+                header: navigationProps => <SafeAreaView><TrainOrCourseNav {...navigationProps} /></SafeAreaView>
             }
         },
 
         Courses: {
             screen: Courses,
             navigationOptions: {
-                header: navigationProps => <StockNav {...navigationProps} />
+                header: navigationProps => <SafeAreaView><StockNav {...navigationProps} /></SafeAreaView>
             }
         }
 
     },
     {
-        initialRouteName: 'Login'
+        initialRouteName: 'Login',
     }
 );
 export default createAppContainer(AppNavigator);

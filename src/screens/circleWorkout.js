@@ -5,7 +5,7 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import WorkoutNav from '../components/headers/WorkoutNav';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Header from '@freakycoder/react-native-header-view';
+import {ModernHeader} from '@freakycoder/react-native-header-view';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Card, Divider} from 'react-native-paper';
 import plank from '../assets/plank.png';
@@ -228,9 +228,9 @@ export default class CircleWorkout extends Component {
         return (
 
             <SafeAreaView style={{backgroundColor: 'black', flex: 1}}>
-                <Header
+                <ModernHeader
                     backgroundColor={'black'}
-                    leftComponent={
+                    leftIconComponent={
                         <TouchableOpacity
                             onPress={() => {
                                 this.state.doneWorkout ? (this.navigateBack())
@@ -261,7 +261,8 @@ export default class CircleWorkout extends Component {
                                 marginRight: 24,
                                 paddingBottom: 20,
                                 flexDirection: 'column',
-                                justifyContent: 'space-between'
+                                justifyContent: 'space-between',
+                                backgroundColor: 'white'
                             }}>
 
                             {
