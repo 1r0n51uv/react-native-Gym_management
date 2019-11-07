@@ -9,16 +9,21 @@ import Welcome from './src/screens/Welcome';
 import WelcomeNav from './src/components/headers/WelcomeNav';
 import ProfileNav from './src/components/headers/ProfileNav';
 import StartWorkouts from './src/screens/StartWorkouts';
-import CircleWorkout from './src/screens/circleWorkout';
+import WorkoutTime from './src/screens/workoutTime';
 import TrainOrCourse from './src/screens/TrainOrCourse';
 import TrainOrCourseNav from './src/components/headers/TrainOrCourseNav';
 import Courses from './src/screens/Courses';
 import StockNav from './src/components/headers/StockNav';
 import {SafeAreaView} from "react-native";
+import WorkoutWeight from "./src/screens/workoutWeight";
+import SplashScreen from "react-native-splash-screen";
+import CardDay from "./src/components/workOrTrain/cardDay";
 
 
 
 class App extends Component {
+
+
     render() {
         return (
 
@@ -26,6 +31,7 @@ class App extends Component {
         )
     }
 }
+
 
 const AppNavigator = createStackNavigator(
     {
@@ -68,8 +74,15 @@ const AppNavigator = createStackNavigator(
             }
         },
 
-        CircleWorkout: {
-            screen: CircleWorkout,
+        WorkoutTime: {
+            screen: WorkoutTime,
+            navigationOptions: {
+                header: null
+            }
+        },
+
+        WorkoutWeight: {
+            screen: WorkoutWeight,
             navigationOptions: {
                 header: null
             }
@@ -84,6 +97,13 @@ const AppNavigator = createStackNavigator(
 
         Courses: {
             screen: Courses,
+            navigationOptions: {
+                header: navigationProps => <SafeAreaView><StockNav {...navigationProps} /></SafeAreaView>
+            }
+        },
+
+        CardDay: {
+            screen: CardDay,
             navigationOptions: {
                 header: navigationProps => <SafeAreaView><StockNav {...navigationProps} /></SafeAreaView>
             }

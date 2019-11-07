@@ -16,7 +16,7 @@ import Reactotron from 'reactotron-react-native'
 const timer = require('react-native-timer');
 
 
-export default class CircleWorkout extends Component {
+export default class WorkoutTime extends Component {
 
     constructor(props) {
         console.ignoredYellowBox = ['Setting a timer'];
@@ -221,6 +221,7 @@ export default class CircleWorkout extends Component {
         this.setState({
             restSeries: this.state.numberOfSeries
         })
+
     }
 
 

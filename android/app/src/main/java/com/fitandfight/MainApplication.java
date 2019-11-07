@@ -2,7 +2,8 @@ package com.fitandfight;
 
 import android.app.Application;
 import android.util.Log;
-
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import android.os.Bundle;
 import com.facebook.react.PackageList;
 import com.facebook.hermes.reactexecutor.HermesExecutorFactory;
 import com.facebook.react.bridge.JavaScriptExecutorFactory;
