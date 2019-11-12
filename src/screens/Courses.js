@@ -12,6 +12,7 @@ import UserManagerOffline from '../UserManagerOffline';
 import {observer} from 'mobx-react';
 import Reactotron from "reactotron-react-native";
 import Spinner from "react-native-loading-spinner-overlay";
+import CoursesCarousel from "../components/courses/coursesCarousel";
 
 @observer
 export default class  extends Component {
@@ -20,6 +21,7 @@ export default class  extends Component {
         super(props);
         this.state = {
             spinner: true,
+            allCourse: [],
             fireCourse: [],
         };
 
@@ -38,8 +40,10 @@ export default class  extends Component {
 
     retrieveCourses(user) {
         let courses = [];
+        let allCoursesToSlider = [];
         firebase.firestore().collection('Courses').get().then(allCourses => {
             allCourses.docs.map((course) => {
+                allCoursesToSlider.push(course.data());
                 course.data()['usersList'].forEach(usr => {
                     if (usr === user.uid) {
                         courses.push(course.data());
@@ -49,25 +53,10 @@ export default class  extends Component {
         }).then(() => {
             this.setState({
                 fireCourse: courses,
-                spinner: false
+                spinner: false,
+                allCourse: allCoursesToSlider
             })
         })
-
-
-
-
-        /*
-                userSubs['IDCorso'].map(val => {
-                    firebase.firestore().collection('Corsi').doc(val).get().then(course => {
-                        courses.push(course.data())
-                    }).then(() => {
-                        this.userCourses = courses;
-                        Reactotron.log('COURSES SETTED')
-                    }).then(() => {
-                        this.isSet = true;
-                    })
-                })
-         */
 
     }
     componentDidMount() {
@@ -232,24 +221,49 @@ export default class  extends Component {
                                 </CardView>
 
                             ))
-                        ) : (<CardView
-                            cardElevation={7}
-                            cardMaxElevation={2}
-                            cornerRadius={8}
-                            style={{
-                                marginTop: 24,
-                                marginLeft: 24,
-                                marginRight: 24,
-                                marginBottom: 24,
-                                backgroundColor: 'white'
+                        ) : (
 
-                            }}>
-                            <View style={{justifyContent: 'center', flexDirection: 'column', marginTop: 5}}>
-                                <Ionicons style={{color: '#007AFF', alignSelf: 'center'}} size={100}
-                                          name={Platform.OS === 'ios' ? 'md-close-circle' : 'md-close-circle'}/>
+                            <View>
+                                <CardView
+                                    cardElevation={7}
+                                    cardMaxElevation={2}
+                                    cornerRadius={8}
+                                    style={{
+                                        marginTop: 24,
+                                        marginLeft: 24,
+                                        marginRight: 24,
+                                        marginBottom: 24,
+                                        backgroundColor: 'white'
+
+                                    }}>
+
+                                    <View style={{justifyContent: 'center', flexDirection: 'column', marginTop: 5}}>
+                                        <Ionicons style={{color: '#007AFF', alignSelf: 'center'}} size={100}
+                                                  name={Platform.OS === 'ios' ? 'md-close-circle' : 'md-close-circle'}/>
+
+                                    </View>
+                                </CardView>
+
+                                <View style={{flexDirection: 'column'}}>
+
+                                    <Text style={{
+                                        color: 'white',
+                                        fontFamily: 'Oswald',
+                                        fontSize: 40,
+                                        marginLeft: 30,
+                                        borderBottomColor: 'white',
+                                        borderBottomWidth: 5
+                                    }}>I nostri corsi</Text>
+
+                                    <CoursesCarousel
+                                        courses={this.state.allCourse}
+                                    />
+                                </View>
+
+
 
                             </View>
-                        </CardView>)
+                            )
 
 
                     }
