@@ -4,17 +4,14 @@ import {SafeAreaView, View, Text, Dimensions, TouchableOpacity, ImageBackground}
 import AsyncStorage from '@react-native-community/async-storage';
 import {Divider} from 'react-native-paper';
 const { height, width } = Dimensions.get("window");
-import gymWallpaper from './../assets/wall1.jpeg';
+import gymWallpaper from './../assets/590.jpg';
 import firebase from "react-native-firebase";
 import Reactotron from 'reactotron-react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome5'
-import UserManagerOffline from '../UserManagerOffline';
 import {observer} from 'mobx-react';
-import Spinner from 'react-native-loading-spinner-overlay';
 import SplashScreen from 'react-native-splash-screen';
-import * as Animatable from 'react-native-animatable';
-import avatar from '../assets/ProfileInfo.png'
-import logo from '../assets/Fit&Fightlogo.png'
+import TextCarousel from "react-native-text-carousel";
+
 
 @observer
 export default class Welcome extends Component {
@@ -53,11 +50,9 @@ export default class Welcome extends Component {
 
                 <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
 
-                    <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around', flex: 1}}>
+                    <View style={{flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'space-around', flex: 1}}>
 
-                        <Animatable.Image source={logo} animation="pulse" easing="ease-out" iterationCount="infinite" style={{width: 180, height: 180}}/>
-
-                        <View style={{flexDirection: 'column'}}>
+                        <View style={{flexDirection: 'column', marginLeft: 20, marginTop: height/3}}>
 
                             <View>
                                 <TouchableOpacity
@@ -67,23 +62,28 @@ export default class Welcome extends Component {
                                     }}
                                     style={{
                                         marginTop: 20,
-                                        paddingTop: 20,
-                                        paddingBottom: 20,
-                                        backgroundColor:'#D8D8D8',
-                                        borderRadius: 30,
-                                        borderWidth: 1,
-                                        borderColor: '#979797',
-                                        width: width/2,
+                                        paddingBottom: 10
                                     }}>
 
 
-                                    <Text style={{
-                                        color:'#000000',
-                                        textAlign:'center',
-                                        fontSize: 30,
-                                    }}>
-                                        <FontAwesome name={'stopwatch'} size={25}/>
-                                        {' ' + 'Corsi'}</Text>
+                                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                        <Text style={{
+                                            color:'#000000',
+                                            textAlign:'center',
+                                            fontSize: 50,
+                                            borderBottomWidth: 10,
+                                            paddingRight: 5,
+                                            borderBottomColor: '#000000',
+                                            fontFamily: 'Oswald'
+                                        }}>
+
+                                            {'CORSI' + ' '}
+                                            <FontAwesome name={'stopwatch'} size={45}/>
+                                        </Text>
+
+
+                                    </View>
+
 
 
                                 </TouchableOpacity>
@@ -97,23 +97,22 @@ export default class Welcome extends Component {
                                     }}
                                     style={{
                                         marginTop: 20,
-                                        paddingTop: 20,
-                                        paddingBottom: 20,
-                                        backgroundColor:'#D8D8D8',
-                                        borderRadius: 30,
-                                        borderWidth: 1,
-                                        borderColor: '#979797',
-                                        width: width/2,
+                                        paddingBottom: 10
                                     }}>
 
 
                                     <Text style={{
                                         color:'#000000',
-                                        textAlign:'center',
-                                        fontSize: 30,
+                                        textAlign:'left',
+                                        fontSize: 50,
+                                        borderBottomWidth: 10,
+                                        borderBottomColor: '#000000',
+                                        paddingRight: 5,
+                                        fontFamily: 'Oswald'
                                     }}>
-                                        <FontAwesome name={'dumbbell'} size={25}/>
-                                        {' ' + 'Allenati'}</Text>
+                                        {'ALLENATI' + ' '}
+                                        <FontAwesome name={'dumbbell'} size={45}/>
+                                    </Text>
 
 
                                 </TouchableOpacity>

@@ -1,25 +1,24 @@
 import React, {Component} from 'react';
 
 import {Text, TouchableOpacity} from 'react-native';
-import EvilIcons from "react-native-vector-icons/EvilIcons";
 import {ModernHeader} from '@freakycoder/react-native-header-view';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 
 
 export default class StockNav extends Component {
     render() {
         return (
-                <ModernHeader
-                    backgroundColor='black'
-                    leftIconComponent={
-                        <TouchableOpacity
-                            onPress={() => {this.props.navigation.pop()}}>
-                            <Text style={{color: '#FFFFFF', fontSize: 20, marginLeft: 5}}>
-                                <AntDesign name="left" type="AntDesign" size={20} color='#FFFFFF' />Indietro
-                            </Text>
-                        </TouchableOpacity>
-                    }
-                />
+
+
+            <ModernHeader
+                leftIconType="EvilIcons"
+                leftIconName="chevron-left"
+                leftIconSize={35}
+                text="Fit&Fight"
+                textStyle={{fontSize: 20, color: 'white'}}
+                rightDisable={true}
+                leftIconOnPress={() => this.props.navigation.pop()}
+                leftIconColor='white'
+            />
         );
     }
 }
