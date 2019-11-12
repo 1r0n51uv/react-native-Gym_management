@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {View, Text, ScrollView, SafeAreaView, TouchableOpacity, Platform} from 'react-native';
+import {View, Text, ScrollView, SafeAreaView, TouchableOpacity, Platform, Image} from 'react-native';
 import {Avatar, Divider, TextInput} from 'react-native-paper';
 import avatar from './../assets/ProfileInfo.png'
 import CardView from 'react-native-cardview'
@@ -144,7 +144,6 @@ export default class Profile extends Component {
                             <View>
                                 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                     <View style={{marginLeft: 40, marginTop: 10}}>
-
 
                                         <TouchableOpacity onPress={() => {this.changeTab(0)}}>
                                             <Ionicons name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} type="FontAwesome" size={40} color={this.state.active === 0 ? '#007AFF' : 'grey'} />

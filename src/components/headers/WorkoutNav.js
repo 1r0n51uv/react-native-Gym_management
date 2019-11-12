@@ -4,6 +4,13 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import {ModernHeader} from '@freakycoder/react-native-header-view';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
+
+
+
+
+
+
+
 // import styles from './styles';
 
 export default class WorkoutNav extends Component {

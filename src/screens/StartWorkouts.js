@@ -110,62 +110,68 @@ export default class StartWorkouts extends Component {
 
             <SafeAreaView style={{flex: 1, backgroundColor: 'black'}}>
 
-                {
-                    this.state.workouts.length > 0 ? (<View>
-                            <EditModal visible={this.state.editModalVisible} setEditModalVisible={this.setEditModalVisible.bind(this)}/>
 
-                            <InfoModal visible={this.state.infoModalVisible} setInfoModalVisible={this.setInfoModalVisible.bind(this)}/>
 
-                            <TouchableOpacity activeOpacity={0.5} delayPressIn={50} onPress={() => this.startTraining(this.state.workouts[0], 0) }>
-                                <View style={{backgroundColor: '#D8D8D8', height: height/3, alignItems: 'center', justifyContent: 'center'}}>
-                                    <Text style={{fontSize: 40}}>
-                                        <Ionicons name={Platform.OS === 'ios' ? 'ios-play' : 'md-play'} size={40}/>
-                                        {' '} Inizia allenamento
-                                    </Text>
+
+                <ScrollView contentContainerStyle={{paddingBottom: 20}}>
+
+
+                    {
+                        this.state.workouts.length > 0 ? (<View>
+                                    <EditModal visible={this.state.editModalVisible} setEditModalVisible={this.setEditModalVisible.bind(this)}/>
+
+                                    <InfoModal visible={this.state.infoModalVisible} setInfoModalVisible={this.setInfoModalVisible.bind(this)}/>
+
+                                    <TouchableOpacity activeOpacity={0.5} delayPressIn={50} onPress={() => this.startTraining(this.state.workouts[0], 0) }>
+                                        <View style={{backgroundColor: '#D8D8D8', height: height/3, alignItems: 'center', justifyContent: 'center'}}>
+                                            <Text style={{fontSize: 40}}>
+                                                <Ionicons name={Platform.OS === 'ios' ? 'ios-play' : 'md-play'} size={40}/>
+                                                {' '} Inizia allenamento
+                                            </Text>
+                                        </View>
+                                    </TouchableOpacity>
+
+
+                                    {this.state.workouts.map((workout, index) => (
+
+                                        workout.status ?
+
+                                            (
+                                                <WorkoutCard key={index}
+                                                             bgColor={'#4CD964'}
+                                                             doneWorkout={workout.status}
+                                                             workout={workout}
+
+                                                />
+                                            )
+
+                                            :
+
+                                            (
+                                                <TouchableOpacity activeOpacity={0.5} delayPressIn={50} key={index} onPress={() => {
+                                                    this.startTraining(workout, index);
+                                                }}>
+
+                                                    <WorkoutCard workout={workout}
+                                                                 setEditModalVisible={this.setEditModalVisible.bind(this)}
+                                                                 setInfoModalVisible={this.setInfoModalVisible.bind(this)}
+                                                                 bgColor={'white'}/>
+                                                </TouchableOpacity>
+                                            )
+
+                                    ))}
+
+
+
                                 </View>
-                            </TouchableOpacity>
 
-
-                            <ScrollView contentContainerStyle={{paddingBottom: 20}}>
-
-                                {this.state.workouts.map((workout, index) => (
-
-                                    workout.status ?
-
-                                        (
-                                            <WorkoutCard key={index}
-                                                         bgColor={'#4CD964'}
-                                                         doneWorkout={workout.status}
-                                                         workout={workout}
-
-                                            />
-                                        )
-
-                                        :
-
-                                        (
-                                            <TouchableOpacity activeOpacity={0.5} delayPressIn={50} key={index} onPress={() => {
-                                                this.startTraining(workout, index);
-                                            }}>
-
-                                                <WorkoutCard workout={workout}
-                                                             setEditModalVisible={this.setEditModalVisible.bind(this)}
-                                                             setInfoModalVisible={this.setInfoModalVisible.bind(this)}
-                                                             bgColor={'white'}/>
-                                            </TouchableOpacity>
-                                        )
-
-                                ))}
-
-
-                            </ScrollView>
-                        </View>) :
-                        (<Spinner visible={this.state.spinner}/>)
-                }
+                            ) :
+                            (<Spinner visible={this.state.spinner}/>)
+                    }
 
 
 
-
+                </ScrollView>
             </SafeAreaView>
         );
     }
