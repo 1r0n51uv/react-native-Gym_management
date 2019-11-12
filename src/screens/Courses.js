@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-import {View, SafeAreaView, ScrollView, Text, Dimensions, Platform, TouchableOpacity, NativeModules} from 'react-native';
+import {
+    View,
+    SafeAreaView,
+    ScrollView,
+    Text,
+    Dimensions,
+    Platform,
+    TouchableOpacity,
+    NativeModules,
+    ImageBackground
+} from 'react-native';
 import Emoji from 'react-native-emoji';
 import CardView from 'react-native-cardview';
 import {Card, Divider} from 'react-native-paper';
@@ -13,6 +23,7 @@ import {observer} from 'mobx-react';
 import Reactotron from "reactotron-react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 import CoursesCarousel from "../components/courses/coursesCarousel";
+import gymWallpaper from "../assets/2659255-min.jpg";
 
 @observer
 export default class  extends Component {
@@ -72,207 +83,206 @@ export default class  extends Component {
 
     render() {
         return (
-            <SafeAreaView style={{flex: 1, backgroundColor: 'black'}}>
+            <SafeAreaView >
 
-                {this.state.spinner ? (<Spinner visible={this.state.spinner}/>) : (<ScrollView>
+                <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
 
-                    {
+                    {this.state.spinner ? (<Spinner visible={this.state.spinner}/>) : (<ScrollView>
 
-                        this.state.fireCourse.length > 0  ? (
+                        {
 
-                            this.state.fireCourse.map((course, index) => (
+                            this.state.fireCourse.length > 0  ? (
 
-                                <CardView
-                                    key={index}
-                                    cardElevation={7}
-                                    cardMaxElevation={2}
-                                    cornerRadius={8}
-                                    style={{
-                                        marginTop: 24,
-                                        marginLeft: 24,
-                                        marginRight: 24,
-                                        marginBottom: 24,
-                                        backgroundColor: 'white'
-                                    }}>
+                                this.state.fireCourse.map((course, index) => (
 
-                                    <Card>
-                                        <Card.Cover source={plank}/>
-
-                                        <Card.Content style={{
-                                            flexDirection: 'row',
-                                            justifyContent: 'space-between',
-                                            paddingBottom: 15
+                                    <CardView
+                                        key={index}
+                                        cardElevation={7}
+                                        cardMaxElevation={2}
+                                        cornerRadius={8}
+                                        style={{
+                                            marginTop: 24,
+                                            marginLeft: 24,
+                                            marginRight: 24,
+                                            marginBottom: 24,
+                                            backgroundColor: 'white'
                                         }}>
-                                            <Text style={{
-                                                marginTop: 10,
-                                                fontSize: 30,
-                                                alignSelf: 'center'
-                                            }}>{course['name']}</Text>
-                                            <TouchableOpacity activeOpacity={0.5} delayPressIn={50} onPress={() => {
-                                                this.collapseManagement(index);
+
+                                        <Card>
+                                            <Card.Cover source={plank}/>
+
+                                            <Card.Content style={{
+                                                flexDirection: 'row',
+                                                justifyContent: 'space-between',
+                                                paddingBottom: 15
                                             }}>
+                                                <Text style={{
+                                                    marginTop: 10,
+                                                    fontSize: 30,
+                                                    alignSelf: 'center'
+                                                }}>{course['name']}</Text>
+                                                <TouchableOpacity activeOpacity={0.5} delayPressIn={50} onPress={() => {
+                                                    this.collapseManagement(index);
+                                                }}>
 
-                                                <Ionicons style={{alignSelf: 'center', marginTop: 15, color: '#007AFF'}}
-                                                          name={(this.state.fireCourse[index].collapsed) ?
-                                                              (Platform.OS === 'ios' ? 'md-arrow-dropup' : 'ios-arrow-dropup')
-                                                              :
-                                                              (Platform.OS === 'ios' ? 'md-information-circle-outline' : 'ios-information-circle-outline')
-                                                          }
-                                                          size={35}/>
-                                            </TouchableOpacity>
-                                        </Card.Content>
+                                                    <Ionicons style={{alignSelf: 'center', marginTop: 15, color: '#007AFF'}}
+                                                              name={(this.state.fireCourse[index].collapsed) ?
+                                                                  (Platform.OS === 'ios' ? 'md-arrow-dropup' : 'ios-arrow-dropup')
+                                                                  :
+                                                                  (Platform.OS === 'ios' ? 'md-information-circle-outline' : 'ios-information-circle-outline')
+                                                              }
+                                                              size={35}/>
+                                                </TouchableOpacity>
+                                            </Card.Content>
 
-                                        {(this.state.fireCourse[index].collapsed) ?
-                                            (
-                                                <Card.Content>
+                                            {(this.state.fireCourse[index].collapsed) ?
+                                                (
+                                                    <Card.Content>
 
-                                                    <Divider/>
+                                                        <Divider/>
 
-                                                    <View style={{
-                                                        justifyContent: 'flex-start',
-                                                        flexDirection: 'row',
-                                                        marginTop: 5
-                                                    }}>
-                                                        <Text style={{
-                                                            fontSize: 15,
-                                                            color: '#007AFF',
+                                                        <View style={{
+                                                            justifyContent: 'flex-start',
+                                                            flexDirection: 'row',
                                                             marginTop: 5
-                                                        }}>Istruttore:</Text>
-                                                        <Text style={{fontSize: 20}}>{' ' + course['instructor']}</Text>
-                                                    </View>
+                                                        }}>
+                                                            <Text style={{
+                                                                fontSize: 15,
+                                                                color: '#007AFF',
+                                                                marginTop: 5
+                                                            }}>Istruttore:</Text>
+                                                            <Text style={{fontSize: 20}}>{' ' + course['instructor']}</Text>
+                                                        </View>
 
-                                                    <View style={{
-                                                        justifyContent: 'flex-start',
-                                                        flexDirection: 'row',
-                                                        marginTop: 5
-                                                    }}>
-                                                        <Text style={{
-                                                            fontSize: 15,
-                                                            color: '#007AFF',
+                                                        <View style={{
+                                                            justifyContent: 'flex-start',
+                                                            flexDirection: 'row',
                                                             marginTop: 5
-                                                        }}>Cadenza:</Text>
+                                                        }}>
+                                                            <Text style={{
+                                                                fontSize: 15,
+                                                                color: '#007AFF',
+                                                                marginTop: 5
+                                                            }}>Cadenza:</Text>
 
-                                                        <View style={{flexDirection: 'column'}}>
+                                                            <View style={{flexDirection: 'column'}}>
 
-                                                            {
+                                                                {
 
 
-                                                                course['weeklyFrequency'].map((workDay, index) =>(
-                                                                    <Text key={index} style={{fontSize: 18, marginTop: 2}}>{' ' + workDay.day + ' - ' + workDay.startTime.hour + ':' + workDay.endTime.minutes}</Text>
-                                                                ))
+                                                                    course['weeklyFrequency'].map((workDay, index) =>(
+                                                                        <Text key={index} style={{fontSize: 18, marginTop: 2}}>{' ' + workDay.day + ' - ' + workDay.startTime.hour + ':' + workDay.endTime.minutes}</Text>
+                                                                    ))
 
-                                                                /*
-                                                                course['weeklyFrequency']['Giorni'].map((days, index) => (
-                                                                        <Text key={index} style={{fontSize: 18, marginTop: 2}}>
-                                                                            {
-                                                                                ' ' + days['Giorno']['Giorno'] + ' - ' + days['Giorno']['Ora inizio']['Ora'] + ':'
-                                                                                + (days['Giorno']['Ora inizio']['Minuti'] === 0 ? '00' : days['Giorno']['Ora inizio']['Minuti'])
-                                                                                + '/' + days['Giorno']['Ora Fine']['Ora'] + ':'
-                                                                                + (days['Giorno']['Ora Fine']['Minuti'] === 0 ? '00' : days['Giorno']['Ora Fine']['Minuti'])
-                                                                            }
-                                                                        </Text>
+                                                                    /*
+                                                                    course['weeklyFrequency']['Giorni'].map((days, index) => (
+                                                                            <Text key={index} style={{fontSize: 18, marginTop: 2}}>
+                                                                                {
+                                                                                    ' ' + days['Giorno']['Giorno'] + ' - ' + days['Giorno']['Ora inizio']['Ora'] + ':'
+                                                                                    + (days['Giorno']['Ora inizio']['Minuti'] === 0 ? '00' : days['Giorno']['Ora inizio']['Minuti'])
+                                                                                    + '/' + days['Giorno']['Ora Fine']['Ora'] + ':'
+                                                                                    + (days['Giorno']['Ora Fine']['Minuti'] === 0 ? '00' : days['Giorno']['Ora Fine']['Minuti'])
+                                                                                }
+                                                                            </Text>
+                                                                        )
                                                                     )
-                                                                )
 
-                                                                 */
+                                                                     */
 
 
-                                                            }
+                                                                }
+                                                            </View>
+
+
+                                                        </View>
+
+                                                        <View style={{
+                                                            justifyContent: 'flex-start',
+                                                            flexDirection: 'row',
+                                                            marginTop: 5
+                                                        }}>
+                                                            <Text style={{
+                                                                fontSize: 15,
+                                                                color: '#007AFF',
+                                                                marginTop: 5
+                                                            }}>Inizio:</Text>
+                                                            <Text
+                                                                style={{fontSize: 20}}>{' ' + course['period'].startDate }</Text>
                                                         </View>
 
 
-                                                    </View>
-
-                                                    <View style={{
-                                                        justifyContent: 'flex-start',
-                                                        flexDirection: 'row',
-                                                        marginTop: 5
-                                                    }}>
-                                                        <Text style={{
-                                                            fontSize: 15,
-                                                            color: '#007AFF',
+                                                        <View style={{
+                                                            justifyContent: 'flex-start',
+                                                            flexDirection: 'row',
                                                             marginTop: 5
-                                                        }}>Inizio:</Text>
-                                                        <Text
-                                                            style={{fontSize: 20}}>{' ' + course['period'].startDate }</Text>
-                                                    </View>
+                                                        }}>
+                                                            <Text style={{
+                                                                fontSize: 15,
+                                                                color: '#007AFF',
+                                                                marginTop: 5
+                                                            }}>Fine:</Text>
+                                                            <Text
+                                                                style={{fontSize: 20}}>{' ' + course['period'].endDate}</Text>
+                                                        </View>
 
+                                                    </Card.Content>
+                                                ) : (<View/>)
+                                            }
 
-                                                    <View style={{
-                                                        justifyContent: 'flex-start',
-                                                        flexDirection: 'row',
-                                                        marginTop: 5
-                                                    }}>
-                                                        <Text style={{
-                                                            fontSize: 15,
-                                                            color: '#007AFF',
-                                                            marginTop: 5
-                                                        }}>Fine:</Text>
-                                                        <Text
-                                                            style={{fontSize: 20}}>{' ' + course['period'].endDate}</Text>
-                                                    </View>
+                                        </Card>
 
-                                                </Card.Content>
-                                            ) : (<View/>)
-                                        }
+                                    </CardView>
 
-                                    </Card>
+                                ))
+                            ) : (
 
-                                </CardView>
+                                <View style={{justifyContent: 'space-between', flexDirection: 'column'}}>
+                                    <CardView
+                                        cardElevation={7}
+                                        cardMaxElevation={2}
+                                        cornerRadius={8}
+                                        style={{
+                                            marginTop: 24,
+                                            marginLeft: 24,
+                                            marginRight: 24,
+                                            marginBottom: 24,
+                                            backgroundColor: 'white'
 
-                            ))
-                        ) : (
+                                        }}>
 
-                            <View>
-                                <CardView
-                                    cardElevation={7}
-                                    cardMaxElevation={2}
-                                    cornerRadius={8}
-                                    style={{
-                                        marginTop: 24,
-                                        marginLeft: 24,
-                                        marginRight: 24,
-                                        marginBottom: 24,
-                                        backgroundColor: 'white'
+                                        <View style={{justifyContent: 'center', flexDirection: 'column', marginTop: 5}}>
+                                            <Ionicons style={{color: '#007AFF', alignSelf: 'center'}} size={100}
+                                                      name={Platform.OS === 'ios' ? 'md-close-circle' : 'md-close-circle'}/>
 
-                                    }}>
+                                        </View>
+                                    </CardView>
 
-                                    <View style={{justifyContent: 'center', flexDirection: 'column', marginTop: 5}}>
-                                        <Ionicons style={{color: '#007AFF', alignSelf: 'center'}} size={100}
-                                                  name={Platform.OS === 'ios' ? 'md-close-circle' : 'md-close-circle'}/>
+                                    <View style={{flexDirection: 'column'}}>
 
+                                        <Text style={{
+                                            color: 'black',
+                                            fontFamily: 'Oswald',
+                                            fontSize: 40,
+                                            marginLeft: 40
+                                        }}>I nostri corsi</Text>
+
+                                        <CoursesCarousel
+                                            courses={this.state.allCourse}
+                                        />
                                     </View>
-                                </CardView>
 
-                                <View style={{flexDirection: 'column'}}>
 
-                                    <Text style={{
-                                        color: 'white',
-                                        fontFamily: 'Oswald',
-                                        fontSize: 40,
-                                        marginLeft: 30,
-                                        borderBottomColor: 'white',
-                                        borderBottomWidth: 5
-                                    }}>I nostri corsi</Text>
-
-                                    <CoursesCarousel
-                                        courses={this.state.allCourse}
-                                    />
                                 </View>
-
-
-
-                            </View>
                             )
 
 
-                    }
+                        }
 
-                </ScrollView>)}
-
-
+                    </ScrollView>)}
 
 
+
+                </ImageBackground>
             </SafeAreaView>
         );
     }

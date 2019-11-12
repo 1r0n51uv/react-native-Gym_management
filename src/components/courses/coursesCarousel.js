@@ -5,6 +5,7 @@ import firebase from "react-native-firebase";
 const { height, width } = Dimensions.get("window");
 import Reactotron from "reactotron-react-native";
 import {Card, Divider, Title, Paragraph} from 'react-native-paper';
+import CardView from "react-native-cardview";
 
 export default class CoursesCarousel extends Component {
     constructor(props) {
@@ -27,7 +28,18 @@ export default class CoursesCarousel extends Component {
 
     _renderItem ({item, index}, parallaxProps) {
         return (
-            <View style={styles.item}>
+            <CardView
+                cardElevation={7}
+                cardMaxElevation={2}
+                cornerRadius={8}
+                style={{
+                    marginTop: 10,
+                    marginLeft: 10,
+                    marginRight: 10,
+                    marginBottom: 10,
+                    backgroundColor: 'white'
+                }}>
+
 
                 <Card>
                     <Card.Cover source={{ uri: item.image }} />
@@ -36,8 +48,7 @@ export default class CoursesCarousel extends Component {
                         <Paragraph>{item.description}</Paragraph>
                     </Card.Content>
                 </Card>
-
-            </View>
+            </CardView>
         );
     }
 
