@@ -62,6 +62,7 @@ export default class CoursesCarousel extends Component {
                                 marginTop: 10,
                                 fontSize: 30,
                                 alignSelf: 'flex-start',
+                                fontFamily: 'Oswald'
                             }}>{item['name']}</Text>
                         </View>
 
@@ -76,9 +77,10 @@ export default class CoursesCarousel extends Component {
                                 <Text style={{
                                     fontSize: 15,
                                     color: '#007AFF',
-                                    marginTop: 5
+                                    marginTop: 5,
+                                    fontFamily: 'Oswald'
                                 }}>Istruttore:</Text>
-                                <Text style={{fontSize: 20}}>{' ' + item['instructor']}</Text>
+                                <Text style={{fontSize: 20, fontFamily: 'Oswald'}}>{' ' + item['instructor']}</Text>
                             </View>
 
                             <View style={{
@@ -89,7 +91,8 @@ export default class CoursesCarousel extends Component {
                                 <Text style={{
                                     fontSize: 15,
                                     color: '#007AFF',
-                                    marginTop: 5
+                                    marginTop: 5,
+                                    fontFamily: 'Oswald'
                                 }}>Cadenza:</Text>
 
                                 <View style={{flexDirection: 'column'}}>
@@ -97,7 +100,7 @@ export default class CoursesCarousel extends Component {
                                     {
 
                                         item['weeklyFrequency'].map((workDay, index) =>(
-                                            <Text key={index} style={{fontSize: 18, marginTop: 2}}>{' ' + workDay.day + ' - ' + workDay.startTime.hour + ':' + workDay.endTime.minutes}</Text>
+                                            <Text key={index} style={{fontSize: 18, marginTop: 2, fontFamily: 'Oswald'}}>{' ' + workDay.day + ' - ' + workDay.startTime.hour + ':' + workDay.endTime.minutes}</Text>
                                         ))
 
                                     }
@@ -114,10 +117,11 @@ export default class CoursesCarousel extends Component {
                                 <Text style={{
                                     fontSize: 15,
                                     color: '#007AFF',
-                                    marginTop: 5
+                                    marginTop: 5,
+                                    fontFamily: 'Oswald'
                                 }}>Inizio:</Text>
                                 <Text
-                                    style={{fontSize: 20}}>{' ' + item['period'].startDate }</Text>
+                                    style={{fontSize: 20, fontFamily: 'Oswald'}}>{' ' + item['period'].startDate }</Text>
                             </View>
 
 
@@ -129,10 +133,11 @@ export default class CoursesCarousel extends Component {
                                 <Text style={{
                                     fontSize: 15,
                                     color: '#007AFF',
-                                    marginTop: 5
+                                    marginTop: 5,
+                                    fontFamily: 'Oswald'
                                 }}>Fine:</Text>
                                 <Text
-                                    style={{fontSize: 20}}>{' ' + item['period'].endDate}</Text>
+                                    style={{fontSize: 20, fontFamily: 'Oswald'}}>{' ' + item['period'].endDate}</Text>
                             </View>
 
                         </View>
@@ -166,8 +171,10 @@ export default class CoursesCarousel extends Component {
                 <Card>
                     <Card.Cover source={{ uri: item.image }} />
                     <Card.Content>
-                        <Title style={{ fontFamily: 'Oswald', fontSize: 30}}>{item.name}</Title>
-                        <Paragraph>{item.description}</Paragraph>
+                        <View style={{marginTop: 5}}>
+                            <Title style={{ fontFamily: 'Oswald', fontSize: 30}}>{item.name}</Title>
+                            <Paragraph>{item.description}</Paragraph>
+                        </View>
                     </Card.Content>
                 </Card>
             </CardView>

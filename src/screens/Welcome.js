@@ -58,12 +58,12 @@ export default class Welcome extends Component {
                                 <TouchableOpacity
                                     onPress={() => {
                                         this.props.navigation.push('Courses')
-
                                     }}
                                     style={{
                                         marginTop: 20,
                                         borderWidth: 5,
                                         borderColor: '#000000',
+                                        borderRadius: 20,
                                         alignItems: 'center'
                                     }}>
 
@@ -82,10 +82,7 @@ export default class Welcome extends Component {
                                             <Ionicons name={Platform.OS === 'ios' ? 'ios-timer' : 'md-timer'} size={50} />
                                         </Text>
 
-
                                     </View>
-
-
 
                                 </TouchableOpacity>
                             </View>

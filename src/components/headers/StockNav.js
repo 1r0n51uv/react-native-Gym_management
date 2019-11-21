@@ -14,7 +14,7 @@ export default class StockNav extends Component {
                 leftIconName="chevron-left"
                 leftIconSize={35}
                 text="Fit&Fight"
-                textStyle={{fontSize: 20, color: 'white'}}
+                textStyle={{fontSize: 20, color: 'white', fontFamily: 'Oswald'}}
                 rightDisable={true}
                 leftIconOnPress={() => this.props.navigation.pop()}
                 leftIconColor='white'

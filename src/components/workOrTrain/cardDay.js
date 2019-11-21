@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import CardView from "react-native-cardview";
-import {Text, TouchableOpacity, View, Dimensions, ScrollView} from "react-native";
+import {Text, TouchableOpacity, View, Dimensions, ScrollView, ImageBackground, SafeAreaView} from "react-native";
 import Emoji from "react-native-emoji";
 import Reactotron from 'reactotron-react-native'
 import firebase from "react-native-firebase";
+import gymWallpaper from './../../assets/590.jpg';
 const { height, width } = Dimensions.get("window");
 
 class CardDay extends Component {
@@ -58,34 +59,40 @@ class CardDay extends Component {
 
     render() {
         return (
-            <ScrollView>
+            <SafeAreaView style={{flex: 1}}>
+                <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
+                    <ScrollView>
 
-                {this.state.days.map((day, index) => (
-                    <TouchableOpacity key={index} activeOpacity={0.5} onPress={() => this.props.navigation.push('StartWorkout', {day})}>
 
-                        <CardView
-                            cardElevation={7}
-                            cardMaxElevation={2}
-                            cornerRadius={8}
-                            style={{
-                                marginTop: 24,
-                                marginLeft: 24,
-                                marginRight: 24,
-                                marginBottom: 24,
-                                backgroundColor: 'white'
 
-                            }}>
+                        {this.state.days.map((day, index) => (
+                            <TouchableOpacity key={index} activeOpacity={0.5} onPress={() => this.props.navigation.push('StartWorkout', {day})}>
 
-                            <View style={{height: height/3, alignItems: 'center', justifyContent: 'center'}}>
-                                <Emoji name="newspaper" style={{fontSize: 50}} />
-                                <Text style={{fontSize: 40}}>{'Giorno: ' + (index + 1)}</Text>
-                            </View>
-                        </CardView>
+                                <CardView
+                                    cardElevation={7}
+                                    cardMaxElevation={2}
+                                    style={{
+                                        marginTop: 24,
+                                        marginLeft: 24,
+                                        marginRight: 24,
+                                        marginBottom: 24,
+                                        backgroundColor: 'white'
+                                    }}>
 
-                    </TouchableOpacity>
-                ))
-                }
-            </ScrollView>
+                                    <View style={{height: height/5, alignItems: 'center', justifyContent: 'center', borderWidth: 5,
+                                        borderColor: '#000000', flexDirection: 'row'}}>
+                                        <Text style={{fontSize: 50, fontFamily: 'Oswald'}}>{'GIORNO ' + (index + 1)}</Text>
+                                    </View>
+                                </CardView>
+
+                            </TouchableOpacity>
+                        ))
+                        }
+
+                    </ScrollView>
+                </ImageBackground>
+            </SafeAreaView>
+
         );
     }
 }

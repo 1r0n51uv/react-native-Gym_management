@@ -6,21 +6,15 @@ import {
     Text,
     Dimensions,
     Platform,
-    TouchableOpacity,
-    NativeModules,
     ImageBackground
 } from 'react-native';
-import Emoji from 'react-native-emoji';
+
 import CardView from 'react-native-cardview';
-import {Card, Divider} from 'react-native-paper';
-import plank from '../assets/plank.png';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 const { height, width } = Dimensions.get("window");
 const timer = require('react-native-timer');
 import firebase from 'react-native-firebase';
-import UserManagerOffline from '../UserManagerOffline';
 import {observer} from 'mobx-react';
-import Reactotron from "reactotron-react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 import CoursesCarousel from "../components/courses/coursesCarousel";
 import gymWallpaper from "../assets/2659255-min.jpg";
@@ -83,7 +77,7 @@ export default class  extends Component {
 
     render() {
         return (
-            <SafeAreaView >
+            <SafeAreaView>
 
                 <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
 
@@ -94,14 +88,35 @@ export default class  extends Component {
                             this.state.fireCourse.length > 0  ? (
 
                                 <View>
-                                <CoursesCarousel
-                                    courses={this.state.fireCourse}
-                                    whichCarousel={false}
-                                />
-                                    <CoursesCarousel
-                                        courses={this.state.allCourse}
-                                        whichCarousel={true}
-                                    />
+
+                                    <View style={{flexDirection: 'column'}}>
+                                        <Text style={{
+                                            color: 'black',
+                                            fontFamily: 'Oswald',
+                                            fontSize: 40,
+                                            alignSelf: 'center'
+                                        }}>I tuoi corsi</Text>
+                                        <CoursesCarousel
+                                            courses={this.state.fireCourse}
+                                            whichCarousel={false}
+                                        />
+
+                                    </View>
+
+                                    <View style={{flexDirection: 'column'}}>
+
+                                        <Text style={{
+                                            color: 'black',
+                                            fontFamily: 'Oswald',
+                                            fontSize: 40,
+                                            marginLeft: 40,
+                                        }}>I tuoi corsi</Text>
+                                        <CoursesCarousel
+                                            courses={this.state.allCourse}
+                                            whichCarousel={true}
+                                        />
+                                    </View>
+
                                 </View>
 
 
@@ -151,8 +166,6 @@ export default class  extends Component {
                         }
 
                     </ScrollView>)}
-
-
 
                 </ImageBackground>
             </SafeAreaView>

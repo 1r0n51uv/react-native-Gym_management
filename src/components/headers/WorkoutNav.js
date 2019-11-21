@@ -33,7 +33,7 @@ export default class WorkoutNav extends Component {
                                     this.props.navigation.goWorkoutList();
                             }
                             }>
-                            <Text style={{color: 'white', fontSize: 20, marginLeft: 5}}>
+                            <Text style={{color: 'white', fontSize: 20, marginLeft: 5, fontFamily: 'Oswald'}}>
                                 <AntDesign name="left" type="AntDesign" size={20} color='white' />Indietro</Text>
                         </TouchableOpacity>
                     }

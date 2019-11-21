@@ -13,7 +13,7 @@ export default class WelcomeNav extends Component {
                 <ModernHeader
                     leftDisable={true}
                     text="Fit&Fight"
-                    textStyle={{fontSize: 20, color: 'white'}}
+                    textStyle={{fontSize: 20, color: 'white', fontFamily: 'Oswald'}}
                     rightIconName="user"
                     rightIconType="EvilIcons"
                     rightIconSize={35}
