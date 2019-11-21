@@ -122,7 +122,7 @@ export default class Profile extends Component {
 
 
         return (
-            <SafeAreaView style={{backgroundColor: 'black', flex: 1}}>
+            <SafeAreaView style={{backgroundColor: 'white', flex: 1}}>
 
                 {this.state.userInfo ?
 
@@ -133,7 +133,6 @@ export default class Profile extends Component {
                         <CardView
                             cardElevation={7}
                             cardMaxElevation={2}
-                            cornerRadius={8}
                             style={{
                                 marginTop: 20,
                                 marginLeft: 24,
@@ -141,7 +140,7 @@ export default class Profile extends Component {
                                 backgroundColor: 'white'
                             }}>
 
-                            <View>
+                            <View style={{borderWidth: 5, borderColor: '#000000'}}>
                                 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                     <View style={{marginLeft: 40, marginTop: 10}}>
 
@@ -180,21 +179,20 @@ export default class Profile extends Component {
                             onPress={() => this.logout()}
                             style={{
                                 marginTop: 20,
+                                borderWidth: 5,
+                                borderColor: '#000000',
+                                alignItems: 'center',
                                 marginRight: 24,
-                                paddingTop: 20,
-                                paddingBottom: 20,
-                                backgroundColor:'#EB3333',
-                                borderRadius: 30,
-                                borderWidth: 1,
-                                borderColor: '#EB3333',
                                 alignSelf: 'flex-end',
-                                width: '40%'
                             }}>
                             <Text style={{
-                                color:'#FFFFFF',
+                                color:'#000000',
                                 textAlign:'center',
-                                fontSize: 25
-                            }}>Logout <Ionicons name={Platform.OS === 'ios' ? 'ios-log-out' : 'md-log-out'} size={25} /></Text>
+                                fontSize: 45,
+                                paddingRight: 10,
+                                paddingLeft: 10,
+                                fontFamily: 'Oswald'
+                            }}>LOGOUT <Ionicons name={Platform.OS === 'ios' ? 'ios-log-out' : 'md-log-out'} size={40} /></Text>
                         </TouchableOpacity>
                     </ScrollView>) :
 

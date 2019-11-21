@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import firebase from "react-native-firebase";
 // import styles from './styles';
 
@@ -16,22 +16,34 @@ export default class ProfileTabOne extends Component {
         return (
             <View style={{flexDirection: 'column', marginLeft: 20, marginTop: 10, paddingBottom: 10}}>
 
-                <Text style={{color: '#007AFF'}}>Nome</Text>
-                <Text style={{fontSize: 25}}>{this.props.userInfo ? this.props.userInfo['name'] : ' '}</Text>
+                <Text style={styles.mainTitle}>Nome</Text>
+                <Text style={styles.subtitle}>{this.props.userInfo ? this.props.userInfo['name'] : ' '}</Text>
 
-                <Text style={{color: '#007AFF'}}>Cognome</Text>
-                <Text style={{fontSize: 25}}>{this.props.userInfo ? this.props.userInfo['surname'] : ' '}</Text>
+                <Text style={styles.mainTitle}>Cognome</Text>
+                <Text style={styles.subtitle}>{this.props.userInfo ? this.props.userInfo['surname'] : ' '}</Text>
 
-                <Text style={{color: '#007AFF'}}>Età</Text>
-                <Text style={{fontSize: 25}}>{this.props.userInfo ? this.props.userInfo['dateOfBirth'] : ' '}</Text>
+                <Text style={styles.mainTitle}>Età</Text>
+                <Text style={styles.subtitle}>{this.props.userInfo ? this.props.userInfo['dateOfBirth'] : ' '}</Text>
 
-                <Text style={{color: '#007AFF'}}>Email</Text>
-                <Text style={{fontSize: 25}}>{this.props.userInfo ? this.props.userInfo['email'] : ' '}</Text>
+                <Text style={styles.mainTitle}>Email</Text>
+                <Text style={styles.subtitle}>{this.props.userInfo ? this.props.userInfo['email'] : ' '}</Text>
 
-                <Text style={{color: '#007AFF'}}>Telefono</Text>
-                <Text style={{fontSize: 25}}>{this.props.userInfo ? this.props.userInfo['telephone'] : ' '}</Text>
+                <Text style={styles.mainTitle}>Telefono</Text>
+                <Text style={styles.subtitle}>{this.props.userInfo ? this.props.userInfo['telephoneNumber'] : ' '}</Text>
 
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    mainTitle: {
+        color: '#007AFF',
+        fontFamily: 'Oswald'
+    },
+    subtitle: {
+        fontSize: 25,
+        fontFamily: 'Oswald'
+    }
+
+});

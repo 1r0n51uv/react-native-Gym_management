@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-import {Text, View} from 'react-native';
-
+import {Text, View, StyleSheet} from 'react-native';
 // import styles from './styles';
 
 export default class ProfileTabTwo extends Component {
@@ -14,18 +13,29 @@ export default class ProfileTabTwo extends Component {
         return (
             <View style={{flexDirection: 'column', marginLeft: 20, marginTop: 10, paddingBottom: 10}}>
 
-                <Text style={{color: '#007AFF'}}>Altezza</Text>
-                <Text style={{fontSize: 25}}>{this.props.userAnemic ? this.props.userAnemic['height'] + ' cm' : ' '}</Text>
+                <Text style={styles.mainTitle}>Altezza</Text>
+                <Text style={styles.subtitle}>{this.props.userAnemic ? this.props.userAnemic['height'] + ' cm' : ' '}</Text>
 
-                <Text style={{color: '#007AFF'}}>Peso</Text>
-                <Text style={{fontSize: 25}}>{this.props.userAnemic ? this.props.userAnemic['weight'] + ' kg' : ' '}</Text>
+                <Text style={styles.mainTitle}>Peso</Text>
+                <Text style={styles.subtitle}>{this.props.userAnemic ? this.props.userAnemic['weight'] + ' kg' : ' '}</Text>
 
-                <Text style={{color: '#007AFF'}}>BCM</Text>
-                <Text style={{fontSize: 25}}>Appezzi</Text>
-
-
+                <Text style={styles.mainTitle}>BCM</Text>
+                <Text style={styles.subtitle}>Appezzi</Text>
 
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    mainTitle: {
+        color: '#007AFF',
+        fontFamily: 'Oswald'
+    },
+    subtitle: {
+        fontSize: 25,
+        fontFamily: 'Oswald'
+    }
+
+});
+

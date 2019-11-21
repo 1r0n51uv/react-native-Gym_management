@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-import {SafeAreaView, View, Text, Dimensions, TouchableOpacity, ImageBackground} from 'react-native';
+import {SafeAreaView, View, Text, Dimensions, TouchableOpacity, ImageBackground, Platform} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {Divider} from 'react-native-paper';
 const { height, width } = Dimensions.get("window");
 import gymWallpaper from './../assets/590.jpg';
 import firebase from "react-native-firebase";
 import Reactotron from 'reactotron-react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome5'
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {observer} from 'mobx-react';
 import SplashScreen from 'react-native-splash-screen';
 import TextCarousel from "react-native-text-carousel";
@@ -62,7 +62,7 @@ export default class Welcome extends Component {
                                     }}
                                     style={{
                                         marginTop: 20,
-                                        borderWidth: 3,
+                                        borderWidth: 5,
                                         borderColor: '#000000',
                                         alignItems: 'center'
                                     }}>
@@ -72,14 +72,14 @@ export default class Welcome extends Component {
 
                                         <Text style={{
                                             color:'#000000',
-                                            textAlign:'center',
                                             fontSize: 50,
-                                            paddingRight: 5,
+                                            paddingRight: 10,
+                                            paddingLeft: 10,
                                             fontFamily: 'Oswald'
                                         }}>
 
-                                            {'Corsi' + ' '}
-                                            <FontAwesome name={'stopwatch'} size={35}/>
+                                            {'CORSI' + ' '}
+                                            <Ionicons name={Platform.OS === 'ios' ? 'ios-timer' : 'md-timer'} size={50} />
                                         </Text>
 
 
@@ -100,20 +100,20 @@ export default class Welcome extends Component {
                                         marginTop: 20,
                                         borderWidth: 5,
                                         borderColor: '#000000',
-                                        alignItems: 'center'
+                                        alignItems: 'flex-start'
                                     }}>
 
 
                                     <Text style={{
                                         color:'#000000',
-                                        textAlign:'center',
+                                        textAlign:'left',
                                         fontSize: 50,
-                                        paddingRight: 5,
-                                        paddingLeft: 5,
+                                        paddingRight: 10,
+                                        paddingLeft: 10,
                                         fontFamily: 'Oswald'
                                     }}>
                                         {'ALLENATI' + ' '}
-                                        <FontAwesome name={'dumbbell'} size={45}/>
+                                        <Ionicons name={Platform.OS === 'ios' ? 'ios-walk' : 'md-walk'} size={50} />
                                     </Text>
 
 

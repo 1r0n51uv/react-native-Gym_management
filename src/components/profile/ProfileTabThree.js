@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import Entrance from '../subscription/entrance';
 import Periodical from '../subscription/periodical';
 import ActiveCourses from '../subscription/activeCourses';
@@ -23,9 +23,9 @@ export default class ProfileTabThree extends Component {
             <View style={{flexDirection: 'column', marginLeft: 20, marginTop: 10, paddingBottom: 10}}>
 
 
-                <Text style={{color: '#007AFF'}}>Abbonamento</Text>
+                <Text style={styles.mainTitle}>Abbonamento</Text>
 
-                <Text style={{fontSize: 25}}>
+                <Text style={styles.subtitle}>
                     {this.props.userSubscription['type'] === 'period' && 'Periodico' }
 
                     {this.props.userSubscription['type'] === 'revenue' &&  'Entrate'}
@@ -50,3 +50,15 @@ export default class ProfileTabThree extends Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    mainTitle: {
+        color: '#007AFF',
+        fontFamily: 'Oswald'
+    },
+    subtitle: {
+        fontSize: 25,
+        fontFamily: 'Oswald'
+    }
+
+});

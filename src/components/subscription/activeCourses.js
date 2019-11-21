@@ -18,7 +18,7 @@ export default class ActiveCourses extends Component {
 
 
 
-          <Text style={{color: '#007AFF'}}>Corsi:</Text>
+          <Text style={{color: '#007AFF', fontFamily: 'Oswald'}}>Corsi:</Text>
 
           <TouchableOpacity
               onPress={() => {
@@ -29,7 +29,7 @@ export default class ActiveCourses extends Component {
             style={{flexDirection: 'row'}}>
             <Text style={{
               color: this.props.active ? '#4CD964' : '#EB3333',
-              fontSize: 25
+              fontSize: 25, fontFamily: 'Oswald'
             }}>{this.props.active ? 'Vedi Corsi ' : 'Nessuna iscrizione '}</Text>
             <Fontisto name={this.props.active ? 'angle-right' : 'close-a'} size={25} style={{marginTop: 5, color: this.props.active ? '#4CD964' : '#EB3333'}}/>
           </TouchableOpacity>
