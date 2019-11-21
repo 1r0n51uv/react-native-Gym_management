@@ -28,11 +28,12 @@ export default class WorkoutCard extends Component {
                     backgroundColor: this.props.bgColor
                 }}>
 
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <View style={{flexDirection: 'row', justifyContent: 'space-around', borderWidth: 5, borderColor: '#000000', borderRadius: 10}}>
+
 
                     {/* WORKOUT IMAGE */}
-                    <View style={{ width: width/4}}>
-                        <Image source={{uri: this.props.workout.gif}} style={{width: '100%', height: 80, marginTop: 20, marginLeft: 20, marginBottom: 20, borderRadius: 10}}/>
+                    <View style={{ width: width/4, paddingRight: 10}}>
+                        <Image source={{uri: this.props.workout.gif}} style={{width: '100%', height: 80, marginTop: 20, marginBottom: 20, borderRadius: 10, alignSelf: 'center'}}/>
                     </View>
 
                     {/* NAME, WEIGHT, REPS, SERIES */}
@@ -40,8 +41,8 @@ export default class WorkoutCard extends Component {
                     {
                         this.props.workout.atTime  &&
                         <View style={{flexDirection: 'column', justifyContent: 'center'}}>
-                            <Text style={{fontSize: 25}}>{this.props.workout.name}</Text>
-                            <Text style={{fontSize: 20, marginTop: 5, color: 'grey'}}>{this.props.workout.work.min + ':' + this.props.workout.work.sec}</Text>
+                            <Text style={{fontSize: 25, fontFamily: 'Oswald'}}>{this.props.workout.name}</Text>
+                            <Text style={{fontSize: 20, marginTop: 5, color: 'grey', fontFamily: 'Oswald'}}>{this.props.workout.work.min + ':' + this.props.workout.work.sec}</Text>
                         </View>
 
                     }
@@ -50,58 +51,13 @@ export default class WorkoutCard extends Component {
                         this.props.workout.atTime === false &&
 
                         <View style={{flexDirection: 'column', justifyContent: 'center'}}>
-                            <Text style={{fontSize: 25}}>{this.props.workout.name}</Text>
-                            <Text style={{fontSize: 20, marginTop: 5, color: 'grey'}}>{this.props.workout.weight + 'kg ' + 'x' +this.props.workout.numberOfSeries}</Text>
+                            <Text style={{fontSize: 25, fontFamily: 'Oswald'}}>{this.props.workout.name}</Text>
+                            <Text style={{fontSize: 20, marginTop: 5, color: 'grey', fontFamily: 'Oswald'}}>{this.props.workout.weight + 'kg ' + 'x' +this.props.workout.numberOfSeries}</Text>
                         </View>
                     }
 
-
-                    <View style={{flexDirection: 'row', marginRight: 20, marginTop: 45}}>
-
-
-                        {this.props.doneWorkout ?
-                            (<FontAwesome style={{marginLeft: 15}} name={'check'} color='#007AFF' size={30}/>)
-                            :
-
-
-                            (
-                                <TouchableOpacity onPress={() => {null}}>
-                                    <Tooltip
-                                        withPointer={false}
-                                        withOverlay={true}
-                                        backgroundColor={'white'}
-                                        height={100}
-                                        popover={
-                                            <View>
-                                                <TouchableOpacity onPress={() => this.props.setEditModalVisible(true)}>
-                                                    <Text style={{fontSize: 20}}>
-                                                        <Ionicons name={Platform.OS === 'ios' ? 'ios-create' : 'md-create'} color='#007AFF' size={25}/>
-                                                        {' '}Modifica
-                                                    </Text>
-                                                </TouchableOpacity>
-
-                                                <TouchableOpacity onPress={() => this.props.setInfoModalVisible(true)}>
-                                                    <Text style={{fontSize: 20, marginTop: 15}}>
-                                                        <Ionicons name={Platform.OS === 'ios' ? 'ios-information-circle-outline' : 'md-information-circle-outline'} color='#007AFF' size={25}/>
-                                                        {' '}Info
-                                                    </Text>
-                                                </TouchableOpacity>
-                                            </View>
-                                        }>
-
-                                        <FontAwesome style={{marginLeft: 15}} name={'bars'} color='#007AFF' size={30}/>
-
-                                    </Tooltip>
-                                </TouchableOpacity>
-                            )
-                        }
-
-
-
-
-
-                    </View>
                 </View>
+
             </CardView>
         );
 

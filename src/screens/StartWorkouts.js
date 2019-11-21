@@ -9,11 +9,10 @@ import {
     Platform,
     TouchableOpacity,
     ScrollView,
-    TouchableWithoutFeedback} from 'react-native';
+    } from 'react-native';
 const { height, width } = Dimensions.get("window");
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import WorkoutCard from '../components/workouts/WorkoutCard';
-import gifff from './../assets/test.gif';
 import EditModal from '../components/modals/editModal';
 import InfoModal from '../components/modals/infoModal';
 import firebase from "react-native-firebase";
@@ -108,9 +107,7 @@ export default class StartWorkouts extends Component {
     render() {
         return (
 
-            <SafeAreaView style={{flex: 1, backgroundColor: 'black'}}>
-
-
+            <SafeAreaView style={{flex: 1}}>
 
 
                 <ScrollView contentContainerStyle={{paddingBottom: 20}}>
@@ -124,7 +121,7 @@ export default class StartWorkouts extends Component {
 
                                     <TouchableOpacity activeOpacity={0.5} delayPressIn={50} onPress={() => this.startTraining(this.state.workouts[0], 0) }>
                                         <View style={{backgroundColor: '#D8D8D8', height: height/3, alignItems: 'center', justifyContent: 'center'}}>
-                                            <Text style={{fontSize: 40}}>
+                                            <Text style={{fontSize: 40, fontFamily: 'Oswald'}}>
                                                 <Ionicons name={Platform.OS === 'ios' ? 'ios-play' : 'md-play'} size={40}/>
                                                 {' '} Inizia allenamento
                                             </Text>
