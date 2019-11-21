@@ -62,23 +62,24 @@ export default class Welcome extends Component {
                                     }}
                                     style={{
                                         marginTop: 20,
-                                        paddingBottom: 10
+                                        borderWidth: 3,
+                                        borderColor: '#000000',
+                                        alignItems: 'center'
                                     }}>
 
 
                                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+
                                         <Text style={{
                                             color:'#000000',
                                             textAlign:'center',
                                             fontSize: 50,
-                                            borderBottomWidth: 10,
                                             paddingRight: 5,
-                                            borderBottomColor: '#000000',
                                             fontFamily: 'Oswald'
                                         }}>
 
-                                            {'CORSI' + ' '}
-                                            <FontAwesome name={'stopwatch'} size={45}/>
+                                            {'Corsi' + ' '}
+                                            <FontAwesome name={'stopwatch'} size={35}/>
                                         </Text>
 
 
@@ -97,17 +98,18 @@ export default class Welcome extends Component {
                                     }}
                                     style={{
                                         marginTop: 20,
-                                        paddingBottom: 10
+                                        borderWidth: 5,
+                                        borderColor: '#000000',
+                                        alignItems: 'center'
                                     }}>
 
 
                                     <Text style={{
                                         color:'#000000',
-                                        textAlign:'left',
+                                        textAlign:'center',
                                         fontSize: 50,
-                                        borderBottomWidth: 10,
-                                        borderBottomColor: '#000000',
                                         paddingRight: 5,
+                                        paddingLeft: 5,
                                         fontFamily: 'Oswald'
                                     }}>
                                         {'ALLENATI' + ' '}

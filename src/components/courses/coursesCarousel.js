@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {Dimensions, Text, View, StyleSheet} from "react-native";
+import {Dimensions, Text, View, StyleSheet, TouchableOpacity, Platform} from "react-native";
 import Carousel, { ParallaxImage } from "react-native-snap-carousel";
 import firebase from "react-native-firebase";
 const { height, width } = Dimensions.get("window");
 import Reactotron from "reactotron-react-native";
 import {Card, Divider, Title, Paragraph} from 'react-native-paper';
 import CardView from "react-native-cardview";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 export default class CoursesCarousel extends Component {
     constructor(props) {
@@ -18,12 +19,133 @@ export default class CoursesCarousel extends Component {
 
 
     componentDidMount() {
-        let course = [...this.props.courses, ...this.props.courses, ...this.props.courses,];
-
+        let tmp = [];
+        this.props.courses.map(val => {
+            let x = {
+                ...val,
+                collapsed: false
+            }
+            tmp.push(x);
+        });
         this.setState({
-            fireCourse: course
-        })
-        Reactotron.log(this.state.fireCourse);
+            fireCourse: tmp
+        });
+    }
+
+
+    _renderItem2({item, index}, parallaxProps) {
+        return (
+            <CardView
+                key={index}
+                cardElevation={7}
+                cardMaxElevation={2}
+                cornerRadius={8}
+                style={{
+                    marginTop: 24,
+                    marginLeft: 24,
+                    marginRight: 24,
+                    marginBottom: 24,
+                    backgroundColor: 'white'
+                }}>
+
+                <Card>
+                    <Card.Cover source={{ uri: item.image }}/>
+
+                    <Card.Content style={{
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        paddingBottom: 15,
+                        fontFamily: 'Oswald'
+                    }}>
+                        <View >
+                            <Text style={{
+                                marginTop: 10,
+                                fontSize: 30,
+                                alignSelf: 'flex-start',
+                            }}>{item['name']}</Text>
+                        </View>
+
+                        <Divider/>
+
+                        <View>
+                            <View style={{
+                                justifyContent: 'flex-start',
+                                flexDirection: 'row',
+                                marginTop: 5
+                            }}>
+                                <Text style={{
+                                    fontSize: 15,
+                                    color: '#007AFF',
+                                    marginTop: 5
+                                }}>Istruttore:</Text>
+                                <Text style={{fontSize: 20}}>{' ' + item['instructor']}</Text>
+                            </View>
+
+                            <View style={{
+                                justifyContent: 'flex-start',
+                                flexDirection: 'row',
+                                marginTop: 5
+                            }}>
+                                <Text style={{
+                                    fontSize: 15,
+                                    color: '#007AFF',
+                                    marginTop: 5
+                                }}>Cadenza:</Text>
+
+                                <View style={{flexDirection: 'column'}}>
+
+                                    {
+
+                                        item['weeklyFrequency'].map((workDay, index) =>(
+                                            <Text key={index} style={{fontSize: 18, marginTop: 2}}>{' ' + workDay.day + ' - ' + workDay.startTime.hour + ':' + workDay.endTime.minutes}</Text>
+                                        ))
+
+                                    }
+                                </View>
+
+
+                            </View>
+
+                            <View style={{
+                                justifyContent: 'flex-start',
+                                flexDirection: 'row',
+                                marginTop: 5
+                            }}>
+                                <Text style={{
+                                    fontSize: 15,
+                                    color: '#007AFF',
+                                    marginTop: 5
+                                }}>Inizio:</Text>
+                                <Text
+                                    style={{fontSize: 20}}>{' ' + item['period'].startDate }</Text>
+                            </View>
+
+
+                            <View style={{
+                                justifyContent: 'flex-start',
+                                flexDirection: 'row',
+                                marginTop: 5
+                            }}>
+                                <Text style={{
+                                    fontSize: 15,
+                                    color: '#007AFF',
+                                    marginTop: 5
+                                }}>Fine:</Text>
+                                <Text
+                                    style={{fontSize: 20}}>{' ' + item['period'].endDate}</Text>
+                            </View>
+
+                        </View>
+
+
+
+
+                    </Card.Content>
+
+                </Card>
+
+            </CardView>
+        )
     }
 
     _renderItem ({item, index}, parallaxProps) {
@@ -63,7 +185,7 @@ export default class CoursesCarousel extends Component {
                 itemWidth={width - 60}
                 data={this.state.fireCourse}
                 layout={'default'}
-                renderItem={this._renderItem}
+                renderItem={this.props.whichCarousel ? this._renderItem : this._renderItem2}
                 hasParallaxImages={true}
             />
         );
