@@ -38,23 +38,10 @@ export default class WorkoutCard extends Component {
 
                     {/* NAME, WEIGHT, REPS, SERIES */}
 
-                    {
-                        this.props.workout.atTime  &&
-                        <View style={{flexDirection: 'column', justifyContent: 'center', width: width / 2.5}}>
-                            <Text style={{fontSize: 25, fontFamily: 'Oswald', color: '#3F5469'}}>{this.props.workout.name}</Text>
-                            <Text style={{fontSize: 20, marginTop: 5, color: '#3F5469', fontFamily: 'Oswald'}}>{this.props.workout.work.min + ':' + this.props.workout.work.sec}</Text>
-                        </View>
+                    <View style={{flexDirection: 'column', justifyContent: 'center', width: width / 2.5}}>
+                        <Text style={{fontSize: width / 15, fontFamily: 'Oswald', color: '#3F5469'}}>{this.props.workout.name}</Text>
+                    </View>
 
-                    }
-
-                    {
-                        this.props.workout.atTime === false &&
-
-                        <View style={{flexDirection: 'column', justifyContent: 'center', width: width / 2.5}}>
-                            <Text style={{fontSize: 25, fontFamily: 'Oswald', color: '#3F5469'}}>{this.props.workout.name}</Text>
-                            <Text style={{fontSize: 20, marginTop: 5, color: '#3F5469', fontFamily: 'Oswald'}}>{this.props.workout.weight + 'kg ' + 'x' +this.props.workout.numberOfSeries}</Text>
-                        </View>
-                    }
 
                 </View>
 

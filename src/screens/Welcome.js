@@ -11,7 +11,14 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {observer} from 'mobx-react';
 import SplashScreen from 'react-native-splash-screen';
 import TextCarousel from "react-native-text-carousel";
+import {NavigationActions, StackActions} from "react-navigation";
 
+const resetAction = StackActions.reset({
+    index: 0,
+    isAuth: false,
+    actions: [NavigationActions.navigate({ routeName: 'Login' })],
+    spinner: true
+});
 
 @observer
 export default class Welcome extends Component {
@@ -22,15 +29,17 @@ export default class Welcome extends Component {
         this.state = {
             user: null,
         }
+        this.retrieveInfo2 = this.retrieveInfo2.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
 
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
+                this.retrieveInfo2(user);
                 SplashScreen.hide();
                 //UserManagerOffline.retrieveUser(user);
-
                 this.setState({
                     isAuth: true,
                 })
@@ -41,6 +50,22 @@ export default class Welcome extends Component {
         })
     }
 
+    logout() {
+        firebase.auth().signOut().then(value => {
+            this.props.navigation.dispatch(resetAction);
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
+
+    retrieveInfo2(user) {
+        firebase.firestore().collection('Users').doc(user.uid).get().then(value => {
+
+        }).catch(err => {
+            Reactotron.log(err)
+        })
+    }
 
     render() {
         return (

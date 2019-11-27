@@ -27,28 +27,61 @@ export default class Login extends Component {
             pas_err: false,
             visible: false,
             login_err: '',
-            loading: false
+            loading: false,
+            check: false,
         };
+
         this.login = this.login.bind(this);
         this.loginProcedure = this.loginProcedure.bind(this);
         this.parseError = this.parseError.bind(this);
+        this.checkActiveAndRedirect = this.checkActiveAndRedirect.bind(this);
+        this.checkLoggedUser = this.checkLoggedUser.bind(this);
+
     }
 
     componentDidMount() {
+
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                SplashScreen.hide();
-                this.props.navigation.replace('Welcome')
+                this.checkLoggedUser(user)
             } else {
                 SplashScreen.hide();
                 this.setState({
-                    isAuth: true
+                    isAuth: false
                 })
             }
         })
     }
 
+    checkLoggedUser(user) {
+        firebase.firestore().collection('Users').doc(user.uid).get().then(value => {
+            if (value.data().status) {
+                this.setState({isAuth: true});
+                this.props.navigation.replace('Welcome')
+                SplashScreen.hide();
+            } else {
+                this.setState({isAuth: false});
+                SplashScreen.hide();
+            }
+        }).catch(err => {
+            Reactotron.log(err)
+        })
+    }
 
+
+    checkActiveAndRedirect(user) {
+        firebase.firestore().collection('Users').doc(user.uid).get().then(value => {
+            if (value.data().status) {
+                this.setState({isAuth: true});
+                this.props.navigation.replace('Welcome')
+            } else {
+                this.bounce();
+                this.setState({loading: false, visible: true, login_err: 'Utente disattivato'})
+            }
+        }).catch(err => {
+            Reactotron.log(err)
+        })
+    }
 
     componentWillUnmount() {
         this.setState({
@@ -62,7 +95,7 @@ export default class Login extends Component {
             loading: true
         });
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((user) => {
-            this.setState({isAuth: true});
+            this.checkActiveAndRedirect(user.user);
         }).catch(err => {
             Reactotron.log(err);
             this.bounce();
@@ -129,6 +162,7 @@ export default class Login extends Component {
                                     }}>
                                         <TextInput
                                             error={this.state.em_err}
+                                            autoCompleteType='email'
                                             mode='outlined'
                                             label='Email'
                                             value={this.state.email}

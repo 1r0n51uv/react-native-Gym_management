@@ -124,8 +124,8 @@ export default class StartWorkouts extends Component {
                                         <View style={{height: height/3, justifyContent: 'flex-start', flexDirection: 'column'}}>
                                             <ImageBackground source={startWork} style={{width: '100%', height: '100%', justifyContent: 'flex-end'}}>
                                                 <View style={{justifyContent: 'flex-end', alignItems: 'center'}}>
-                                                    <Text style={{fontSize: 40, fontFamily: 'Oswald', paddingBottom: 10}}>
-                                                        <Ionicons name={Platform.OS === 'ios' ? 'ios-play' : 'md-play'} size={40}/>
+                                                    <Text style={{fontSize: width / 10, fontFamily: 'Oswald', paddingBottom: 10, color: '#3F5469'}}>
+                                                        <Ionicons name={Platform.OS === 'ios' ? 'ios-play' : 'md-play'} size={width / 10}/>
                                                         {' '} Inizia allenamento
                                                     </Text>
                                                 </View>
