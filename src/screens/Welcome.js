@@ -62,20 +62,22 @@ export default class Welcome extends Component {
                                     style={{
                                         marginTop: 20,
                                         borderWidth: 5,
-                                        borderColor: '#000000',
-                                        borderRadius: 20,
-                                        alignItems: 'center'
+                                        borderColor: '#3F5469',
+                                        backgroundColor: '#FFFFFF',
+                                        alignItems: 'center',
                                     }}>
 
 
                                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
 
                                         <Text style={{
-                                            color:'#000000',
-                                            fontSize: 50,
-                                            paddingRight: 10,
-                                            paddingLeft: 10,
+                                            color:'#3F5469',
+                                            fontSize: width / 9,
+                                            paddingRight: width / 17,
+                                            paddingLeft: width / 17,
+                                            paddingBottom: width / 35,
                                             fontFamily: 'Oswald'
+
                                         }}>
 
                                             {'CORSI' + ' '}
@@ -96,17 +98,19 @@ export default class Welcome extends Component {
                                     style={{
                                         marginTop: 20,
                                         borderWidth: 5,
-                                        borderColor: '#000000',
+                                        borderColor: '#3F5469',
+                                        backgroundColor: '#FFFFFF',
                                         alignItems: 'flex-start'
                                     }}>
 
 
                                     <Text style={{
-                                        color:'#000000',
+                                        color:'#3F5469',
                                         textAlign:'left',
-                                        fontSize: 50,
-                                        paddingRight: 10,
-                                        paddingLeft: 10,
+                                        fontSize: width / 9,
+                                        paddingRight: width / 17,
+                                        paddingLeft: width / 17,
+                                        paddingBottom: width / 35,
                                         fontFamily: 'Oswald'
                                     }}>
                                         {'ALLENATI' + ' '}

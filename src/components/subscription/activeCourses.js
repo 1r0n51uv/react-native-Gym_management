@@ -18,7 +18,7 @@ export default class ActiveCourses extends Component {
 
 
 
-          <Text style={{color: '#007AFF', fontFamily: 'Oswald'}}>Corsi:</Text>
+          <Text style={{color: '#3F5469', fontFamily: 'Oswald'}}>Corsi:</Text>
 
           <TouchableOpacity
               onPress={() => {

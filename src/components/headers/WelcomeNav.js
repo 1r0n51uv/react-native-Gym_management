@@ -12,14 +12,13 @@ export default class WelcomeNav extends Component {
 
                 <ModernHeader
                     leftDisable={true}
-                    text="Fit&Fight"
-                    textStyle={{fontSize: 20, color: 'white', fontFamily: 'Oswald'}}
                     rightIconName="user"
                     rightIconType="EvilIcons"
-                    rightIconSize={35}
+                    rightIconSize={45}
                     rightIconOnPress={() => this.props.navigation.navigate('Profile')}
-                    rightIconColor='white'
-
+                    rightIconColor='#3F5469'
+                    text="FIT&FIGHT"
+                    textStyle={{fontSize: 35, color: '#3F5469', fontFamily: 'Oswald'}}
                 />
 
         );

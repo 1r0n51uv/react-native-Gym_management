@@ -9,15 +9,16 @@ import {ModernHeader} from '@freakycoder/react-native-header-view';
 export default class ProfileNav extends Component {
     render() {
         return (
-                <ModernHeader
-                    leftIconComponent={
-                        <TouchableOpacity
-                            onPress={() => { this.props.navigation.navigate('Welcome')}}>
-                            <Text style={{color: '#007AFF', fontSize: 20, marginLeft: 5, fontFamily: 'Oswald'}}>
-                                <AntDesign name="left" type="AntDesign" size={20} color='#007AFF' />Indietro</Text>
-                        </TouchableOpacity>
-                    }
-                />
+            <ModernHeader
+                rightDisable={true}
+                text="PROFIL0"
+                textStyle={{fontSize: 35, color: '#3F5469', fontFamily: 'Oswald'}}
+                leftIconName="arrow-left"
+                leftIconType="EvilIcons"
+                leftIconSize={45}
+                leftIconOnPress={() => this.props.navigation.pop()}
+                leftIconColor='#3F5469'
+            />
         );
     }
 }

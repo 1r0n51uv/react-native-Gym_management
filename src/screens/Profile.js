@@ -13,6 +13,7 @@ import { StackActions, NavigationActions } from 'react-navigation';
 import Spinner from 'react-native-loading-spinner-overlay';
 import CounterStore from '../UserManagerOffline';
 import Reactotron from 'reactotron-react-native'
+import UserAvatar from "react-native-user-avatar";
 
 const resetAction = StackActions.reset({
     index: 0,
@@ -30,6 +31,7 @@ export default class Profile extends Component {
             spinner: true,
             anemic: null,
             subscription: null,
+            userInfo: null
         };
 
         this.retrieveInfo2 = this.retrieveInfo2.bind(this);
@@ -56,6 +58,7 @@ export default class Profile extends Component {
                 userInfo: value.data(),
                 spinner: false
             })
+
         }).then(() => {
             this.retrieveAnemic();
         }).then(() => {
@@ -128,7 +131,7 @@ export default class Profile extends Component {
 
                     (<ScrollView>
                         <View style={{alignSelf: 'center', marginTop: 20}}>
-                            <Avatar.Image size={148} source={avatar} />
+                            <UserAvatar size="100" name={this.state.userInfo['name'].toUpperCase() + ' ' + this.state.userInfo['surname'].toUpperCase()} color='#3F5469'/>
                         </View>
                         <CardView
                             cardElevation={7}
@@ -140,24 +143,24 @@ export default class Profile extends Component {
                                 backgroundColor: 'white'
                             }}>
 
-                            <View style={{borderWidth: 5, borderColor: '#000000'}}>
+                            <View style={{borderWidth: 5, borderColor: '#3F5469'}}>
                                 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                     <View style={{marginLeft: 40, marginTop: 10}}>
 
                                         <TouchableOpacity onPress={() => {this.changeTab(0)}}>
-                                            <Ionicons name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} type="FontAwesome" size={40} color={this.state.active === 0 ? '#007AFF' : 'grey'} />
+                                            <Ionicons name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} type="FontAwesome" size={40} color={this.state.active === 0 ? '#3F5469' : 'grey'} />
                                         </TouchableOpacity>
                                     </View>
 
                                     <View style={{marginTop: 10}}>
                                         <TouchableOpacity onPress={() => {this.changeTab(1)}}>
-                                            <Ionicons name={Platform.OS === 'ios' ? 'ios-clipboard' : 'md-clipboard'} type="Ionicons" size={40} color={this.state.active === 1 ? '#007AFF' : 'grey'} />
+                                            <Ionicons name={Platform.OS === 'ios' ? 'ios-clipboard' : 'md-clipboard'} type="Ionicons" size={40} color={this.state.active === 1 ? '#3F5469' : 'grey'} />
                                         </TouchableOpacity>
                                     </View>
 
                                     <View style={{marginRight: 40, marginTop: 10}}>
                                         <TouchableOpacity onPress={() => {this.changeTab(2)}}>
-                                            <Ionicons name={Platform.OS === 'ios' ? 'ios-apps' : 'md-apps'} type="Ionicons" size={40} color={this.state.active === 2 ? '#007AFF' : 'grey'} />
+                                            <Ionicons name={Platform.OS === 'ios' ? 'ios-apps' : 'md-apps'} type="Ionicons" size={40} color={this.state.active === 2 ? '#3F5469' : 'grey'} />
                                         </TouchableOpacity>
                                     </View>
 
@@ -180,19 +183,20 @@ export default class Profile extends Component {
                             style={{
                                 marginTop: 20,
                                 borderWidth: 5,
-                                borderColor: '#000000',
+                                borderColor: 'red',
                                 alignItems: 'center',
                                 marginRight: 24,
                                 alignSelf: 'flex-end',
+                                marginBottom: 10
                             }}>
                             <Text style={{
-                                color:'#000000',
+                                color:'red',
                                 textAlign:'center',
                                 fontSize: 45,
                                 paddingRight: 10,
                                 paddingLeft: 10,
                                 fontFamily: 'Oswald'
-                            }}>LOGOUT <Ionicons name={Platform.OS === 'ios' ? 'ios-log-out' : 'md-log-out'} size={40} /></Text>
+                            }}>LOGOUT <Ionicons name={Platform.OS === 'ios' ? 'ios-log-out' : 'md-log-out'} style={{color: 'red'}} size={40} /></Text>
                         </TouchableOpacity>
                     </ScrollView>) :
 

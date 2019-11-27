@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
-import {Button, SafeAreaView, Image, Text, TouchableOpacity, View, Dimensions, Easing, ScrollView, Platform, ImageBackground} from 'react-native';
+import {Button, SafeAreaView, Image, Text, TouchableOpacity, View, Dimensions, Easing, ScrollView, Platform, ImageBackground, Linking} from 'react-native';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import {Divider} from "react-native-paper";
+
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {ModernHeader} from '@freakycoder/react-native-header-view';
@@ -9,6 +11,7 @@ import CardView from 'react-native-cardview';
 const { height, width } = Dimensions.get("window");
 import Reactotron from 'reactotron-react-native'
 import AsyncStorage from '@react-native-community/async-storage';
+import DescriptionAndLink from "../components/workouts/descriptionAndLink";
 
 const timer = require('react-native-timer');
 
@@ -37,7 +40,7 @@ export default class WorkoutWeight extends Component {
             doneWorkout: false, //WORKOUT IS DONE
             circularProgressAction: 'Inizia', //ACTION
             restSeries: 0,
-            size: 150
+            size: 180
         };
 
         this.setWorkoutDone = this.setWorkoutDone.bind(this);
@@ -68,6 +71,7 @@ export default class WorkoutWeight extends Component {
 
     }
 
+
     startWorkout = () => {
 
         this.setState({
@@ -79,6 +83,16 @@ export default class WorkoutWeight extends Component {
     }
 
     startRestTimer() {
+        if (this.state.rest.sec === 0 || this.state.rest.sec === '0' || this.state.rest.sec === '00') {
+            Reactotron.log(this.state.rest);
+
+            this.setState({
+                rest: {
+                    min: this.state.rest.min - 1,
+                    sec: 60
+                }
+            })
+        }
         timer.clearTimeout(this);
         this.setState({timeOrAction: true, progressColor: '#FCD533'});
         timer.setInterval(this, 'restCounter', () => {
@@ -190,73 +204,94 @@ export default class WorkoutWeight extends Component {
     render() {
         return (
 
-            <SafeAreaView style={{backgroundColor: 'black', flex: 1}}>
+            <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
+
                 <ModernHeader
-                    backgroundColor={'black'}
-                    leftIconComponent={
-                        <TouchableOpacity
-                            onPress={() => {
-                                this.state.doneWorkout ? (this.navigateBack())
-                                    :
-                                    this.props.navigation.pop();
-                            }}>
-                            <Text style={{color: 'white', fontSize: 20, marginLeft: 5}}>
-                                <AntDesign name="left" type="AntDesign" size={20} color='white' />Indietro</Text>
-                        </TouchableOpacity>
-                    }
+                    rightIconName="user"
+                    rightIconType="EvilIcons"
+                    rightIconSize={45}
+                    rightIconOnPress={() => this.props.navigation.navigate('Profile')}
+                    rightIconColor='#3F5469'
+                    text="FIT&FIGHT"
+                    textStyle={{fontSize: 35, color: '#3F5469', fontFamily: 'Oswald'}}
+                    leftIconName="arrow-left"
+                    leftIconType="EvilIcons"
+                    leftIconSize={45}
+                    leftIconOnPress={() => {
+                        this.state.doneWorkout ? (this.navigateBack())
+                            :
+                            this.props.navigation.pop();
+                    }}
+                    leftIconColor='#3F5469'
                 />
+
 
                 <ScrollView>
 
+                    <Text style={{
+                        color: 'black',
+                        fontFamily: 'Oswald',
+                        fontSize: 50,
+                        marginLeft: 24
+                    }}>{this.state.name}</Text>
 
+                    <View style={{ marginLeft: 24,
+                        marginRight: 24}}>
+                        <Divider style={{height: 3, backgroundColor: 'black'}}/>
+                    </View>
 
-                    <View style={{backgroundColor: 'black', height: height/3.5, justifyContent: 'center'}}>
+                    <CardView
+                        cardElevation={7}
+                        cardMaxElevation={2}
+                        cornerRadius={8}
 
-                        <CardView
-                            cardElevation={7}
-                            cardMaxElevation={2}
-                            cornerRadius={8}
-                            style={{
-                                marginLeft: 24,
-                                marginRight: 24,
-                                flexDirection: 'column',
-                                justifyContent: 'space-between',
-                                backgroundColor: 'white'
-                            }}>
+                        style={{
+                            marginLeft: 24,
+                            marginRight: 24,
+                            marginTop: 10,
+                            flexDirection: 'column',
+                            justifyContent: 'space-between',
+                            backgroundColor: 'white'
+                        }}>
 
-                            <View style={{ flexDirection: 'column', justifyContent: 'center'}}>
+                        <View>
 
-                                <View style={{backgroundColor: '#EFF0F0'}}>
-                                    <ImageBackground resizeMode={'contain'} source={{uri: this.state.gif}} style={{width: '100%', height: height/3.8}}/>
+                            <View style={{backgroundColor: '#EFF0F0'}}>
+                                <ImageBackground resizeMode={'contain'} source={{uri: this.state.gif}} style={{width: '100%', height: height/3.8}}/>
+                            </View>
+
+                            <View style={{ flexDirection: 'column' }}>
+                                <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
+                                    <Text style={{fontSize: 25, color: '#007AFF'}}>Peso:</Text>
+                                    <Text style={{fontSize: 25}}>60Kg</Text>
                                 </View>
-                                <View style={{ flexDirection: 'column' }}>
-                                    <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
-                                        <Text style={{fontSize: 25, color: '#007AFF'}}>Peso:</Text>
-                                        <Text style={{fontSize: 25}}>60Kg</Text>
-                                    </View>
 
-                                    <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
-                                        <Text style={{fontSize: 25, color: '#007AFF'}}>Serie:</Text>
-                                        <Text style={{fontSize: 25}}>{this.state.numberOfSeries}</Text>
-                                    </View>
-
-                                    <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
-                                        <Text style={{fontSize: 25, color: '#007AFF'}}>Ripetizioni:</Text>
-                                        <Text style={{fontSize: 25}}>{this.state.numberOfRepetitions}</Text>
-                                    </View>
-
-                                    <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
-                                        <Text style={{fontSize: 25, color: '#007AFF'}}>Riposo:</Text>
-                                        <Text style={{fontSize: 25}}>{this.state.snapshot.rest.min + ':' + this.state.snapshot.rest.sec}</Text>
-                                    </View>
+                                <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
+                                    <Text style={{fontSize: 25, color: '#007AFF'}}>Serie:</Text>
+                                    <Text style={{fontSize: 25}}>{this.state.numberOfSeries}</Text>
                                 </View>
+
+                                <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
+                                    <Text style={{fontSize: 25, color: '#007AFF'}}>Ripetizioni:</Text>
+                                    <Text style={{fontSize: 25}}>{this.state.numberOfRepetitions}</Text>
+                                </View>
+
+                                <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
+                                    <Text style={{fontSize: 25, color: '#007AFF'}}>Riposo:</Text>
+                                    <Text style={{fontSize: 25}}>{this.state.snapshot.rest.min + ':' + this.state.snapshot.rest.sec}</Text>
+                                </View>
+                            </View>
+
+                            <View style={{flexDirection: 'column', justifyContent:'center', padding: 10}}>
+
+
                                 <AnimatedCircularProgress
                                     ref={(ref) => this.circularProgress = ref}
                                     size={this.state.size}
                                     width={30}
                                     rotation={0}
                                     fill={this.state.doneWorkout ? 100 : this.state.animationFill}
-                                    backgroundColor="#3d5875"
+                                    backgroundColor={'#FFFFFF'}
                                     tintColor={this.state.doneWorkout ? '#4CD964' : this.state.progressColor }
                                     style={{alignSelf:'center'}}>
                                     {
@@ -274,7 +309,7 @@ export default class WorkoutWeight extends Component {
                                                         <TouchableOpacity onPress={() => {
                                                             this.navigateBack();
                                                         }}>
-                                                            <Text style={{fontSize: 35, color: '#4CD964'}} >{this.state.circularProgressAction}</Text>
+                                                            <Text style={{fontSize: 35, color: '#4CD964', fontFamily: 'Oswald' }} >{this.state.circularProgressAction}</Text>
                                                             <Fontisto style={{alignSelf: 'center', justifyContent: 'center', marginTop: 10, color: '#4CD964'}} size={30} name={'angle-dobule-right'}/>
 
                                                         </TouchableOpacity>
@@ -300,7 +335,7 @@ export default class WorkoutWeight extends Component {
                                                                         <TouchableOpacity onPress={() => {
                                                                             this.stopWorkouTimer()
                                                                         }}>
-                                                                            <Text style={{fontSize: 35, color: 'black'}}>
+                                                                            <Text style={{fontSize: 35, color: 'black', fontFamily: 'Oswald' }}>
                                                                                 {this.state.circularProgressAction}
                                                                             </Text>
                                                                         </TouchableOpacity>
@@ -314,13 +349,13 @@ export default class WorkoutWeight extends Component {
                                                                             this.startWorkout()
                                                                         }}>
 
-                                                                            <Text style={{fontSize: 35, color: 'black'}}>
+                                                                            <Text style={{fontSize: 35, color: 'black', fontFamily: 'Oswald' }}>
                                                                                 {this.state.circularProgressAction}
                                                                             </Text>
 
                                                                             {
                                                                                 this.state.circularProgressAction === 'Allenati' ?
-                                                                                    (<Fontisto style={{alignSelf: 'center', justifyContent: 'center', color: 'white', marginTop: 10}} size={30} name={'play'}/>)
+                                                                                    (<Fontisto style={{alignSelf: 'center', justifyContent: 'center', marginTop: 10}} size={30} name={'play'}/>)
                                                                                     :
                                                                                     (<View/>)
                                                                             }
@@ -347,7 +382,7 @@ export default class WorkoutWeight extends Component {
                                                                     //IF TRUE RENDER TIMER
                                                                     (
 
-                                                                        <Text style={{fontSize: 35, color: 'white'}}>
+                                                                        <Text style={{fontSize: 35}}>
                                                                             {this.state.rest.min + ':' + this.state.rest.sec}
                                                                         </Text>
 
@@ -358,7 +393,7 @@ export default class WorkoutWeight extends Component {
                                                                     //IF FALSE RENDER ACTION
                                                                     (
 
-                                                                        <Text style={{fontSize: 35, color: 'white'}}>
+                                                                        <Text style={{fontSize: 35}}>
                                                                             {this.state.circularProgressAction}
                                                                         </Text>
                                                                     )
@@ -374,17 +409,21 @@ export default class WorkoutWeight extends Component {
                                         )
                                     }
 
-
                                 </AnimatedCircularProgress>
+
+
+
                             </View>
+                        </View>
 
-                        </CardView>
-                    </View>
-
-
+                    </CardView>
 
 
 
+                    <DescriptionAndLink
+                        description={this.state.description}
+                        link={this.state.link}
+                    />
 
 
                 </ScrollView>

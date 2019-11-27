@@ -38,10 +38,11 @@ export default class ProfileTabOne extends Component {
 
 const styles = StyleSheet.create({
     mainTitle: {
-        color: '#007AFF',
+        color: '#3F5469',
         fontFamily: 'Oswald'
     },
     subtitle: {
+        color: '#3F5469',
         fontSize: 25,
         fontFamily: 'Oswald'
     }

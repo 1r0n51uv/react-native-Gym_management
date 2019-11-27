@@ -18,6 +18,7 @@ import {observer} from 'mobx-react';
 import Spinner from "react-native-loading-spinner-overlay";
 import CoursesCarousel from "../components/courses/coursesCarousel";
 import gymWallpaper from "../assets/2659255-min.jpg";
+import {Divider} from "react-native-paper";
 
 @observer
 export default class  extends Component {
@@ -91,11 +92,14 @@ export default class  extends Component {
 
                                     <View style={{flexDirection: 'column'}}>
                                         <Text style={{
-                                            color: 'black',
+                                            color: '#3F5469',
                                             fontFamily: 'Oswald',
-                                            fontSize: 40,
-                                            alignSelf: 'center'
+                                            fontSize: 35,
+                                            marginLeft: 60
                                         }}>I tuoi corsi</Text>
+                                        <Divider
+                                            style={{marginLeft: 60, marginRight: 60, backgroundColor: 'black', height: 5}}
+                                        />
                                         <CoursesCarousel
                                             courses={this.state.fireCourse}
                                             whichCarousel={false}
@@ -106,11 +110,14 @@ export default class  extends Component {
                                     <View style={{flexDirection: 'column'}}>
 
                                         <Text style={{
-                                            color: 'black',
+                                            color: '#3F5469',
                                             fontFamily: 'Oswald',
                                             fontSize: 40,
-                                            marginLeft: 40,
-                                        }}>I tuoi corsi</Text>
+                                            marginLeft: 60,
+                                        }}>Scopri altri corsi</Text>
+                                        <Divider
+                                            style={{marginLeft: 60, marginRight: 60, backgroundColor: 'black', height: 5}}
+                                        />
                                         <CoursesCarousel
                                             courses={this.state.allCourse}
                                             whichCarousel={true}
@@ -149,7 +156,7 @@ export default class  extends Component {
                                             color: 'black',
                                             fontFamily: 'Oswald',
                                             fontSize: 40,
-                                            marginLeft: 40
+                                            marginLeft: 60
                                         }}>I nostri corsi</Text>
 
                                         <CoursesCarousel

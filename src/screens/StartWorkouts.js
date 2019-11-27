@@ -8,8 +8,8 @@ import {
     Dimensions,
     Platform,
     TouchableOpacity,
-    ScrollView,
-    } from 'react-native';
+    ScrollView, ImageBackground,
+} from 'react-native';
 const { height, width } = Dimensions.get("window");
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import WorkoutCard from '../components/workouts/WorkoutCard';
@@ -18,6 +18,8 @@ import InfoModal from '../components/modals/infoModal';
 import firebase from "react-native-firebase";
 import Spinner from "react-native-loading-spinner-overlay";
 import AsyncStorage from '@react-native-community/async-storage';
+import startWork from './../assets/startworkout.gif'
+import gymWallpaper from "../assets/2659255-min.jpg";
 
 export default class StartWorkouts extends Component {
     constructor(props) {
@@ -114,17 +116,20 @@ export default class StartWorkouts extends Component {
 
 
                     {
-                        this.state.workouts.length > 0 ? (<View>
-                                    <EditModal visible={this.state.editModalVisible} setEditModalVisible={this.setEditModalVisible.bind(this)}/>
+                        this.state.workouts.length > 0 ? (
 
-                                    <InfoModal visible={this.state.infoModalVisible} setInfoModalVisible={this.setInfoModalVisible.bind(this)}/>
-
+                                <View>
                                     <TouchableOpacity activeOpacity={0.5} delayPressIn={50} onPress={() => this.startTraining(this.state.workouts[0], 0) }>
-                                        <View style={{backgroundColor: '#D8D8D8', height: height/3, alignItems: 'center', justifyContent: 'center'}}>
-                                            <Text style={{fontSize: 40, fontFamily: 'Oswald'}}>
-                                                <Ionicons name={Platform.OS === 'ios' ? 'ios-play' : 'md-play'} size={40}/>
-                                                {' '} Inizia allenamento
-                                            </Text>
+
+                                        <View style={{height: height/3, justifyContent: 'flex-start', flexDirection: 'column'}}>
+                                            <ImageBackground source={startWork} style={{width: '100%', height: '100%', justifyContent: 'flex-end'}}>
+                                                <View style={{justifyContent: 'flex-end', alignItems: 'center'}}>
+                                                    <Text style={{fontSize: 40, fontFamily: 'Oswald', paddingBottom: 10}}>
+                                                        <Ionicons name={Platform.OS === 'ios' ? 'ios-play' : 'md-play'} size={40}/>
+                                                        {' '} Inizia allenamento
+                                                    </Text>
+                                                </View>
+                                            </ImageBackground>
                                         </View>
                                     </TouchableOpacity>
 

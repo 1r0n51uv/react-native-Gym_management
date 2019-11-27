@@ -56,7 +56,7 @@ const AppNavigator = createStackNavigator(
         Profile: {
             screen: Profile,
             navigationOptions: {
-                header: navigationProps => <SafeAreaView><StockNav {...navigationProps} /></SafeAreaView>
+                header: navigationProps => <SafeAreaView><ProfileNav {...navigationProps} /></SafeAreaView>
             }
         },
 

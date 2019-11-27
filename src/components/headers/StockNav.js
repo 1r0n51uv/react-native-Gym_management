@@ -10,14 +10,18 @@ export default class StockNav extends Component {
 
 
             <ModernHeader
+                rightIconName="user"
+                rightIconType="EvilIcons"
+                rightIconSize={45}
+                rightIconOnPress={() => this.props.navigation.navigate('Profile')}
+                rightIconColor='#3F5469'
+                text="FIT&FIGHT"
+                textStyle={{fontSize: 35, color: '#3F5469', fontFamily: 'Oswald'}}
+                leftIconName="arrow-left"
                 leftIconType="EvilIcons"
-                leftIconName="chevron-left"
-                leftIconSize={35}
-                text="Fit&Fight"
-                textStyle={{fontSize: 20, color: 'white', fontFamily: 'Oswald'}}
-                rightDisable={true}
+                leftIconSize={45}
                 leftIconOnPress={() => this.props.navigation.pop()}
-                leftIconColor='white'
+                leftIconColor='#3F5469'
             />
         );
     }

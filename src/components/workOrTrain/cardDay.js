@@ -5,6 +5,7 @@ import Emoji from "react-native-emoji";
 import Reactotron from 'reactotron-react-native'
 import firebase from "react-native-firebase";
 import gymWallpaper from './../../assets/590.jpg';
+import Spinner from "react-native-loading-spinner-overlay";
 const { height, width } = Dimensions.get("window");
 
 class CardDay extends Component {
@@ -12,7 +13,7 @@ class CardDay extends Component {
         super(props);
         this.state = {
             workouts: [],
-            spinner: false,
+            spinner: true,
             days: [],
 
         }
@@ -59,35 +60,40 @@ class CardDay extends Component {
 
     render() {
         return (
-            <SafeAreaView style={{flex: 1}}>
+            <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
                 <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
                     <ScrollView>
 
+                        {this.state.days.length > 0 ? (
+                            this.state.days.map((day, index) => (
+                                    <TouchableOpacity
+                                        key={index} activeOpacity={0.5} onPress={() => this.props.navigation.push('StartWorkout', {day})}>
 
+                                        <CardView
+                                            cardElevation={7}
+                                            cardMaxElevation={2}
+                                            style={{
+                                                marginTop: width / 20,
+                                                marginLeft: width / 10,
+                                                marginRight: width / 10,
+                                                marginBottom: width / 35,
 
-                        {this.state.days.map((day, index) => (
-                            <TouchableOpacity key={index} activeOpacity={0.5} onPress={() => this.props.navigation.push('StartWorkout', {day})}>
+                                                backgroundColor: 'white',
+                                            }}>
 
-                                <CardView
-                                    cardElevation={7}
-                                    cardMaxElevation={2}
-                                    style={{
-                                        marginTop: 24,
-                                        marginLeft: 24,
-                                        marginRight: 24,
-                                        marginBottom: 24,
-                                        backgroundColor: 'white'
-                                    }}>
+                                            <View style={{height: height/6, alignItems: 'center', justifyContent: 'center', borderWidth: 5,
+                                                borderColor: '#3F5469', flexDirection: 'row'}}>
+                                                <Text style={{fontSize: width / 8, fontFamily: 'Oswald', color: '#3F5469'}}>{day.toUpperCase()}</Text>
+                                            </View>
+                                        </CardView>
 
-                                    <View style={{height: height/5, alignItems: 'center', justifyContent: 'center', borderWidth: 5,
-                                        borderColor: '#000000', flexDirection: 'row'}}>
-                                        <Text style={{fontSize: 50, fontFamily: 'Oswald'}}>{'GIORNO ' + (index + 1)}</Text>
-                                    </View>
-                                </CardView>
+                                    </TouchableOpacity>
+                                ))
 
-                            </TouchableOpacity>
-                        ))
+                        ) :
+                            (<Spinner visible={this.state.spinner}/>)
                         }
+
 
                     </ScrollView>
                 </ImageBackground>

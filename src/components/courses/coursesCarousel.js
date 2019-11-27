@@ -6,16 +6,17 @@ const { height, width } = Dimensions.get("window");
 import Reactotron from "reactotron-react-native";
 import {Card, Divider, Title, Paragraph} from 'react-native-paper';
 import CardView from "react-native-cardview";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import Fontisto from "react-native-vector-icons/Fontisto";
 
 export default class CoursesCarousel extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            fireCourse: []
+            fireCourse: [],
+            collapse: false
         }
-
     }
+
 
 
     componentDidMount() {
@@ -41,10 +42,10 @@ export default class CoursesCarousel extends Component {
                 cardMaxElevation={2}
                 cornerRadius={8}
                 style={{
-                    marginTop: 24,
-                    marginLeft: 24,
-                    marginRight: 24,
-                    marginBottom: 24,
+                    marginTop: 10,
+                    marginLeft: 10,
+                    marginRight: 10,
+                    marginBottom: 10,
                     backgroundColor: 'white'
                 }}>
 
@@ -57,13 +58,15 @@ export default class CoursesCarousel extends Component {
                         paddingBottom: 15,
                         fontFamily: 'Oswald'
                     }}>
-                        <View >
+                        <View style={{flexDirection: 'row'}}>
                             <Text style={{
+                                color: '#3F5469',
                                 marginTop: 10,
                                 fontSize: 30,
                                 alignSelf: 'flex-start',
                                 fontFamily: 'Oswald'
                             }}>{item['name']}</Text>
+
                         </View>
 
                         <Divider/>
@@ -76,11 +79,11 @@ export default class CoursesCarousel extends Component {
                             }}>
                                 <Text style={{
                                     fontSize: 15,
-                                    color: '#007AFF',
+                                    color: '#3F5469',
                                     marginTop: 5,
                                     fontFamily: 'Oswald'
                                 }}>Istruttore:</Text>
-                                <Text style={{fontSize: 20, fontFamily: 'Oswald'}}>{' ' + item['instructor']}</Text>
+                                <Text style={{fontSize: 20, fontFamily: 'Oswald', color: '#3F5469',}}>{' ' + item['instructor']}</Text>
                             </View>
 
                             <View style={{
@@ -90,7 +93,7 @@ export default class CoursesCarousel extends Component {
                             }}>
                                 <Text style={{
                                     fontSize: 15,
-                                    color: '#007AFF',
+                                    color: '#3F5469',
                                     marginTop: 5,
                                     fontFamily: 'Oswald'
                                 }}>Cadenza:</Text>
@@ -100,7 +103,7 @@ export default class CoursesCarousel extends Component {
                                     {
 
                                         item['weeklyFrequency'].map((workDay, index) =>(
-                                            <Text key={index} style={{fontSize: 18, marginTop: 2, fontFamily: 'Oswald'}}>{' ' + workDay.day + ' - ' + workDay.startTime.hour + ':' + workDay.endTime.minutes}</Text>
+                                            <Text key={index} style={{fontSize: 18, marginTop: 2, fontFamily: 'Oswald', color: '#3F5469'}}>{' ' + workDay.day + ' - ' + workDay.startTime.hour + ':' + workDay.endTime.minutes}</Text>
                                         ))
 
                                     }
@@ -116,12 +119,12 @@ export default class CoursesCarousel extends Component {
                             }}>
                                 <Text style={{
                                     fontSize: 15,
-                                    color: '#007AFF',
+                                    color: '#3F5469',
                                     marginTop: 5,
                                     fontFamily: 'Oswald'
                                 }}>Inizio:</Text>
                                 <Text
-                                    style={{fontSize: 20, fontFamily: 'Oswald'}}>{' ' + item['period'].startDate }</Text>
+                                    style={{fontSize: 20, fontFamily: 'Oswald', color: '#3F5469'}}>{' ' + item['period'].startDate }</Text>
                             </View>
 
 
@@ -132,12 +135,12 @@ export default class CoursesCarousel extends Component {
                             }}>
                                 <Text style={{
                                     fontSize: 15,
-                                    color: '#007AFF',
+                                    color: '#3F5469',
                                     marginTop: 5,
                                     fontFamily: 'Oswald'
                                 }}>Fine:</Text>
                                 <Text
-                                    style={{fontSize: 20, fontFamily: 'Oswald'}}>{' ' + item['period'].endDate}</Text>
+                                    style={{fontSize: 20, fontFamily: 'Oswald', color: '#3F5469',}}>{' ' + item['period'].endDate}</Text>
                             </View>
 
                         </View>
@@ -171,8 +174,9 @@ export default class CoursesCarousel extends Component {
                 <Card>
                     <Card.Cover source={{ uri: item.image }} />
                     <Card.Content>
-                        <View style={{marginTop: 5}}>
-                            <Title style={{ fontFamily: 'Oswald', fontSize: 30}}>{item.name}</Title>
+                        <View>
+                            <Title style={{ fontFamily: 'Oswald', fontSize: 30, paddingTop: 10}}>{item.name}</Title>
+                            <Divider/>
                             <Paragraph>{item.description}</Paragraph>
                         </View>
                     </Card.Content>
@@ -189,7 +193,7 @@ export default class CoursesCarousel extends Component {
             this.state.fireCourse.length > 0 && <Carousel
                 sliderWidth={width}
                 sliderHeight={width}
-                itemWidth={width - 60}
+                itemWidth={width - 100}
                 data={this.state.fireCourse}
                 layout={'default'}
                 renderItem={this.props.whichCarousel ? this._renderItem : this._renderItem2}

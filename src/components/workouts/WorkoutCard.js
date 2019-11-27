@@ -28,7 +28,7 @@ export default class WorkoutCard extends Component {
                     backgroundColor: this.props.bgColor
                 }}>
 
-                <View style={{flexDirection: 'row', justifyContent: 'space-around', borderWidth: 5, borderColor: '#000000', borderRadius: 10}}>
+                <View style={{flexDirection: 'row', justifyContent: 'space-around', borderWidth: 5, borderColor: '#3F5469', borderRadius: 10}}>
 
 
                     {/* WORKOUT IMAGE */}
@@ -40,9 +40,9 @@ export default class WorkoutCard extends Component {
 
                     {
                         this.props.workout.atTime  &&
-                        <View style={{flexDirection: 'column', justifyContent: 'center'}}>
-                            <Text style={{fontSize: 25, fontFamily: 'Oswald'}}>{this.props.workout.name}</Text>
-                            <Text style={{fontSize: 20, marginTop: 5, color: 'grey', fontFamily: 'Oswald'}}>{this.props.workout.work.min + ':' + this.props.workout.work.sec}</Text>
+                        <View style={{flexDirection: 'column', justifyContent: 'center', width: width / 2.5}}>
+                            <Text style={{fontSize: 25, fontFamily: 'Oswald', color: '#3F5469'}}>{this.props.workout.name}</Text>
+                            <Text style={{fontSize: 20, marginTop: 5, color: '#3F5469', fontFamily: 'Oswald'}}>{this.props.workout.work.min + ':' + this.props.workout.work.sec}</Text>
                         </View>
 
                     }
@@ -50,9 +50,9 @@ export default class WorkoutCard extends Component {
                     {
                         this.props.workout.atTime === false &&
 
-                        <View style={{flexDirection: 'column', justifyContent: 'center'}}>
-                            <Text style={{fontSize: 25, fontFamily: 'Oswald'}}>{this.props.workout.name}</Text>
-                            <Text style={{fontSize: 20, marginTop: 5, color: 'grey', fontFamily: 'Oswald'}}>{this.props.workout.weight + 'kg ' + 'x' +this.props.workout.numberOfSeries}</Text>
+                        <View style={{flexDirection: 'column', justifyContent: 'center', width: width / 2.5}}>
+                            <Text style={{fontSize: 25, fontFamily: 'Oswald', color: '#3F5469'}}>{this.props.workout.name}</Text>
+                            <Text style={{fontSize: 20, marginTop: 5, color: '#3F5469', fontFamily: 'Oswald'}}>{this.props.workout.weight + 'kg ' + 'x' +this.props.workout.numberOfSeries}</Text>
                         </View>
                     }
 
