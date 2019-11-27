@@ -23,7 +23,7 @@ class DescriptionAndLink extends Component {
             <View style={{flexDirection: 'column', marginBottom: 24}}>
 
                 <Text style={{
-                    color: 'black',
+                    color: '#3F5469',
                     fontFamily: 'Oswald',
                     fontSize: 40,
                     marginLeft: 24
@@ -31,7 +31,7 @@ class DescriptionAndLink extends Component {
 
                 <View style={{ marginLeft: 24,
                     marginRight: 24}}>
-                    <Divider style={{height: 3, backgroundColor: 'black'}}/>
+                    <Divider style={{height: 3, backgroundColor: '#3F5469'}}/>
 
                 </View>
 
@@ -66,7 +66,7 @@ class DescriptionAndLink extends Component {
                                 color: 'black',
                                 fontFamily: 'Oswald',
                                 fontSize: 40,
-                            }}>Link <Fontisto name="youtube-play" size={35}/>
+                            }}>Link <Fontisto name="youtube-play" size={35} style={{color: '#FF0000'}}/>
                             </Text>
 
 

@@ -108,6 +108,8 @@ export default class Login extends Component {
         switch (err) {
             case 'auth/invalid-email':
                 return 'Email o Password non valida';
+            case 'auth/user-not-found':
+                return 'Utente non trovato';
             case 'auth/wrong-password':
                 return 'Email o Password non valida';
             case 'auth/network-request-failed':

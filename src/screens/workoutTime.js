@@ -3,12 +3,8 @@ import React, { Component } from 'react';
 import {Button, SafeAreaView, Image, Text, TouchableOpacity, View, Dimensions, Easing, ScrollView, Platform, ImageBackground} from 'react-native';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
-import WorkoutNav from '../components/headers/WorkoutNav';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import {ModernHeader} from '@freakycoder/react-native-header-view';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Card, Divider} from 'react-native-paper';
-import plank from '../assets/plank.png';
 import CardView from 'react-native-cardview';
 const { height, width } = Dimensions.get("window");
 import Reactotron from 'reactotron-react-native'
@@ -296,15 +292,15 @@ export default class WorkoutTime extends Component {
                 <ScrollView>
 
                     <Text style={{
-                        color: 'black',
+                        color: '#3F5469',
                         fontFamily: 'Oswald',
-                        fontSize: 50,
+                        fontSize: width / 10,
                         marginLeft: 24
                     }}>{this.state.name}</Text>
 
                     <View style={{ marginLeft: 24,
                         marginRight: 24}}>
-                        <Divider style={{height: 3, backgroundColor: 'black'}}/>
+                        <Divider style={{height: 3, backgroundColor: '#3F5469'}}/>
 
                     </View>
 
@@ -321,16 +317,6 @@ export default class WorkoutTime extends Component {
                             backgroundColor: 'white'
                         }}>
 
-                        {
-                            this.state.atTime === false &&
-                            <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
-                                <Text style={{fontSize: 25, color: '#007AFF'}}>Peso:</Text>
-                                <Fontisto style={{marginTop:5, color: '#EB3333'}} size={25} name={'minus-a'}/>
-                                <Text style={{fontSize: 25}}>60Kg</Text>
-                                <Fontisto style={{marginTop:5, color: '#4CD964'}} size={25} name={'plus-a'}/>
-                            </View>
-                        }
-
                         <View>
 
                             <View style={{backgroundColor: '#EFF0F0'}}>
@@ -339,18 +325,28 @@ export default class WorkoutTime extends Component {
 
                             <View style={{ flexDirection: 'column' }}>
                                 <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
-                                    <Text style={{fontSize: 25, color: '#007AFF'}}>Ripetizioni:</Text>
-                                    <Text style={{fontSize: 25}}>{this.state.numberOfSeries}</Text>
+                                    <Text style={{fontFamily: 'Oswald', fontSize: 25, color: '#3F5469'}}>Ripetizioni:</Text>
+                                    <Text style={{fontFamily: 'Oswald', fontSize: 25}}>{this.state.numberOfSeries}</Text>
                                 </View>
 
                                 <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
-                                    <Text style={{fontSize: 25, color: '#007AFF'}}>Riposo:</Text>
-                                    <Text style={{fontSize: 25}}>{this.state.snapshot.work.min + ':' + this.state.snapshot.work.sec}</Text>
+                                    <Text style={{fontFamily: 'Oswald', fontSize: 25, color: '#3F5469'}}>Riposo:</Text>
+                                    <Text style={{fontFamily: 'Oswald', fontSize: 25}}>{this.state.snapshot.work.min + 'm' +
+
+                                    ((this.state.snapshot.work.sec !== 0 ||
+                                        this.state.snapshot.work.sec !== '0' ||
+                                        this.state.snapshot.work.sec !== '00') ? ('') : (this.state.snapshot.work.sec + 's'))}</Text>
+
                                 </View>
 
                                 <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
-                                    <Text style={{fontSize: 25, color: '#007AFF'}}>Lavoro:</Text>
-                                    <Text style={{fontSize: 25}}>{this.state.snapshot.rest.min + ':' + this.state.snapshot.rest.sec}</Text>
+                                    <Text style={{fontFamily: 'Oswald', fontSize: 25, color: '#3F5469'}}>Lavoro:</Text>
+                                    <Text style={{fontFamily: 'Oswald', fontSize: 25}}>{this.state.snapshot.rest.min + 'm' +
+
+                                    ((this.state.snapshot.rest.sec !== 0 ||
+                                        this.state.snapshot.rest.sec !== '0' ||
+                                        this.state.snapshot.rest.sec !== '00') ? (' ' + this.state.snapshot.rest.sec + 's') : (''))}</Text>
+                                    
                                 </View>
                             </View>
 
