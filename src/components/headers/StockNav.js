@@ -14,14 +14,14 @@ export default class StockNav extends Component {
                 rightIconType="EvilIcons"
                 rightIconSize={45}
                 rightIconOnPress={() => this.props.navigation.navigate('Profile')}
-                rightIconColor='#3F5469'
+                rightIconColor='#ffffff'
                 text="FIT&FIGHT"
-                textStyle={{fontSize: 35, color: '#3F5469', fontFamily: 'Oswald'}}
+                textStyle={{fontSize: 35, color: '#ffffff', fontFamily: 'Oswald'}}
                 leftIconName="arrow-left"
                 leftIconType="EvilIcons"
                 leftIconSize={45}
                 leftIconOnPress={() => this.props.navigation.pop()}
-                leftIconColor='#3F5469'
+                leftIconColor='#ffffff'
             />
         );
     }

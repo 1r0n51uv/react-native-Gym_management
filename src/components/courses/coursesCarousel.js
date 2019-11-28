@@ -175,9 +175,9 @@ export default class CoursesCarousel extends Component {
                     <Card.Cover source={{ uri: item.image }} />
                     <Card.Content>
                         <View>
-                            <Title style={{ fontFamily: 'Oswald', fontSize: 30, paddingTop: 10}}>{item.name}</Title>
+                            <Title style={{ fontFamily: 'Oswald', fontSize: 30, paddingTop: 10, color: '#3F5469'}}>{item.name}</Title>
                             <Divider/>
-                            <Paragraph>{item.description}</Paragraph>
+                            <Paragraph style={{color: '#3F5469'}}>{item.description}</Paragraph>
                         </View>
                     </Card.Content>
                 </Card>

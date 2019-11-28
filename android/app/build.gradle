@@ -205,6 +205,8 @@ dependencies {
     implementation "com.google.firebase:firebase-database:17.0.0"
     implementation "com.google.firebase:firebase-storage:17.0.0"
 
+    implementation project(':react-native-linear-gradient')
+
 
 
     implementation 'com.facebook.fresco:fresco:2.0.0'

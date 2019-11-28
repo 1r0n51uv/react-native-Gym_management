@@ -12,6 +12,13 @@ import {observer} from 'mobx-react';
 import SplashScreen from 'react-native-splash-screen';
 import TextCarousel from "react-native-text-carousel";
 import {NavigationActions, StackActions} from "react-navigation";
+import LinearGradient from "react-native-linear-gradient";
+import WelcomeMotivational from "../components/welcome/welcomeMotivational";
+
+
+
+
+
 
 const resetAction = StackActions.reset({
     index: 0,
@@ -70,14 +77,19 @@ export default class Welcome extends Component {
     render() {
         return (
 
-            <SafeAreaView>
+            <SafeAreaView style={{flex: 1}}>
 
 
-                <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
+                <ImageBackground  source={gymWallpaper} style={{width: '100%', height: '100%'}}>
 
                     <View style={{flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'space-around', flex: 1}}>
 
-                        <View style={{flexDirection: 'column', marginLeft: 20, marginTop: height/3}}>
+
+                        <WelcomeMotivational
+                            phrases={['ciaooo', 'peloooo', 'woooow']}
+                        />
+
+                        <View style={{flexDirection: 'column', marginLeft: 20}}>
 
                             <View>
                                 <TouchableOpacity
@@ -148,14 +160,10 @@ export default class Welcome extends Component {
 
 
                         </View>
-
-
-
-
                     </View>
+
+
                 </ImageBackground>
-
-
 
             </SafeAreaView>
         );

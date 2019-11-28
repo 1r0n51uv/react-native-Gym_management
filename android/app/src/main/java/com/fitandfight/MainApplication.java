@@ -19,7 +19,7 @@ import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
 import io.invertase.firebase.auth.RNFirebaseAuthPackage;
 import io.invertase.firebase.database.RNFirebaseDatabasePackage;
 import io.invertase.firebase.storage.RNFirebaseStoragePackage;
-
+import com.BV.LinearGradient.LinearGradientPackage;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -40,6 +40,7 @@ public class MainApplication extends Application implements ReactApplication {
       packages.add(new RNFirebaseFirestorePackage());
       packages.add(new RNFirebaseDatabasePackage());
       packages.add(new RNFirebaseStoragePackage());
+      packages.add(new LinearGradientPackage());
       return packages;
     }
 

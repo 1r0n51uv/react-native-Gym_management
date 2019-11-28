@@ -16,9 +16,9 @@ export default class WelcomeNav extends Component {
                     rightIconType="EvilIcons"
                     rightIconSize={45}
                     rightIconOnPress={() => this.props.navigation.navigate('Profile')}
-                    rightIconColor='#3F5469'
+                    rightIconColor='#ffffff'
                     text="FIT&FIGHT"
-                    textStyle={{fontSize: 35, color: '#3F5469', fontFamily: 'Oswald'}}
+                    textStyle={{fontSize: 35, color: '#ffffff', fontFamily: 'Oswald'}}
                 />
 
         );

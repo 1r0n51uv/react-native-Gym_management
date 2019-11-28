@@ -7,6 +7,8 @@ import firebase from "react-native-firebase";
 import gymWallpaper from './../../assets/590.jpg';
 import Spinner from "react-native-loading-spinner-overlay";
 const { height, width } = Dimensions.get("window");
+import LinearGradient from 'react-native-linear-gradient';
+import NoTrainingCard from "./noTrainingCard";
 
 class CardDay extends Component {
     constructor(props) {
@@ -15,7 +17,7 @@ class CardDay extends Component {
             workouts: [],
             spinner: true,
             days: [],
-
+            tcardActive: true
         }
 
         this.getTrainingCard = this.getTrainingCard.bind(this);
@@ -30,18 +32,31 @@ class CardDay extends Component {
                 this.setState({
                     spinner: false
                 });
-            } else {
-                Reactotron.log('NO USER');
             }
         })
     }
 
 
+
+
     getTrainingCard(id) {
-        firebase.firestore().collection('TrainingCards').where('idUserDatabase', '==', id).get().then(value => {
-            this.setState({
-                workouts: value.docs[0].data().exercises
-            });
+        firebase.firestore().collection('TrainingCards').where('idUserDatabase', '==', id)
+            .where('isActive', '==', true).get().then(value => {
+            if  (value.docs.length > 0 ) {
+                this.setState({
+                    workouts: value.docs[0].data().exercises,
+                    spinner: false,
+                    tcardActive: true
+                });
+            } else {
+                this.setState({
+                    tcardActive: false
+                })
+            }
+
+
+
+
             this.retriveDays();
         }).catch(error => {
             Reactotron.log(error);
@@ -61,11 +76,12 @@ class CardDay extends Component {
     render() {
         return (
             <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
-                <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
+                <LinearGradient colors={['#3F5469', '#ffffff']} style={{flex: 1}}>
                     <ScrollView>
+                        {this.state.spinner ? (<Spinner visible={this.state.spinner}/>) :
 
-                        {this.state.days.length > 0 ? (
-                            this.state.days.map((day, index) => (
+                            (this.state.tcardActive ? (
+                                this.state.days.map((day, index) => (
                                     <TouchableOpacity
                                         key={index} activeOpacity={0.5} onPress={() => this.props.navigation.push('StartWorkout', {day})}>
 
@@ -81,6 +97,7 @@ class CardDay extends Component {
                                                 backgroundColor: 'white',
                                             }}>
 
+
                                             <View style={{height: height/6, alignItems: 'center', justifyContent: 'center', borderWidth: 5,
                                                 borderColor: '#3F5469', flexDirection: 'row'}}>
                                                 <Text style={{fontSize: width / 8, fontFamily: 'Oswald', color: '#3F5469'}}>{day.toUpperCase()}</Text>
@@ -89,14 +106,12 @@ class CardDay extends Component {
 
                                     </TouchableOpacity>
                                 ))
-
-                        ) :
-                            (<Spinner visible={this.state.spinner}/>)
-                        }
-
+                            ): (<NoTrainingCard />))}
 
                     </ScrollView>
-                </ImageBackground>
+                </LinearGradient>
+
+
             </SafeAreaView>
 
         );
