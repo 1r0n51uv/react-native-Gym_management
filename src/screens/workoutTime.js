@@ -9,6 +9,8 @@ import CardView from 'react-native-cardview';
 const { height, width } = Dimensions.get("window");
 import Reactotron from 'reactotron-react-native'
 import DescriptionAndLink from "../components/workouts/descriptionAndLink";
+import gymWallpaper from "../assets/pelo.jpeg";
+import * as Animatable from "react-native-animatable";
 
 const timer = require('react-native-timer');
 
@@ -269,242 +271,259 @@ export default class WorkoutTime extends Component {
 
             <SafeAreaView style={{flex: 1}}>
 
+                <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
 
-                <ModernHeader
-                    rightIconName="user"
-                    rightIconType="EvilIcons"
-                    rightIconSize={45}
-                    rightIconOnPress={() => this.props.navigation.navigate('Profile')}
-                    rightIconColor='#3F5469'
-                    text="FIT&FIGHT"
-                    textStyle={{fontSize: 35, color: '#3F5469', fontFamily: 'Oswald'}}
-                    leftIconName="arrow-left"
-                    leftIconType="EvilIcons"
-                    leftIconSize={45}
-                    leftIconOnPress={() => {
-                        this.state.doneWorkout ? (this.navigateBack())
-                        :
-                        this.props.navigation.pop();
-                    }}
-                    leftIconColor='#3F5469'
-                />
 
-                <ScrollView>
 
-                    <Text style={{
-                        color: '#3F5469',
-                        fontFamily: 'Oswald',
-                        fontSize: width / 10,
-                        marginLeft: 24
-                    }}>{this.state.name}</Text>
+                    <ModernHeader
+                        rightIconName="user"
+                        rightIconType="EvilIcons"
+                        rightIconSize={45}
+                        rightIconOnPress={() => this.props.navigation.navigate('Profile')}
+                        rightIconColor='#ffffff'
+                        text="FIT&FIGHT"
+                        textStyle={{fontSize: 35, color: '#ffffff', fontFamily: 'Oswald'}}
+                        leftIconName="arrow-left"
+                        leftIconType="EvilIcons"
+                        leftIconSize={45}
+                        leftIconOnPress={() => {
+                            this.state.doneWorkout ? (this.navigateBack())
+                                :
+                                this.props.navigation.pop();
+                        }}
+                        leftIconColor='#ffffff'
+                    />
 
-                    <View style={{ marginLeft: 24,
-                        marginRight: 24}}>
-                        <Divider style={{height: 3, backgroundColor: '#3F5469'}}/>
 
-                    </View>
 
-                    <CardView
-                        cardElevation={7}
-                        cardMaxElevation={2}
-                        cornerRadius={8}
-                        style={{
-                            marginLeft: 24,
-                            marginRight: 24,
-                            marginTop: 10,
-                            flexDirection: 'column',
-                            justifyContent: 'space-between',
-                            backgroundColor: 'white'
-                        }}>
 
-                        <View>
 
-                            <View style={{backgroundColor: '#EFF0F0'}}>
-                                <ImageBackground resizeMode={'contain'} source={{uri: this.state.gif}} style={{width: '100%', height: height/3.8}}/>
-                            </View>
+                    <ScrollView>
 
-                            <View style={{ flexDirection: 'column' }}>
-                                <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
-                                    <Text style={{fontFamily: 'Oswald', fontSize: 25, color: '#3F5469'}}>Ripetizioni:</Text>
-                                    <Text style={{fontFamily: 'Oswald', fontSize: 25}}>{this.state.numberOfSeries}</Text>
+
+                        <Animatable.View animation="fadeIn" >
+
+
+                        <CardView
+                            cardElevation={7}
+                            cardMaxElevation={2}
+                            cornerRadius={8}
+                            style={{
+                                marginLeft: 24,
+                                marginRight: 24,
+                                marginTop: 10,
+                                flexDirection: 'column',
+                                justifyContent: 'space-between',
+                                backgroundColor: 'white',
+                                opacity: 0.7
+                            }}>
+
+                            <View>
+
+                                <View>
+                                    <Text style={{
+                                        color: 'black',
+                                        fontFamily: 'Oswald',
+                                        fontSize: width / 12,
+                                        alignSelf: 'center'
+                                    }}>{this.state.name}</Text>
+
+                                    <View>
+                                        <Divider style={{height: 3, backgroundColor: 'black'}}/>
+                                    </View>
                                 </View>
 
-                                <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
-                                    <Text style={{fontFamily: 'Oswald', fontSize: 25, color: '#3F5469'}}>Riposo:</Text>
-                                    <Text style={{fontFamily: 'Oswald', fontSize: 25}}>{this.state.snapshot.work.min + 'm' +
 
-                                    ((this.state.snapshot.work.sec !== 0 ||
-                                        this.state.snapshot.work.sec !== '0' ||
-                                        this.state.snapshot.work.sec !== '00') ? ('') : (this.state.snapshot.work.sec + 's'))}</Text>
-
+                                <View style={{backgroundColor: '#EFF0F0'}}>
+                                    <ImageBackground resizeMode={'contain'} source={{uri: this.state.gif}} style={{width: '100%', height: height/3.8}}/>
                                 </View>
 
-                                <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
-                                    <Text style={{fontFamily: 'Oswald', fontSize: 25, color: '#3F5469'}}>Lavoro:</Text>
-                                    <Text style={{fontFamily: 'Oswald', fontSize: 25}}>{this.state.snapshot.rest.min + 'm' +
+                                <View style={{ flexDirection: 'column' }}>
+                                    <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
+                                        <Text style={{fontFamily: 'Oswald', fontSize: 25, color: 'black'}}>Ripetizioni:</Text>
+                                        <Text style={{fontFamily: 'Oswald', fontSize: 25}}>{this.state.numberOfSeries}</Text>
+                                    </View>
 
-                                    ((this.state.snapshot.rest.sec !== 0 ||
-                                        this.state.snapshot.rest.sec !== '0' ||
-                                        this.state.snapshot.rest.sec !== '00') ? (' ' + this.state.snapshot.rest.sec + 's') : (''))}</Text>
-                                    
+                                    <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
+                                        <Text style={{fontFamily: 'Oswald', fontSize: 25, color: 'black'}}>Riposo:</Text>
+                                        <Text style={{fontFamily: 'Oswald', fontSize: 25}}>{this.state.snapshot.work.min + 'm' +
+
+                                        ((this.state.snapshot.work.sec !== 0 ||
+                                            this.state.snapshot.work.sec !== '0' ||
+                                            this.state.snapshot.work.sec !== '00') ? ('') : (this.state.snapshot.work.sec + 's'))}</Text>
+
+                                    </View>
+
+                                    <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
+                                        <Text style={{fontFamily: 'Oswald', fontSize: 25, color: 'black'}}>Lavoro:</Text>
+                                        <Text style={{fontFamily: 'Oswald', fontSize: 25}}>{this.state.snapshot.rest.min + 'm' +
+
+                                        ((this.state.snapshot.rest.sec !== 0 ||
+                                            this.state.snapshot.rest.sec !== '0' ||
+                                            this.state.snapshot.rest.sec !== '00') ? (' ' + this.state.snapshot.rest.sec + 's') : (''))}</Text>
+
+                                    </View>
                                 </View>
-                            </View>
 
 
-                            <View style={{flexDirection: 'column', justifyContent:'center', padding: 10}}>
-                                <AnimatedCircularProgress
-                                    ref={(ref) => this.circularProgress = ref}
-                                    size={this.state.size}
-                                    width={30}
-                                    rotation={0}
-                                    fill={this.state.doneWorkout ? 100 : this.state.animationFill}
-                                    backgroundColor={'#FFFFFF'}
-                                    tintColor={this.state.doneWorkout ? '#4CD964' : this.state.progressColor }
-                                    style={{alignSelf:'center'}}>
-                                    {
-                                        (fill) => (
+                                <View style={{flexDirection: 'column', justifyContent:'center', padding: 10}}>
+                                    <AnimatedCircularProgress
+                                        ref={(ref) => this.circularProgress = ref}
+                                        size={this.state.size}
+                                        width={30}
+                                        rotation={0}
+                                        fill={this.state.doneWorkout ? 100 : this.state.animationFill}
+                                        backgroundColor={'#FFFFFF'}
+                                        tintColor={this.state.doneWorkout ? '#4CD964' : this.state.progressColor }
+                                        style={{alignSelf:'center'}}>
+                                        {
+                                            (fill) => (
 
-                                            //CHECK IF WORKOUT IS DONE
+                                                //CHECK IF WORKOUT IS DONE
 
-                                            this.state.doneWorkout ?
-
-
-                                                (
-                                                    //IF TRUE RENDER COMPLETED CIRCULAR PROGRESS GO AHEAD
-
-                                                    <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                                                        <TouchableOpacity onPress={() => {
-                                                            this.navigateBack();
-                                                        }}>
-                                                            <Text style={{fontSize: 35, color: '#4CD964', fontFamily: 'Oswald'}} >{this.state.circularProgressAction}</Text>
-                                                            <Fontisto style={{alignSelf: 'center', justifyContent: 'center', marginTop: 10, color: '#4CD964'}} size={30} name={'angle-dobule-right'}/>
-
-                                                        </TouchableOpacity>
-                                                    </View>
-
-                                                ) :
-
-                                                (
-                                                    //IF FALSE, CHECK IF RENDER WORK OR REST CIRCULAR PROGRESS
-
-                                                    this.state.workOrRest ?
-
-                                                        (
-                                                            //IF TRUE, RENDER WORKOUT CIRCULAR PROGRESS
-                                                            <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                                                this.state.doneWorkout ?
 
 
-                                                                {/* CHECK IF RENDER TIMER OR ACTION*/}
-                                                                {this.state.timeOrAction ?
+                                                    (
+                                                        //IF TRUE RENDER COMPLETED CIRCULAR PROGRESS GO AHEAD
 
-                                                                    //IF TRUE RENDER TIMER
-                                                                    (
+                                                        <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                                                            <TouchableOpacity onPress={() => {
+                                                                this.navigateBack();
+                                                            }}>
+                                                                <Text style={{fontSize: 35, color: '#4CD964', fontFamily: 'Oswald'}} >{this.state.circularProgressAction}</Text>
+                                                                <Fontisto style={{alignSelf: 'center', justifyContent: 'center', marginTop: 10, color: '#4CD964'}} size={30} name={'angle-dobule-right'}/>
 
-                                                                        <View>
+                                                            </TouchableOpacity>
+                                                        </View>
 
-                                                                            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                                                                                <Text style={{fontSize: 35}}>
-                                                                                    {this.state.work.min + ':' + this.state.work.sec}
+                                                    ) :
+
+                                                    (
+                                                        //IF FALSE, CHECK IF RENDER WORK OR REST CIRCULAR PROGRESS
+
+                                                        this.state.workOrRest ?
+
+                                                            (
+                                                                //IF TRUE, RENDER WORKOUT CIRCULAR PROGRESS
+                                                                <View style={{alignItems: 'center', justifyContent: 'center'}}>
+
+
+                                                                    {/* CHECK IF RENDER TIMER OR ACTION*/}
+                                                                    {this.state.timeOrAction ?
+
+                                                                        //IF TRUE RENDER TIMER
+                                                                        (
+
+                                                                            <View>
+
+                                                                                <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                                                                                    <Text style={{fontSize: 35}}>
+                                                                                        {this.state.work.min + ':' + this.state.work.sec}
+                                                                                    </Text>
+                                                                                </View>
+
+                                                                                <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'space-between', marginTop: 10}}>
+
+                                                                                    {/* Pause/Resume Icon*/}
+                                                                                    <TouchableOpacity onPress={() => {
+                                                                                        this.state.paused ? this.startWorkouTimer() : this.pauseTimer()
+                                                                                    }}>
+                                                                                        <Fontisto style={{alignSelf: 'center', justifyContent: 'center'}} size={30} name={this.state.paused ? 'play' : 'pause'}/>
+                                                                                    </TouchableOpacity>
+
+                                                                                    {/* Pause/Resume Icon*/}
+                                                                                    <TouchableOpacity onPress={() => this.resetTimer()}>
+                                                                                        <Fontisto style={{alignSelf: 'center', justifyContent: 'center', marginLeft: 20}} size={30} name={'redo'}/>
+                                                                                    </TouchableOpacity>
+
+                                                                                </View>
+
+                                                                            </View>
+
+                                                                        )
+
+                                                                        :
+
+                                                                        //IF FALSE RENDER ACTION
+                                                                        (
+                                                                            <TouchableOpacity onPress={() => {
+                                                                                this.startWorkouTimer()
+                                                                            }}>
+                                                                                <Text style={{fontSize: 35, fontFamily: 'Oswald'}}>
+                                                                                    {this.state.circularProgressAction}
                                                                                 </Text>
-                                                                            </View>
 
-                                                                            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'space-between', marginTop: 10}}>
+                                                                                {
+                                                                                    this.state.circularProgressAction === 'Allenati' ?
+                                                                                        (<Fontisto style={{alignSelf: 'center', justifyContent: 'center', marginTop: 10}} size={30} name={'play'}/>)
+                                                                                        :
+                                                                                        (<View/>)
+                                                                                }
 
-                                                                                {/* Pause/Resume Icon*/}
-                                                                                <TouchableOpacity onPress={() => {
-                                                                                    this.state.paused ? this.startWorkouTimer() : this.pauseTimer()
-                                                                                }}>
-                                                                                    <Fontisto style={{alignSelf: 'center', justifyContent: 'center'}} size={30} name={this.state.paused ? 'play' : 'pause'}/>
-                                                                                </TouchableOpacity>
+                                                                            </TouchableOpacity>
+                                                                        )
 
-                                                                                {/* Pause/Resume Icon*/}
-                                                                                <TouchableOpacity onPress={() => this.resetTimer()}>
-                                                                                    <Fontisto style={{alignSelf: 'center', justifyContent: 'center', marginLeft: 20}} size={30} name={'redo'}/>
-                                                                                </TouchableOpacity>
+                                                                    }
+                                                                </View>
+                                                            )
 
-                                                                            </View>
+                                                            :
 
-                                                                        </View>
+                                                            (
+                                                                //IF FALSE, RENDER REST CIRCULAR PROGRESS
+                                                                <View style={{alignItems: 'center', justifyContent: 'center'}}>
 
-                                                                    )
 
-                                                                    :
+                                                                    {/* CHECK IF RENDER TIMER OR ACTION*/}
+                                                                    {this.state.timeOrAction ?
 
-                                                                    //IF FALSE RENDER ACTION
-                                                                    (
-                                                                        <TouchableOpacity onPress={() => {
-                                                                            this.startWorkouTimer()
-                                                                        }}>
+                                                                        //IF TRUE RENDER TIMER
+                                                                        (
+
+                                                                            <Text style={{fontSize: 35}}>
+                                                                                {this.state.rest.min + ':' + this.state.rest.sec}
+                                                                            </Text>
+
+                                                                        )
+
+                                                                        :
+
+                                                                        //IF FALSE RENDER ACTION
+                                                                        (
+
                                                                             <Text style={{fontSize: 35, fontFamily: 'Oswald'}}>
                                                                                 {this.state.circularProgressAction}
                                                                             </Text>
-
-                                                                            {
-                                                                                this.state.circularProgressAction === 'Allenati' ?
-                                                                                    (<Fontisto style={{alignSelf: 'center', justifyContent: 'center', marginTop: 10}} size={30} name={'play'}/>)
-                                                                                    :
-                                                                                    (<View/>)
-                                                                            }
-
-                                                                        </TouchableOpacity>
-                                                                    )
-
-                                                                }
-                                                            </View>
-                                                        )
-
-                                                        :
-
-                                                        (
-                                                            //IF FALSE, RENDER REST CIRCULAR PROGRESS
-                                                            <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                                                                        )
+                                                                    }
 
 
-                                                                {/* CHECK IF RENDER TIMER OR ACTION*/}
-                                                                {this.state.timeOrAction ?
+                                                                </View>
 
-                                                                    //IF TRUE RENDER TIMER
-                                                                    (
+                                                            )
 
-                                                                        <Text style={{fontSize: 35}}>
-                                                                            {this.state.rest.min + ':' + this.state.rest.sec}
-                                                                        </Text>
+                                                    )
 
-                                                                    )
-
-                                                                    :
-
-                                                                    //IF FALSE RENDER ACTION
-                                                                    (
-
-                                                                        <Text style={{fontSize: 35, fontFamily: 'Oswald'}}>
-                                                                            {this.state.circularProgressAction}
-                                                                        </Text>
-                                                                    )
-                                                                }
+                                            )
+                                        }
 
 
-                                                            </View>
+                                    </AnimatedCircularProgress>
 
-                                                        )
-
-                                                )
-
-                                        )
-                                    }
-
-
-                                </AnimatedCircularProgress>
-
+                                </View>
                             </View>
-                        </View>
-                    </CardView>
+                        </CardView>
 
-                    <DescriptionAndLink
-                        description={this.state.description}
-                        link={this.state.link}
-                    />
-                </ScrollView>
+                        </Animatable.View>
+
+                        <DescriptionAndLink
+                            description={this.state.description}
+                            link={this.state.link}
+                        />
+                    </ScrollView>
+
+                </ImageBackground>
 
             </SafeAreaView>
         );

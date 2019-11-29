@@ -25,10 +25,11 @@ export default class WorkoutCard extends Component {
                     marginTop: 20,
                     marginLeft: 24,
                     marginRight: 24,
-                    backgroundColor: this.props.bgColor
+                    backgroundColor: this.props.bgColor,
+                    opacity: 0.7
                 }}>
 
-                <View style={{flexDirection: 'row', justifyContent: 'space-around', borderWidth: 5, borderColor: '#3F5469', borderRadius: 10}}>
+                <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
 
 
                     {/* WORKOUT IMAGE */}
@@ -39,7 +40,7 @@ export default class WorkoutCard extends Component {
                     {/* NAME, WEIGHT, REPS, SERIES */}
 
                     <View style={{flexDirection: 'column', justifyContent: 'center', width: width / 2.5}}>
-                        <Text style={{fontSize: width / 15, fontFamily: 'Oswald', color: '#3F5469'}}>{this.props.workout.name}</Text>
+                        <Text style={{fontSize: width / 15, fontFamily: 'Oswald', color: this.props.bgColor === 'white' ? 'black' : 'white'}}>{this.props.workout.name}</Text>
                     </View>
 
 

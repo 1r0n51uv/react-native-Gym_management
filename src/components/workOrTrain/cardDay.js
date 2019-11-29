@@ -4,11 +4,14 @@ import {Text, TouchableOpacity, View, Dimensions, ScrollView, ImageBackground, S
 import Emoji from "react-native-emoji";
 import Reactotron from 'reactotron-react-native'
 import firebase from "react-native-firebase";
-import gymWallpaper from './../../assets/590.jpg';
 import Spinner from "react-native-loading-spinner-overlay";
 const { height, width } = Dimensions.get("window");
 import LinearGradient from 'react-native-linear-gradient';
 import NoTrainingCard from "./noTrainingCard";
+import * as Animatable from 'react-native-animatable';
+import styles from './../../assets/styles'
+import gymWallpaper from './../../assets/pelo.jpeg';
+import {ModernHeader} from "@freakycoder/react-native-header-view";
 
 class CardDay extends Component {
     constructor(props) {
@@ -76,40 +79,65 @@ class CardDay extends Component {
     render() {
         return (
             <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
-                <LinearGradient colors={['#3F5469', '#ffffff']} style={{flex: 1}}>
+
+                <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
+
+                    <ModernHeader
+                        rightIconName="user"
+                        rightIconType="EvilIcons"
+                        rightIconSize={45}
+                        rightIconOnPress={() => this.props.navigation.navigate('Profile')}
+                        rightIconColor='#ffffff'
+                        text="FIT&FIGHT"
+                        textStyle={{fontSize: 35, color: '#ffffff', fontFamily: 'Oswald'}}
+                        leftIconName="arrow-left"
+                        leftIconType="EvilIcons"
+                        leftIconSize={45}
+                        leftIconOnPress={() => this.props.navigation.pop()}
+                        leftIconColor='#ffffff'
+                    />
+
                     <ScrollView>
                         {this.state.spinner ? (<Spinner visible={this.state.spinner}/>) :
 
                             (this.state.tcardActive ? (
                                 this.state.days.map((day, index) => (
-                                    <TouchableOpacity
-                                        key={index} activeOpacity={0.5} onPress={() => this.props.navigation.push('StartWorkout', {day})}>
-
-                                        <CardView
-                                            cardElevation={7}
-                                            cardMaxElevation={2}
-                                            style={{
-                                                marginTop: width / 20,
-                                                marginLeft: width / 10,
-                                                marginRight: width / 10,
-                                                marginBottom: width / 35,
-
-                                                backgroundColor: 'white',
-                                            }}>
 
 
-                                            <View style={{height: height/6, alignItems: 'center', justifyContent: 'center', borderWidth: 5,
-                                                borderColor: '#3F5469', flexDirection: 'row'}}>
-                                                <Text style={{fontSize: width / 8, fontFamily: 'Oswald', color: '#3F5469'}}>{day.toUpperCase()}</Text>
-                                            </View>
-                                        </CardView>
+                                    <Animatable.View key={index} animation={(index % 2 === 0) ? "fadeInLeftBig" : "fadeInRightBig"} >
 
-                                    </TouchableOpacity>
+                                        <TouchableOpacity
+                                            activeOpacity={0.5} onPress={() => this.props.navigation.push('StartWorkout', {day})}>
+
+                                            <CardView
+                                                cardElevation={7}
+                                                cardMaxElevation={2}
+                                                cornerRadius={8}
+                                                style={{
+                                                    marginTop: width / 20,
+                                                    marginLeft: width / 10,
+                                                    marginRight: width / 10,
+                                                    marginBottom: width / 35,
+                                                    backgroundColor: (index % 2 === 0) ? 'black' : 'white',
+                                                    opacity: 0.7
+                                                }}>
+
+
+                                                <View style={{height: height/6, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', borderRadius: 10}}>
+                                                    <Text style={{fontSize: width / 8, fontFamily: 'Oswald', color: (index % 2 === 0) ? 'white' : 'black'}}>{day.toUpperCase()}</Text>
+                                                </View>
+                                            </CardView>
+
+                                        </TouchableOpacity>
+
+                                    </Animatable.View>
+
                                 ))
                             ): (<NoTrainingCard />))}
 
                     </ScrollView>
-                </LinearGradient>
+
+                </ImageBackground>
 
 
             </SafeAreaView>

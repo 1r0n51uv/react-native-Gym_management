@@ -61,10 +61,10 @@ class WelcomeMotivational extends Component {
 
 
 
-            <View style={{borderRightWidth: 5, marginRight: width / 20, borderRightColor: 'black', flexDirection: 'column', flexWrap: 'nowrap', alignSelf: 'flex-end'}}>
+            <View style={{marginRight: width / 20, flexDirection: 'column', flexWrap: 'nowrap', alignSelf: 'center'}}>
                 <Animatable.View ref={this.handleViewRef} animation={'fadeInLeft'}>
-                    <Text style={{fontSize: width / 12, color: 'black', fontFamily: 'Oswald', paddingRight: 10, paddingBottom: 10}}>
-                        {this.state.currentPhrase}
+                    <Text style={{fontSize: width / 12, color: '#FFFFFF', fontFamily: 'Oswald'}}>
+                        {'"' + this.state.currentPhrase.toUpperCase() + '"'}
                     </Text>
                 </Animatable.View>
 

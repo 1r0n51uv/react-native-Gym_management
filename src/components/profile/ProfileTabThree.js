@@ -43,7 +43,7 @@ export default class ProfileTabThree extends Component {
                                                                           remain={this.props.userSubscription['numberOfEntries'] -
                                                                           this.props.userSubscription['numberOfEntriesMade']} />}
 
-                {this.props.userSubscription['type'] === 'course' ? <ActiveCourses navigation={this.props.navigation} active={true}/> : <ActiveCourses active={false}/>}
+                {this.props.userSubscription['type'] === 'course' ? <ActiveCourses navigation={this.props.navigation} startDate={this.props.userSubscription['startDate']} endDate={this.props.userSubscription['endDate']} active={true}/> : <ActiveCourses active={false}/>}
 
 
             </View>
@@ -53,11 +53,11 @@ export default class ProfileTabThree extends Component {
 
 const styles = StyleSheet.create({
     mainTitle: {
-        color: '#3F5469',
+        color: 'black',
         fontFamily: 'Oswald'
     },
     subtitle: {
-        color: '#3F5469',
+        color: 'black',
         fontSize: 25,
         fontFamily: 'Oswald'
     }

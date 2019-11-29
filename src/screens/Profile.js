@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {View, Text, ScrollView, SafeAreaView, TouchableOpacity, Platform, Image} from 'react-native';
+import {View, Text, ScrollView, SafeAreaView, TouchableOpacity, Platform, Image, ImageBackground} from 'react-native';
 import {Avatar, Button, Divider, TextInput} from 'react-native-paper';
 import avatar from './../assets/ProfileInfo.png'
 import CardView from 'react-native-cardview'
@@ -15,6 +15,10 @@ import CounterStore from '../UserManagerOffline';
 import Reactotron from 'reactotron-react-native'
 import UserAvatar from "react-native-user-avatar";
 import LinearGradient from "react-native-linear-gradient";
+import gymWallpaper from "../assets/pelo.jpeg";
+import {ModernHeader} from "@freakycoder/react-native-header-view";
+import styles from './../assets/styles'
+
 
 const resetAction = StackActions.reset({
     index: 0,
@@ -128,41 +132,55 @@ export default class Profile extends Component {
         return (
             <SafeAreaView style={{backgroundColor: 'white', flex: 1}}>
 
-                <LinearGradient colors={['#3f5469','#647184', '#888f9f', '#acafba', '#d0d0d7', '#d2cedd', '#d8cbe1', '#e0c7e2', '#d799bd', '#cf6a89', '#bb3b4a', '#980f00'].reverse()} style={{flex: 1}}>
-                    {this.state.userInfo ?
+                <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
+
+                    <ModernHeader
+                        rightDisable={true}
+                        text="PROFIL0"
+                        textStyle={{fontSize: 35, color: '#ffffff', fontFamily: 'Oswald'}}
+                        leftIconName="arrow-left"
+                        leftIconType="EvilIcons"
+                        leftIconSize={45}
+                        leftIconOnPress={() => this.props.navigation.pop()}
+                        leftIconColor='#ffffff'
+                    />
+
+                {this.state.userInfo ?
 
                         (<ScrollView>
                             <View style={{alignSelf: 'center', marginTop: 20}}>
-                                <UserAvatar size="100" name={this.state.userInfo['name'].toUpperCase() + ' ' + this.state.userInfo['surname'].toUpperCase()} color='#3F5469'/>
+                                <UserAvatar size="100" name={this.state.userInfo['name'].toUpperCase() + ' ' + this.state.userInfo['surname'].toUpperCase()} color='black'/>
                             </View>
                             <CardView
                                 cardElevation={7}
                                 cardMaxElevation={2}
+                                cornerRadius={8}
                                 style={{
                                     marginTop: 20,
                                     marginLeft: 24,
                                     marginRight: 24,
-                                    backgroundColor: 'white'
+                                    backgroundColor: 'white',
+                                    opacity: 0.8
                                 }}>
 
-                                <View style={{borderWidth: 5, borderColor: '#3F5469'}}>
+                                <View>
                                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                         <View style={{marginLeft: 40, marginTop: 10}}>
 
                                             <TouchableOpacity onPress={() => {this.changeTab(0)}}>
-                                                <Ionicons name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} type="FontAwesome" size={40} color={this.state.active === 0 ? '#3F5469' : 'grey'} />
+                                                <Ionicons name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} type="FontAwesome" size={40} color={this.state.active === 0 ? styles.textColor : 'grey'} />
                                             </TouchableOpacity>
                                         </View>
 
                                         <View style={{marginTop: 10}}>
                                             <TouchableOpacity onPress={() => {this.changeTab(1)}}>
-                                                <Ionicons name={Platform.OS === 'ios' ? 'ios-clipboard' : 'md-clipboard'} type="Ionicons" size={40} color={this.state.active === 1 ? '#3F5469' : 'grey'} />
+                                                <Ionicons name={Platform.OS === 'ios' ? 'ios-clipboard' : 'md-clipboard'} type="Ionicons" size={40} color={this.state.active === 1 ? styles.textColor : 'grey'} />
                                             </TouchableOpacity>
                                         </View>
 
                                         <View style={{marginRight: 40, marginTop: 10}}>
                                             <TouchableOpacity onPress={() => {this.changeTab(2)}}>
-                                                <Ionicons name={Platform.OS === 'ios' ? 'ios-apps' : 'md-apps'} type="Ionicons" size={40} color={this.state.active === 2 ? '#3F5469' : 'grey'} />
+                                                <Ionicons name={Platform.OS === 'ios' ? 'ios-apps' : 'md-apps'} type="Ionicons" size={40} color={this.state.active === 2 ? styles.textColor : 'grey'} />
                                             </TouchableOpacity>
                                         </View>
 
@@ -194,6 +212,7 @@ export default class Profile extends Component {
                                     dark={true}
                                     compact={true}
                                     loading={this.state.loading}
+                                    style={{borderRadius: 10, opacity: 0.9}}
                                     color={'#980f00'}
                                     contentStyle={{
                                         padding: 10
@@ -209,7 +228,7 @@ export default class Profile extends Component {
                         )
 
                     }
-                </LinearGradient>
+                </ImageBackground>
             </SafeAreaView>
         );
     }

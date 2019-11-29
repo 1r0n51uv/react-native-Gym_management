@@ -46,6 +46,7 @@ export default class CoursesCarousel extends Component {
                     marginLeft: 10,
                     marginRight: 10,
                     marginBottom: 10,
+                    opacity: 0.8,
                     backgroundColor: 'white'
                 }}>
 
@@ -60,7 +61,7 @@ export default class CoursesCarousel extends Component {
                     }}>
                         <View style={{flexDirection: 'row'}}>
                             <Text style={{
-                                color: '#3F5469',
+                                color: 'black',
                                 marginTop: 10,
                                 fontSize: 30,
                                 alignSelf: 'flex-start',
@@ -79,11 +80,11 @@ export default class CoursesCarousel extends Component {
                             }}>
                                 <Text style={{
                                     fontSize: 15,
-                                    color: '#3F5469',
+                                    color: 'black',
                                     marginTop: 5,
                                     fontFamily: 'Oswald'
                                 }}>Istruttore:</Text>
-                                <Text style={{fontSize: 20, fontFamily: 'Oswald', color: '#3F5469',}}>{' ' + item['instructor']}</Text>
+                                <Text style={{fontSize: 20, fontFamily: 'Oswald', color: 'black',}}>{' ' + item['instructor']}</Text>
                             </View>
 
                             <View style={{
@@ -93,7 +94,7 @@ export default class CoursesCarousel extends Component {
                             }}>
                                 <Text style={{
                                     fontSize: 15,
-                                    color: '#3F5469',
+                                    color: 'black',
                                     marginTop: 5,
                                     fontFamily: 'Oswald'
                                 }}>Cadenza:</Text>
@@ -103,7 +104,7 @@ export default class CoursesCarousel extends Component {
                                     {
 
                                         item['weeklyFrequency'].map((workDay, index) =>(
-                                            <Text key={index} style={{fontSize: 18, marginTop: 2, fontFamily: 'Oswald', color: '#3F5469'}}>{' ' + workDay.day + ' - ' + workDay.startTime.hour + ':' + workDay.endTime.minutes}</Text>
+                                            <Text key={index} style={{fontSize: 18, marginTop: 2, fontFamily: 'Oswald', color: 'black'}}>{' ' + workDay.day + ' - ' + workDay.startTime.hour + ':' + workDay.endTime.minutes}</Text>
                                         ))
 
                                     }
@@ -119,12 +120,12 @@ export default class CoursesCarousel extends Component {
                             }}>
                                 <Text style={{
                                     fontSize: 15,
-                                    color: '#3F5469',
+                                    color: 'black',
                                     marginTop: 5,
                                     fontFamily: 'Oswald'
                                 }}>Inizio:</Text>
                                 <Text
-                                    style={{fontSize: 20, fontFamily: 'Oswald', color: '#3F5469'}}>{' ' + item['period'].startDate }</Text>
+                                    style={{fontSize: 20, fontFamily: 'Oswald', color: 'black'}}>{' ' + item['period'].startDate }</Text>
                             </View>
 
 
@@ -135,12 +136,12 @@ export default class CoursesCarousel extends Component {
                             }}>
                                 <Text style={{
                                     fontSize: 15,
-                                    color: '#3F5469',
+                                    color: 'black',
                                     marginTop: 5,
                                     fontFamily: 'Oswald'
                                 }}>Fine:</Text>
                                 <Text
-                                    style={{fontSize: 20, fontFamily: 'Oswald', color: '#3F5469',}}>{' ' + item['period'].endDate}</Text>
+                                    style={{fontSize: 20, fontFamily: 'Oswald', color: 'black',}}>{' ' + item['period'].endDate}</Text>
                             </View>
 
                         </View>
@@ -167,6 +168,7 @@ export default class CoursesCarousel extends Component {
                     marginLeft: 10,
                     marginRight: 10,
                     marginBottom: 10,
+                    opacity: 0.8,
                     backgroundColor: 'white'
                 }}>
 
@@ -175,9 +177,81 @@ export default class CoursesCarousel extends Component {
                     <Card.Cover source={{ uri: item.image }} />
                     <Card.Content>
                         <View>
-                            <Title style={{ fontFamily: 'Oswald', fontSize: 30, paddingTop: 10, color: '#3F5469'}}>{item.name}</Title>
+                            <Title style={{ fontFamily: 'Oswald', fontSize: 30, paddingTop: 10, color: 'black'}}>{item.name}</Title>
                             <Divider/>
-                            <Paragraph style={{color: '#3F5469'}}>{item.description}</Paragraph>
+                            <View>
+                                <View style={{
+                                    justifyContent: 'flex-start',
+                                    flexDirection: 'row',
+                                    marginTop: 5
+                                }}>
+                                    <Text style={{
+                                        fontSize: 15,
+                                        color: 'black',
+                                        marginTop: 5,
+                                        fontFamily: 'Oswald'
+                                    }}>Istruttore:</Text>
+                                    <Text style={{fontSize: 20, fontFamily: 'Oswald', color: 'black',}}>{' ' + item['instructor']}</Text>
+                                </View>
+
+                                <View style={{
+                                    justifyContent: 'flex-start',
+                                    flexDirection: 'row',
+                                    marginTop: 5
+                                }}>
+                                    <Text style={{
+                                        fontSize: 15,
+                                        color: 'black',
+                                        marginTop: 5,
+                                        fontFamily: 'Oswald'
+                                    }}>Cadenza:</Text>
+
+                                    <View style={{flexDirection: 'column'}}>
+
+                                        {
+
+                                            item['weeklyFrequency'].map((workDay, index) =>(
+                                                <Text key={index} style={{fontSize: 18, marginTop: 2, fontFamily: 'Oswald', color: 'black'}}>{' ' + workDay.day + ' - ' + workDay.startTime.hour + ':' + workDay.endTime.minutes}</Text>
+                                            ))
+
+                                        }
+                                    </View>
+
+
+                                </View>
+
+                                <View style={{
+                                    justifyContent: 'flex-start',
+                                    flexDirection: 'row',
+                                    marginTop: 5
+                                }}>
+                                    <Text style={{
+                                        fontSize: 15,
+                                        color: 'black',
+                                        marginTop: 5,
+                                        fontFamily: 'Oswald'
+                                    }}>Inizio:</Text>
+                                    <Text
+                                        style={{fontSize: 20, fontFamily: 'Oswald', color: 'black'}}>{' ' + item['period'].startDate }</Text>
+                                </View>
+
+
+                                <View style={{
+                                    justifyContent: 'flex-start',
+                                    flexDirection: 'row',
+                                    marginTop: 5
+                                }}>
+                                    <Text style={{
+                                        fontSize: 15,
+                                        color: 'black',
+                                        marginTop: 5,
+                                        fontFamily: 'Oswald'
+                                    }}>Fine:</Text>
+                                    <Text
+                                        style={{fontSize: 20, fontFamily: 'Oswald', color: 'black',}}>{' ' + item['period'].endDate}</Text>
+                                </View>
+
+                            </View>
                         </View>
                     </Card.Content>
                 </Card>

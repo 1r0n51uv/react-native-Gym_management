@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import {Text, TouchableOpacity, View, Linking} from "react-native";
+import {Text, TouchableOpacity, View, Linking, Dimensions} from "react-native";
 import {Divider} from "react-native-paper";
 import CardView from "react-native-cardview";
 import Fontisto from "react-native-vector-icons/Fontisto";
 import Reactotron from "reactotron-react-native";
+const { height, width } = Dimensions.get("window");
+import * as Animatable from 'react-native-animatable';
 
 class DescriptionAndLink extends Component {
     constructor(props) {
@@ -20,63 +22,68 @@ class DescriptionAndLink extends Component {
 
     render() {
         return (
+
             <View style={{flexDirection: 'column', marginBottom: 24}}>
 
-                <Text style={{
-                    color: '#3F5469',
-                    fontFamily: 'Oswald',
-                    fontSize: 40,
-                    marginLeft: 24
-                }}>Descrizione</Text>
+                <Animatable.View animation="fadeInRightBig">
 
-                <View style={{ marginLeft: 24,
-                    marginRight: 24}}>
-                    <Divider style={{height: 3, backgroundColor: '#3F5469'}}/>
+                    <Text style={{
+                        color: 'white',
+                        fontFamily: 'Oswald',
+                        fontSize: 40,
+                        marginLeft: 24
+                    }}>Descrizione</Text>
 
-                </View>
+                    <View style={{ marginLeft: 24,
+                        marginRight: 24}}>
+                        <Divider style={{height: 3, backgroundColor: 'white'}}/>
 
-                <CardView
-                    cardElevation={7}
-                    cardMaxElevation={2}
-                    cornerRadius={8}
-                    style={{
-                        marginLeft: 24,
-                        marginRight: 24,
-                        marginTop: 10,
-                        flexDirection: 'column',
-                        justifyContent: 'space-between',
-                        backgroundColor: 'white'
-                    }}>
-
-                    <View style={{padding: 10, flexDirection: 'column'}}>
-                        <Text>{this.props.description}</Text>
                     </View>
-                </CardView>
 
-                <View>
+                    <CardView
+                        cardElevation={7}
+                        cardMaxElevation={2}
+                        cornerRadius={8}
+                        style={{
+                            marginLeft: 24,
+                            marginRight: 24,
+                            marginTop: 10,
+                            flexDirection: 'column',
+                            justifyContent: 'space-between',
+                            backgroundColor: 'black',
+                            opacity: 0.7
+                        }}>
 
-
-
-                    <TouchableOpacity onPress={() => {this.getLink(this.props.link)}}>
-
-                        <View style={{flexDirection: 'row', justifyContent:'center'}}>
-
-
-                            <Text style={{
-                                color: 'black',
-                                fontFamily: 'Oswald',
-                                fontSize: 40,
-                            }}>Link <Fontisto name="youtube-play" size={35} style={{color: '#FF0000'}}/>
-                            </Text>
-
-
-
+                        <View style={{padding: 10, flexDirection: 'column'}}>
+                            <Text style={{color: 'white'}}>{this.props.description}</Text>
                         </View>
+                    </CardView>
+                </Animatable.View>
 
-                    </TouchableOpacity>
+                <Animatable.View animation="fadeInLeftBig">
 
-                </View>
+                    <View>
 
+
+
+                        <TouchableOpacity onPress={() => {this.getLink(this.props.link)}}>
+                            <View style={{flexDirection: 'row', justifyContent:'center', marginTop: 10}}>
+                                <Text style={{
+                                    color: 'black',
+                                    fontFamily: 'Oswald',
+                                    fontSize: 40,
+                                    backgroundColor: 'white', opacity: 0.7, borderRadius: 10, paddingLeft: 15, paddingRight: 15 , paddingBottom: 5
+                                }}>Link <Fontisto name="youtube-play" size={35} style={{color: '#FF0000'}}/>
+                                </Text>
+
+
+
+                            </View>
+
+                        </TouchableOpacity>
+
+                    </View>
+                </Animatable.View>
 
             </View>
         );

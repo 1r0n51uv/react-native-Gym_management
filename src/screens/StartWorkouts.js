@@ -19,7 +19,9 @@ import firebase from "react-native-firebase";
 import Spinner from "react-native-loading-spinner-overlay";
 import AsyncStorage from '@react-native-community/async-storage';
 import startWork from './../assets/startworkout.gif'
-import gymWallpaper from "../assets/2659255-min.jpg";
+import gymWallpaper from "../assets/pelo.jpeg";
+import {ModernHeader} from "@freakycoder/react-native-header-view";
+import * as Animatable from 'react-native-animatable';
 
 export default class StartWorkouts extends Component {
     constructor(props) {
@@ -111,69 +113,91 @@ export default class StartWorkouts extends Component {
 
             <SafeAreaView style={{flex: 1}}>
 
+                <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
+                    <ModernHeader
+                        rightIconName="user"
+                        rightIconType="EvilIcons"
+                        rightIconSize={45}
+                        rightIconOnPress={() => this.props.navigation.navigate('Profile')}
+                        rightIconColor='#ffffff'
+                        text="FIT&FIGHT"
+                        textStyle={{fontSize: 35, color: '#ffffff', fontFamily: 'Oswald'}}
+                        leftIconName="arrow-left"
+                        leftIconType="EvilIcons"
+                        leftIconSize={45}
+                        leftIconOnPress={() => this.props.navigation.pop()}
+                        leftIconColor='#ffffff'
+                    />
 
-                <ScrollView contentContainerStyle={{paddingBottom: 20}}>
 
 
-                    {
-                        this.state.workouts.length > 0 ? (
 
-                                <View>
-                                    <TouchableOpacity activeOpacity={0.5} delayPressIn={50} onPress={() => this.startTraining(this.state.workouts[0], 0) }>
+                    <ScrollView contentContainerStyle={{paddingBottom: 20}}>
 
-                                        <View style={{height: height/3, justifyContent: 'flex-start', flexDirection: 'column'}}>
-                                            <ImageBackground source={startWork} style={{width: '100%', height: '100%', justifyContent: 'flex-end'}}>
-                                                <View style={{justifyContent: 'flex-end', alignItems: 'center'}}>
-                                                    <Text style={{fontSize: width / 10, fontFamily: 'Oswald', paddingBottom: 10, color: '#3F5469'}}>
-                                                        <Ionicons name={Platform.OS === 'ios' ? 'ios-play' : 'md-play'} size={width / 10}/>
-                                                        {' '} Inizia allenamento
-                                                    </Text>
-                                                </View>
-                                            </ImageBackground>
+
+                        {
+                            this.state.workouts.length > 0 ? (
+
+                                    <View>
+
+                                        <View style={{height: height/9, justifyContent: 'center', flexDirection: 'column', backgroundColor: 'white', opacity: 0.7}}>
+                                            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                                                <Text style={{fontSize: width / 10, fontFamily: 'Oswald', color: 'black'}}>
+                                                    {this.props.navigation.getParam('day').toUpperCase()}
+                                                </Text>
+                                            </View>
                                         </View>
-                                    </TouchableOpacity>
-
-
-                                    {this.state.workouts.map((workout, index) => (
-
-                                        workout.status ?
-
-                                            (
-                                                <WorkoutCard key={index}
-                                                             bgColor={'#4CD964'}
-                                                             doneWorkout={workout.status}
-                                                             workout={workout}
-
-                                                />
-                                            )
-
-                                            :
-
-                                            (
-                                                <TouchableOpacity activeOpacity={0.5} delayPressIn={50} key={index} onPress={() => {
-                                                    this.startTraining(workout, index);
-                                                }}>
-
-                                                    <WorkoutCard workout={workout}
-                                                                 setEditModalVisible={this.setEditModalVisible.bind(this)}
-                                                                 setInfoModalVisible={this.setInfoModalVisible.bind(this)}
-                                                                 bgColor={'white'}/>
-                                                </TouchableOpacity>
-                                            )
-
-                                    ))}
 
 
 
-                                </View>
+                                        {this.state.workouts.map((workout, index) => (
 
-                            ) :
-                            (<Spinner visible={this.state.spinner}/>)
-                    }
+                                            workout.status ?
+
+                                                (
+                                                    <Animatable.View key={index} animation={(index % 2 === 0) ? "fadeInLeft" : "fadeInRight"} >
+
+                                                        <WorkoutCard key={index}
+                                                                     bgColor={'#4CD964'}
+                                                                     doneWorkout={workout.status}
+                                                                     workout={workout}
+
+                                                        />
+                                                    </Animatable.View>
+                                                )
+
+                                                :
+
+                                                (
+                                                    <Animatable.View key={index} animation={(index % 2 === 0) ? "fadeInLeft" : "fadeInRight"} >
+
+                                                        <TouchableOpacity activeOpacity={0.5} delayPressIn={50} key={index} onPress={() => {
+                                                            this.startTraining(workout, index);
+                                                        }}>
+
+                                                            <WorkoutCard workout={workout}
+                                                                         setEditModalVisible={this.setEditModalVisible.bind(this)}
+                                                                         setInfoModalVisible={this.setInfoModalVisible.bind(this)}
+                                                                         bgColor={(index % 2 === 0) ? 'black' : 'white'}/>
+                                                        </TouchableOpacity>
+                                                    </Animatable.View>
+                                                )
+
+                                        ))}
 
 
 
-                </ScrollView>
+                                    </View>
+
+                                ) :
+                                (<Spinner visible={this.state.spinner}/>)
+                        }
+
+
+
+                    </ScrollView>
+
+                </ImageBackground>
             </SafeAreaView>
         );
     }

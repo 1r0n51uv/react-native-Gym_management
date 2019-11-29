@@ -19,8 +19,8 @@ export default class ProfileTabTwo extends Component {
                 <Text style={styles.mainTitle}>Peso</Text>
                 <Text style={styles.subtitle}>{this.props.userAnemic ? this.props.userAnemic['weight'] + ' kg' : ' '}</Text>
 
-                <Text style={styles.mainTitle}>BCM</Text>
-                <Text style={styles.subtitle}>Appezzi</Text>
+                <Text style={styles.mainTitle}>IMC</Text>
+                <Text style={styles.subtitle}>{this.props.userAnemic['imc']}</Text>
 
             </View>
         );
@@ -29,11 +29,11 @@ export default class ProfileTabTwo extends Component {
 
 const styles = StyleSheet.create({
     mainTitle: {
-        color: '#3F5469',
+        color: 'black',
         fontFamily: 'Oswald'
     },
     subtitle: {
-        color: '#3F5469',
+        color: 'black',
         fontSize: 25,
         fontFamily: 'Oswald'
     }

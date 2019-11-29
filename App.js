@@ -56,21 +56,22 @@ const AppNavigator = createStackNavigator(
         Profile: {
             screen: Profile,
             navigationOptions: {
-                header: navigationProps => <SafeAreaView><ProfileNav {...navigationProps} /></SafeAreaView>
+                header: null
+
             }
         },
 
         Welcome: {
             screen: Welcome,
             navigationOptions: {
-                header: navigationProps => <SafeAreaView><WelcomeNav {...navigationProps} /></SafeAreaView>
+                header: null
             }
         },
 
         StartWorkout: {
             screen: StartWorkouts,
             navigationOptions: {
-                header: navigationProps => <SafeAreaView><StockNav {...navigationProps} /></SafeAreaView>
+                header: null
             }
         },
 
@@ -105,7 +106,7 @@ const AppNavigator = createStackNavigator(
         CardDay: {
             screen: CardDay,
             navigationOptions: {
-                header: navigationProps => <SafeAreaView><StockNav {...navigationProps} /></SafeAreaView>
+                header: null
             }
         }
 

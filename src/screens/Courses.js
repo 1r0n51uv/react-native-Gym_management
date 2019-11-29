@@ -17,7 +17,7 @@ import firebase from 'react-native-firebase';
 import {observer} from 'mobx-react';
 import Spinner from "react-native-loading-spinner-overlay";
 import CoursesCarousel from "../components/courses/coursesCarousel";
-import gymWallpaper from "../assets/2659255-min.jpg";
+import gymWallpaper from "../assets/pelo.jpeg";
 import {Divider} from "react-native-paper";
 import LinearGradient from "react-native-linear-gradient";
 
@@ -81,7 +81,7 @@ export default class  extends Component {
         return (
             <SafeAreaView style={{flex: 1}}>
 
-                <LinearGradient colors={['#3f5469','#647184', '#888f9f', '#acafba', '#d0d0d7', '#d2cedd', '#d8cbe1', '#e0c7e2', '#d799bd', '#cf6a89', '#bb3b4a', '#980f00'].reverse()} style={{flex: 1}}>
+                <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
 
                     {this.state.spinner ? (<Spinner visible={this.state.spinner}/>) : (<ScrollView>
 
@@ -92,15 +92,17 @@ export default class  extends Component {
                                 <View>
 
                                     <View style={{flexDirection: 'column'}}>
-                                        <Text style={{
-                                            color: '#ffffff',
-                                            fontFamily: 'Oswald',
-                                            fontSize: 35,
-                                            marginLeft: 60
-                                        }}>I tuoi corsi</Text>
-                                        <Divider
-                                            style={{marginLeft: 60, marginRight: 60, backgroundColor: '#ffffff', height: 5}}
-                                        />
+                                        <View style={{backgroundColor: 'white', opacity: 0.7}}>
+                                            <Text style={{
+                                                color: 'black',
+                                                fontFamily: 'Oswald',
+                                                fontSize: width / 10,
+                                                alignSelf: 'center',
+                                                marginBottom: 15,
+                                                marginTop: 10,
+                                            }}>I TUOI CORSI</Text>
+                                        </View>
+
                                         <CoursesCarousel
                                             courses={this.state.fireCourse}
                                             whichCarousel={false}
@@ -110,15 +112,17 @@ export default class  extends Component {
 
                                     <View style={{flexDirection: 'column'}}>
 
-                                        <Text style={{
-                                            color: '#ffffff',
-                                            fontFamily: 'Oswald',
-                                            fontSize: 40,
-                                            marginLeft: 60,
-                                        }}>Scopri altri corsi</Text>
-                                        <Divider
-                                            style={{marginLeft: 60, marginRight: 60, backgroundColor: '#ffffff', height: 5}}
-                                        />
+                                        <View style={{backgroundColor: 'black', opacity: 0.7}}>
+                                            <Text style={{
+                                                color: 'white',
+                                                fontFamily: 'Oswald',
+                                                fontSize: width / 10,
+                                                alignSelf: 'center',
+                                                marginBottom: 15,
+                                                marginTop: 10,
+                                            }}>SCOPRI ALTRI CORSI</Text>
+                                        </View>
+
                                         <CoursesCarousel
                                             courses={this.state.allCourse}
                                             whichCarousel={true}
@@ -175,7 +179,7 @@ export default class  extends Component {
 
                     </ScrollView>)}
 
-                </LinearGradient>
+                </ImageBackground>
             </SafeAreaView>
         );
     }

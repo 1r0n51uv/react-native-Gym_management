@@ -7,7 +7,7 @@ import firebase from 'react-native-firebase';
 const { height } = Dimensions.get("window");
 import SplashScreen from 'react-native-splash-screen';
 import Reactotron from 'reactotron-react-native'
-import gymWallpaper from "../assets/238388-P2T2U0-606-min.jpg";
+import gymWallpaper from "./../assets/pelo.jpeg";
 import logo from "../assets/Fit&Fightlogo.png";
 import * as Animatable from "react-native-animatable";
 
@@ -157,6 +157,7 @@ export default class Login extends Component {
                                     style={{
                                         marginLeft: 24,
                                         marginRight: 24,
+                                        opacity: 0.9,
                                         backgroundColor: 'white'
                                     }}>
                                     <View style={{

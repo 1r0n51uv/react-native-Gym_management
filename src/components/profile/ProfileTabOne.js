@@ -22,7 +22,7 @@ export default class ProfileTabOne extends Component {
                 <Text style={styles.mainTitle}>Cognome</Text>
                 <Text style={styles.subtitle}>{this.props.userInfo ? this.props.userInfo['surname'] : ' '}</Text>
 
-                <Text style={styles.mainTitle}>Età</Text>
+                <Text style={styles.mainTitle}>Data di nascita</Text>
                 <Text style={styles.subtitle}>{this.props.userInfo ? this.props.userInfo['dateOfBirth'] : ' '}</Text>
 
                 <Text style={styles.mainTitle}>Email</Text>
@@ -38,11 +38,11 @@ export default class ProfileTabOne extends Component {
 
 const styles = StyleSheet.create({
     mainTitle: {
-        color: '#3F5469',
+        color: 'black',
         fontFamily: 'Oswald'
     },
     subtitle: {
-        color: '#3F5469',
+        color: 'black',
         fontSize: 25,
         fontFamily: 'Oswald'
     }

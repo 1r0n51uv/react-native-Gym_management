@@ -4,7 +4,7 @@ import {SafeAreaView, View, Text, Dimensions, TouchableOpacity, ImageBackground,
 import AsyncStorage from '@react-native-community/async-storage';
 import {Divider} from 'react-native-paper';
 const { height, width } = Dimensions.get("window");
-import gymWallpaper from './../assets/590.jpg';
+import gymWallpaper from './../assets/pelo.jpeg';
 import firebase from "react-native-firebase";
 import Reactotron from 'reactotron-react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -14,8 +14,9 @@ import TextCarousel from "react-native-text-carousel";
 import {NavigationActions, StackActions} from "react-navigation";
 import LinearGradient from "react-native-linear-gradient";
 import WelcomeMotivational from "../components/welcome/welcomeMotivational";
-
-
+import * as Animatable from 'react-native-animatable';
+import styles from './../assets/styles'
+import {ModernHeader} from "@freakycoder/react-native-header-view";
 
 
 
@@ -79,84 +80,106 @@ export default class Welcome extends Component {
 
             <SafeAreaView style={{flex: 1}}>
 
+                <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
 
-                <ImageBackground  source={gymWallpaper} style={{width: '100%', height: '100%'}}>
+                    <ModernHeader
+                        leftDisable={true}
+                        rightIconName="user"
+                        rightIconType="EvilIcons"
+                        rightIconSize={45}
+                        rightIconOnPress={() => this.props.navigation.navigate('Profile')}
+                        rightIconColor='#ffffff'
+                        text="FIT&FIGHT"
+                        textStyle={{fontSize: 35, color: '#ffffff', fontFamily: 'Oswald'}}
+                    />
 
-                    <View style={{flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'space-around', flex: 1}}>
+                    <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around', flex: 1}}>
 
 
                         <WelcomeMotivational
-                            phrases={['ciaooo', 'peloooo', 'woooow']}
+                            phrases={['CIAOOO', 'PELOOOO', 'WOOOOW']}
                         />
 
-                        <View style={{flexDirection: 'column', marginLeft: 20}}>
-
-                            <View>
-                                <TouchableOpacity
-                                    onPress={() => {
-                                        this.props.navigation.push('Courses')
-                                    }}
-                                    style={{
-                                        marginTop: 20,
-                                        borderWidth: 5,
-                                        borderColor: '#3F5469',
-                                        backgroundColor: '#FFFFFF',
-                                        alignItems: 'center',
-                                    }}>
+                        <View style={{flexDirection: 'column', marginLeft: 20, opacity: 0.7}}>
 
 
-                                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                            <Animatable.View animation="pulse" easing="ease-out" iterationCount="infinite" >
 
-                                        <Text style={{
-                                            color:'#3F5469',
-                                            fontSize: width / 9,
-                                            paddingRight: width / 17,
-                                            paddingLeft: width / 17,
-                                            paddingBottom: width / 35,
-                                            fontFamily: 'Oswald'
+                                <Animatable.View animation="fadeInLeftBig" >
 
-                                        }}>
 
-                                            {'CORSI' + ' '}
-                                            <Ionicons name={Platform.OS === 'ios' ? 'ios-timer' : 'md-timer'} size={50} />
-                                        </Text>
+                                    <View>
+                                        <TouchableOpacity
+                                            onPress={() => {
+                                                this.props.navigation.push('CardDay')
 
+                                            }}
+                                            style={{
+                                                marginTop: 20,
+                                                borderRadius: 10,
+                                                backgroundColor: 'white',
+                                                alignItems: 'center',
+                                            }}>
+
+
+                                            <Text style={{
+                                                color: styles.textColor,
+                                                textAlign:'left',
+                                                fontSize: width / 8,
+                                                paddingRight: width / 17,
+                                                paddingLeft: width / 17,
+                                                paddingBottom: width / 35,
+                                                fontFamily: 'Oswald'
+                                            }}>
+                                                {'ALLENATI' + ' '}
+                                                <Ionicons name={Platform.OS === 'ios' ? 'ios-walk' : 'md-walk'} size={width / 8} />
+                                            </Text>
+
+
+                                        </TouchableOpacity>
                                     </View>
+                                </Animatable.View>
+                            </Animatable.View>
 
-                                </TouchableOpacity>
-                            </View>
-
-                            <View>
-                                <TouchableOpacity
-                                    onPress={() => {
-                                        this.props.navigation.push('CardDay')
-
-                                    }}
-                                    style={{
-                                        marginTop: 20,
-                                        borderWidth: 5,
-                                        borderColor: '#3F5469',
-                                        backgroundColor: '#FFFFFF',
-                                        alignItems: 'flex-start'
-                                    }}>
-
-
-                                    <Text style={{
-                                        color:'#3F5469',
-                                        textAlign:'left',
-                                        fontSize: width / 9,
-                                        paddingRight: width / 17,
-                                        paddingLeft: width / 17,
-                                        paddingBottom: width / 35,
-                                        fontFamily: 'Oswald'
-                                    }}>
-                                        {'ALLENATI' + ' '}
-                                        <Ionicons name={Platform.OS === 'ios' ? 'ios-walk' : 'md-walk'} size={50} />
-                                    </Text>
+                            <Animatable.View animation="pulse" easing="ease-in" iterationCount="infinite" >
+                                <Animatable.View animation="fadeInRightBig">
+                                    <View>
+                                        <TouchableOpacity
+                                            onPress={() => {
+                                                this.props.navigation.push('Courses')
+                                            }}
+                                            style={{
+                                                marginTop: 20,
+                                                borderRadius: 10,
+                                                backgroundColor: 'black',
+                                                alignItems: 'center',
+                                            }}>
 
 
-                                </TouchableOpacity>
-                            </View>
+                                            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+
+
+                                                <Text style={{
+                                                    color: styles.subtitle,
+                                                    fontSize: width / 8,
+                                                    paddingRight: width / 17,
+                                                    paddingLeft: width / 17,
+                                                    paddingBottom: width / 35,
+                                                    fontFamily: 'Oswald'
+
+                                                }}>
+
+                                                    {'CORSI' + ' '}
+                                                    <Ionicons name={Platform.OS === 'ios' ? 'ios-timer' : 'md-timer'} size={width / 8} />
+                                                </Text>
+
+                                            </View>
+
+                                        </TouchableOpacity>
+                                    </View>
+                                </Animatable.View>
+                            </Animatable.View>
+
 
 
                         </View>

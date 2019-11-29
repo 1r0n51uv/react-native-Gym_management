@@ -15,24 +15,20 @@ export default class ActiveCourses extends Component {
     return (
         <View style={{flexDirection: 'column'}}>
 
+            <Text style={{color: 'black', fontFamily: 'Oswald'}}>Data inizio:</Text>
 
-
-
-          <Text style={{color: '#3F5469', fontFamily: 'Oswald'}}>Corsi:</Text>
-
-          <TouchableOpacity
-              onPress={() => {
-                if (this.props.active) {
-                  this.props.navigation.push('Courses')
-                }
-              }}
-            style={{flexDirection: 'row'}}>
             <Text style={{
-              color: this.props.active ? '#4CD964' : '#EB3333',
-              fontSize: 25, fontFamily: 'Oswald'
-            }}>{this.props.active ? 'Vedi Corsi ' : 'Nessuna iscrizione '}</Text>
-            <Fontisto name={this.props.active ? 'angle-right' : 'close-a'} size={25} style={{marginTop: 5, color: this.props.active ? '#4CD964' : '#EB3333'}}/>
-          </TouchableOpacity>
+                color: 'black',
+                fontSize: 25, fontFamily: 'Oswald'
+            }}>{this.props.startDate}</Text>
+
+            <Text style={{color: 'black', fontFamily: 'Oswald'}}>Data fine:</Text>
+
+            <Text style={{
+                color: 'black',
+                fontSize: 25, fontFamily: 'Oswald'
+            }}>{this.props.endDate}</Text>
+
 
         </View>
 
