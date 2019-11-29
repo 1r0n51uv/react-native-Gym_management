@@ -4,11 +4,11 @@ import {Text, TouchableOpacity, SafeAreaView, View, StyleSheet, Dimensions, Imag
 import CardView from 'react-native-cardview'
 import { TextInput, Snackbar, Button } from 'react-native-paper';
 import firebase from 'react-native-firebase';
-const { height } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 import SplashScreen from 'react-native-splash-screen';
 import Reactotron from 'reactotron-react-native'
 import gymWallpaper from "./../assets/pelo.jpeg";
-import logo from "../assets/Fit&Fightlogo.png";
+import logo from "../assets/lastLogo.png";
 import * as Animatable from "react-native-animatable";
 
 
@@ -147,7 +147,7 @@ export default class Login extends Component {
 
                     <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
                         <View style={{flexDirection: 'column', flex: 1,  justifyContent: 'space-around'}}>
-                            <Animatable.Image source={logo} animation="pulse" easing="ease-out" iterationCount="infinite" style={{width: 180, height: 180, alignSelf: 'center'}}/>
+                            <Animatable.Image source={logo} animation="pulse" easing="ease-out" iterationCount="infinite" style={{width: width / 2, height: 180, alignSelf: 'center'}}/>
 
                             <Animatable.View ref={this.handleViewRef}>
                                 <CardView
@@ -157,7 +157,7 @@ export default class Login extends Component {
                                     style={{
                                         marginLeft: 24,
                                         marginRight: 24,
-                                        opacity: 0.9,
+                                        opacity: 0.7,
                                         backgroundColor: 'white'
                                     }}>
                                     <View style={{
@@ -172,7 +172,7 @@ export default class Login extends Component {
                                             onChangeText={email => this.setState({ email, em_err: false })}
                                             theme={{
                                                 colors: {
-                                                    primary: 'gray',
+                                                    primary: 'black',
                                                 }
                                             }}
                                         />
@@ -186,7 +186,7 @@ export default class Login extends Component {
                                             onChangeText={password => this.setState({ password, em_pas: false })}
                                             theme={{
                                                 colors: {
-                                                    primary: 'gray',
+                                                    primary: 'black',
                                                 }
                                             }}
                                         />

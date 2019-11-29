@@ -54,6 +54,11 @@ class WelcomeMotivational extends Component {
         this.animateCarousel()
     }
 
+    componentWillUnmount() {
+        this.view.stopAnimation();
+        timer.clearInterval(this);
+    }
+
     render() {
         return (
 
@@ -62,7 +67,7 @@ class WelcomeMotivational extends Component {
 
 
             <View style={{marginRight: width / 20, flexDirection: 'column', flexWrap: 'nowrap', alignSelf: 'center'}}>
-                <Animatable.View ref={this.handleViewRef} animation={'fadeInLeft'}>
+                <Animatable.View ref={this.handleViewRef} animation="fadeInLeft">
                     <Text style={{fontSize: width / 12, color: '#FFFFFF', fontFamily: 'Oswald'}}>
                         {'"' + this.state.currentPhrase.toUpperCase() + '"'}
                     </Text>
