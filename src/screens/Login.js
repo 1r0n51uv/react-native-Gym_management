@@ -10,6 +10,7 @@ import Reactotron from 'reactotron-react-native'
 import gymWallpaper from "./../assets/pelo.jpeg";
 import logo from "../assets/lastLogo.png";
 import * as Animatable from "react-native-animatable";
+import Privacy from "./privacy";
 
 
 export default class Login extends Component {
@@ -29,6 +30,7 @@ export default class Login extends Component {
             login_err: '',
             loading: false,
             check: false,
+            terms: false
         };
 
         this.login = this.login.bind(this);
@@ -36,6 +38,7 @@ export default class Login extends Component {
         this.parseError = this.parseError.bind(this);
         this.checkActiveAndRedirect = this.checkActiveAndRedirect.bind(this);
         this.checkLoggedUser = this.checkLoggedUser.bind(this);
+        this.checkTerms = this.checkTerms.bind(this);
 
     }
 
@@ -139,10 +142,23 @@ export default class Login extends Component {
 
     }
 
+    checkTerms() {
+
+        this.setState({terms: !this.state.terms})
+
+
+    }
+
 
     render() {
         return (
             <SafeAreaView backgroundColor={'#D8D8D8'}>
+
+
+                { this.state.terms === false && <Privacy
+                    returnTerms={this.checkTerms}
+                />}
+
                 <KeyboardAvoidingView enabled={true} behavior="position">
 
                     <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
