@@ -13,6 +13,8 @@ export default class ActiveCourses extends Component {
 
   render() {
     return (
+
+        (this.props.startDate !== undefined) &&
         <View style={{flexDirection: 'column'}}>
 
             <Text style={{color: 'black', fontFamily: 'Oswald'}}>Data inizio:</Text>

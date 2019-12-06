@@ -20,7 +20,7 @@ class CardDay extends Component {
             workouts: [],
             spinner: true,
             days: [],
-            tcardActive: true
+            tcardActive: false
         }
 
         this.getTrainingCard = this.getTrainingCard.bind(this);
@@ -55,10 +55,6 @@ class CardDay extends Component {
                     spinner: false
                 })
             }
-
-
-
-
             this.retriveDays();
         }).catch(error => {
             Reactotron.log(error);
@@ -99,7 +95,7 @@ class CardDay extends Component {
                     <ScrollView>
                         {this.state.spinner ? (<Spinner visible={this.state.spinner}/>) :
 
-                            (this.state.tcardActive ? (
+                            ( this.state.tcardActive === true && this.state.days.length > 0 ? (
 
                                 this.state.days.map((day, index) => (
 

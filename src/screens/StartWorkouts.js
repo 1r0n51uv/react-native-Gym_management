@@ -33,6 +33,7 @@ export default class StartWorkouts extends Component {
             infoModalVisible: false,
             workouts: [],
             spinner: true,
+            idCard: ''
         };
         this.returnData = this.returnData.bind(this);
         this.setInfoModalVisible = this.setInfoModalVisible.bind(this);
@@ -56,16 +57,18 @@ export default class StartWorkouts extends Component {
     }
 
     getTrainingCard(id) {
-        firebase.firestore().collection('TrainingCards').where('idUserDatabase', '==', id).get().then(value => {
+        firebase.firestore().collection('TrainingCards').where('idUserDatabase', '==', id)
+            .where('isActive', '==', true).get().then(value => {
             let dayOK = [];
             value.docs[0].data().exercises.map(work => {
                 if (work.day === this.props.navigation.getParam('day')) {
                     dayOK.push(work);
                 }
-            })
+            });
 
             this.setState({
-                workouts: dayOK
+                workouts: dayOK,
+                idCard: value.docs[0].id
             })
 
 
@@ -101,11 +104,11 @@ export default class StartWorkouts extends Component {
         AsyncStorage.clear();
     }
 
-    startTraining(workout, id) {
+    startTraining(workout, id, idCard) {
         workout.atTime ?
             this.props.navigation.push('WorkoutTime', {workout: workout, workID: id, statusID: false, returnData: this.returnData.bind(this)})
             :
-            this.props.navigation.push('WorkoutWeight', {workout: workout, workID: id, statusID: false, returnData: this.returnData.bind(this)})
+            this.props.navigation.push('WorkoutWeight', {workout: workout, workID: id, statusID: false, returnData: this.returnData.bind(this), idCard: idCard})
     }
 
     render() {
@@ -172,7 +175,7 @@ export default class StartWorkouts extends Component {
                                                     <Animatable.View key={index} animation={(index % 2 === 0) ? "fadeInLeft" : "fadeInRight"} >
 
                                                         <TouchableOpacity activeOpacity={0.5} delayPressIn={50} key={index} onPress={() => {
-                                                            this.startTraining(workout, index);
+                                                            this.startTraining(workout, index, this.state.idCard);
                                                         }}>
 
                                                             <WorkoutCard workout={workout}

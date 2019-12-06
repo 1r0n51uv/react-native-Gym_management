@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {Button, SafeAreaView, Image, Text, TouchableOpacity, View, Dimensions, Easing, ScrollView, Platform, ImageBackground, Linking} from 'react-native';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {Divider} from "react-native-paper";
+import firebase from 'react-native-firebase';
 
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 
@@ -42,7 +43,8 @@ export default class WorkoutWeight extends Component {
             doneWorkout: false, //WORKOUT IS DONE
             circularProgressAction: 'Inizia', //ACTION
             restSeries: 0,
-            size: 180
+            size: 180,
+            tmpCard: []
         };
 
         this.setWorkoutDone = this.setWorkoutDone.bind(this);
@@ -52,6 +54,7 @@ export default class WorkoutWeight extends Component {
         this.navigateBack = this.navigateBack.bind(this);
         this.startWorkout = this.startWorkout.bind(this);
         this.stopWorkouTimer = this.stopWorkouTimer.bind(this);
+        this.plusWeight = this.plusWeight.bind(this);
 
     }
 
@@ -168,13 +171,29 @@ export default class WorkoutWeight extends Component {
     }
 
     componentWillUnmount() {
+
         clearInterval(this);
         clearTimeout(this);
         this.circularProgress.animate().stop();
+        firebase.firestore().collection('TrainingCards').doc(this.props.navigation.getParam('idCard')).get().then(card => {
+            let tmpCard = card.data();
+            tmpCard.exercises.map(val => {
+                if (val.name === this.state.name) {
+                    val.weight = this.state.weight;
+                }
+            });
+            firebase.firestore().collection('TrainingCards').doc(this.props.navigation.getParam('idCard')).set(tmpCard).then(() => {
+                Reactotron.log('pelo');
+            })
+        }).catch(err => {
+            Reactotron.log(err);
+        })
 
     }
 
     componentDidMount() {
+
+
         this.setState({
             restSeries: this.state.numberOfSeries,
         })
@@ -202,6 +221,18 @@ export default class WorkoutWeight extends Component {
 
     }
 
+    plusWeight() {
+        this.setState({
+            weight: Number(this.state.weight) + 1
+        });
+    }
+
+    minusWeight() {
+        this.setState({
+            weight: Number(this.state.weight) - 1
+        });
+    }
+
 
     render() {
         return (
@@ -225,7 +256,7 @@ export default class WorkoutWeight extends Component {
                         leftIconOnPress={() => {
                             this.state.doneWorkout ? (this.navigateBack())
                                 :
-                                this.props.navigation.pop();
+                                this.props.navigation.replace('CardDay');
                         }}
                         leftIconColor='#ffffff'
                     />
@@ -275,7 +306,16 @@ export default class WorkoutWeight extends Component {
                                     <View style={{ flexDirection: 'column' }}>
                                         <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
                                             <Text style={{fontFamily: 'Oswald', fontSize: 25, color: 'black'}}>Peso:</Text>
-                                            <Text style={{fontFamily: 'Oswald', fontSize: 25}}>60Kg</Text>
+
+
+                                            <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+                                                <Fontisto style={{marginTop: 10, color: '#980f00', paddingRight: 10}} size={28} name={'minus-a'} onPress={() => {this.minusWeight()}}/>
+                                                <Text style={{fontFamily: 'Oswald', fontSize: 25}}>{this.state.weight + ' kg'}</Text>
+                                                <Fontisto style={{marginTop: 10, color: '#4CD964', paddingLeft: 10}} size={28} name={'plus-a'} onPress={() => {this.plusWeight()}}/>
+
+                                            </View>
+
+
                                         </View>
 
                                         <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
