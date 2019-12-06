@@ -29,6 +29,8 @@ class WelcomeMotivational extends Component {
     handleViewRef = ref => this.view = ref;
 
     fadeInLeft = () => this.view.fadeInLeft(1000).then(endState => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
+    fadeInRight= () => this.view.fadeInRight(1000).then(endState => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
+    fadeInUp= () => this.view.fadeInUp(1000).then(endState => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
 
 
     animateCarousel() {
@@ -40,7 +42,21 @@ class WelcomeMotivational extends Component {
                 index: this.state.index + 1
             });
 
-            this.fadeInLeft();
+            switch (this.state.index) {
+                case 0:
+                    this.fadeInRight();
+                    break;
+                case 1:
+                    this.fadeInLeft();
+                    break;
+                case 2:
+                    this.fadeInUp();
+                    break;
+                default:
+                    this.fadeInLeft();
+                    break;
+            }
+
 
         }, 5000);
     }
@@ -66,9 +82,9 @@ class WelcomeMotivational extends Component {
 
 
 
-            <View style={{marginRight: width / 20, flexDirection: 'column', flexWrap: 'nowrap', alignSelf: 'center'}}>
+            <View style={{flexDirection: 'column', flexWrap: 'nowrap', alignSelf: 'center', width: width / 1.5}}>
                 <Animatable.View ref={this.handleViewRef} animation="fadeInLeft">
-                    <Text style={{fontSize: width / 12, color: '#FFFFFF', fontFamily: 'Oswald'}}>
+                    <Text style={{fontSize: width / 15, color: '#FFFFFF', fontFamily: 'Oswald'}}>
                         {'"' + this.state.currentPhrase.toUpperCase() + '"'}
                     </Text>
                 </Animatable.View>

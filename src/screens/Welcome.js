@@ -97,7 +97,9 @@ export default class Welcome extends Component {
 
 
                         <WelcomeMotivational
-                            phrases={['CIAOOO', 'PELOOOO', 'WOOOOW']}
+                            phrases={['Il nostro compito nella vita non è superare gli altri ma superare noi stessi',
+                                'Non aspettare il momento giusto per fare le cose, l’unico momento giusto è adesso',
+                                'Il vero fallimento è rinunciare']}
                         />
 
                         <View style={{flexDirection: 'column', marginLeft: 20, opacity: 0.7}}>

@@ -32,9 +32,6 @@ class CardDay extends Component {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.getTrainingCard(user.uid);
-                this.setState({
-                    spinner: false
-                });
             }
         })
     }
@@ -45,6 +42,7 @@ class CardDay extends Component {
     getTrainingCard(id) {
         firebase.firestore().collection('TrainingCards').where('idUserDatabase', '==', id)
             .where('isActive', '==', true).get().then(value => {
+                Reactotron.log(value.docs.length);
             if  (value.docs.length > 0 ) {
                 this.setState({
                     workouts: value.docs[0].data().exercises,
@@ -53,7 +51,8 @@ class CardDay extends Component {
                 });
             } else {
                 this.setState({
-                    tcardActive: false
+                    tcardActive: false,
+                    spinner: false
                 })
             }
 
@@ -101,8 +100,8 @@ class CardDay extends Component {
                         {this.state.spinner ? (<Spinner visible={this.state.spinner}/>) :
 
                             (this.state.tcardActive ? (
-                                this.state.days.map((day, index) => (
 
+                                this.state.days.map((day, index) => (
 
                                     <Animatable.View key={index} animation={(index % 2 === 0) ? "fadeInLeftBig" : "fadeInRightBig"} >
 

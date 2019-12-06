@@ -325,7 +325,10 @@ export default class WorkoutTime extends Component {
                                         color: 'black',
                                         fontFamily: 'Oswald',
                                         fontSize: width / 12,
-                                        alignSelf: 'center'
+                                        alignSelf: 'center',
+                                        paddingRight: 10,
+                                        paddingLeft: 10,
+                                        paddingBottom: 10
                                     }}>{this.state.name}</Text>
 
                                     <View>

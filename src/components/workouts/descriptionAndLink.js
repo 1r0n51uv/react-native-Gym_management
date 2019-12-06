@@ -20,6 +20,7 @@ class DescriptionAndLink extends Component {
         }).catch((err) => console.error('An error occurred', err));
     }
 
+
     render() {
         return (
 
@@ -60,11 +61,9 @@ class DescriptionAndLink extends Component {
                     </CardView>
                 </Animatable.View>
 
-                <Animatable.View animation="fadeInLeftBig">
+                { this.props.link.length > 0 && <Animatable.View animation="fadeInLeftBig">
 
                     <View>
-
-
 
                         <TouchableOpacity onPress={() => {this.getLink(this.props.link)}}>
                             <View style={{flexDirection: 'row', justifyContent:'center', marginTop: 10}}>
@@ -83,7 +82,7 @@ class DescriptionAndLink extends Component {
                         </TouchableOpacity>
 
                     </View>
-                </Animatable.View>
+                </Animatable.View>}
 
             </View>
         );

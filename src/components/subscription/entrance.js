@@ -43,7 +43,7 @@ export default class Entrance extends Component {
         return (
             <View style={{flexDirection: 'column'}}>
 
-                <Text style={{color: '#007AFF'}}>Entrate rimanenti</Text>
+                <Text style={{color: 'black', fontFamily: 'Oswald'}}>Entrate rimanenti</Text>
 
                 <View style={{flexDirection: 'row', marginTop: 5, marginBottom: 5, flexWrap: "wrap"}}>
                     {

@@ -99,7 +99,7 @@ const AppNavigator = createStackNavigator(
         Courses: {
             screen: Courses,
             navigationOptions: {
-                header: navigationProps => <SafeAreaView><StockNav {...navigationProps} /></SafeAreaView>
+                header: null
             }
         },
 

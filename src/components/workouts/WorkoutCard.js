@@ -40,7 +40,7 @@ export default class WorkoutCard extends Component {
                     {/* NAME, WEIGHT, REPS, SERIES */}
 
                     <View style={{flexDirection: 'column', justifyContent: 'center', width: width / 2.5}}>
-                        <Text style={{fontSize: width / 15, fontFamily: 'Oswald', color: this.props.bgColor === 'white' ? 'black' : 'white'}}>{this.props.workout.name}</Text>
+                        <Text style={{fontSize: width / 20, fontFamily: 'Oswald', color: this.props.bgColor === 'white' ? 'black' : 'white', paddingBottom: 10}}>{this.props.workout.name}</Text>
                     </View>
 
 

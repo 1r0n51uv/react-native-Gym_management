@@ -15,11 +15,11 @@ export default class Periodical extends Component {
         <View style={{flexDirection: 'column'}}>
 
 
-          <Text style={{color: '#007AFF'}}>Inizio abbonamento</Text>
-          <Text style={{fontSize: 25}}>{this.props.start}</Text>
+          <Text style={{color: 'black', fontFamily: 'Oswald'}}>Inizio abbonamento</Text>
+          <Text style={{color: 'black', fontFamily: 'Oswald', fontSize: 25}}>{this.props.start}</Text>
 
-          <Text style={{color: '#007AFF'}}>Fine abbonamento</Text>
-          <Text style={{fontSize: 25}}>{this.props.end}</Text>
+          <Text style={{color: 'black', fontFamily: 'Oswald'}}>Fine abbonamento</Text>
+          <Text style={{color: 'black', fontFamily: 'Oswald', fontSize: 25}}>{this.props.end}</Text>
 
 
 

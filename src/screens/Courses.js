@@ -20,6 +20,7 @@ import CoursesCarousel from "../components/courses/coursesCarousel";
 import gymWallpaper from "../assets/pelo.jpeg";
 import {Divider} from "react-native-paper";
 import LinearGradient from "react-native-linear-gradient";
+import {ModernHeader} from "@freakycoder/react-native-header-view";
 
 @observer
 export default class  extends Component {
@@ -83,6 +84,21 @@ export default class  extends Component {
 
                 <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
 
+                    <ModernHeader
+                        rightIconName="user"
+                        rightIconType="EvilIcons"
+                        rightIconSize={45}
+                        rightIconOnPress={() => this.props.navigation.navigate('Profile')}
+                        rightIconColor='#ffffff'
+                        text="FIT&FIGHT"
+                        textStyle={{fontSize: 35, color: '#ffffff', fontFamily: 'Oswald'}}
+                        leftIconName="arrow-left"
+                        leftIconType="EvilIcons"
+                        leftIconSize={45}
+                        leftIconOnPress={() => {this.props.navigation.pop()}}
+                        leftIconColor='#ffffff'
+                    />
+
                     {this.state.spinner ? (<Spinner visible={this.state.spinner}/>) : (<ScrollView>
 
                         {
@@ -140,25 +156,23 @@ export default class  extends Component {
                                         cardMaxElevation={2}
                                         cornerRadius={8}
                                         style={{
-                                            marginTop: 24,
-                                            marginLeft: 24,
-                                            marginRight: 24,
-                                            marginBottom: 24,
-                                            backgroundColor: 'white'
-
+                                            marginTop: width / 20,
+                                            marginLeft: width / 10,
+                                            marginRight: width / 10,
+                                            marginBottom: width / 35,
+                                            opacity: 0.7,
+                                            backgroundColor: 'white',
                                         }}>
 
-                                        <View style={{justifyContent: 'center', flexDirection: 'column', marginTop: 5}}>
-                                            <Ionicons style={{color: '#007AFF', alignSelf: 'center'}} size={100}
-                                                      name={Platform.OS === 'ios' ? 'md-close-circle' : 'md-close-circle'}/>
-
+                                        <View style={{height: height/6, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
+                                            <Text style={{fontSize: width / 12, fontFamily: 'Oswald', color: 'black'}}>Nessun corso attivo</Text>
                                         </View>
                                     </CardView>
 
                                     <View style={{flexDirection: 'column'}}>
 
                                         <Text style={{
-                                            color: 'black',
+                                            color: 'white',
                                             fontFamily: 'Oswald',
                                             fontSize: 40,
                                             marginLeft: 60
@@ -169,12 +183,8 @@ export default class  extends Component {
                                             whichCarousel={true}
                                         />
                                     </View>
-
-
                                 </View>
                             )
-
-
                         }
 
                     </ScrollView>)}
