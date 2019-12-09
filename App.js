@@ -18,6 +18,7 @@ import {SafeAreaView} from "react-native";
 import WorkoutWeight from "./src/screens/workoutWeight";
 import SplashScreen from "react-native-splash-screen";
 import CardDay from "./src/components/workOrTrain/cardDay";
+import ChangePassword from "./src/screens/changePassword";
 
 
 
@@ -105,6 +106,13 @@ const AppNavigator = createStackNavigator(
 
         CardDay: {
             screen: CardDay,
+            navigationOptions: {
+                header: null
+            }
+        },
+
+        ChangePassword: {
+            screen: ChangePassword,
             navigationOptions: {
                 header: null
             }

@@ -42,6 +42,7 @@ export default class Profile extends Component {
         this.retrieveInfo2 = this.retrieveInfo2.bind(this);
         this.retrieveAnemic = this.retrieveAnemic.bind(this);
         this.retrieveSubscription = this.retrieveSubscription.bind(this);
+        this.changePassword = this.changePassword.bind(this);
     }
 
     componentDidMount() {
@@ -126,6 +127,10 @@ export default class Profile extends Component {
         })
     }
 
+    changePassword() {
+        this.props.navigation.navigate('ChangePassword');
+    }
+
     render() {
 
 
@@ -188,7 +193,7 @@ export default class Profile extends Component {
 
                                     <View style={{paddingLeft: 15, paddingRight: 15, marginTop: 10}}><Divider/></View>
 
-                                    { this.state.active === 0 && <ProfileTabOne userInfo={this.state.userInfo}/>
+                                    { this.state.active === 0 && <ProfileTabOne changePassword={() => this.changePassword()} userInfo={this.state.userInfo}/>
                                     }
 
                                     { this.state.active === 1 && <ProfileTabTwo userAnemic={this.state.anemic}/> }

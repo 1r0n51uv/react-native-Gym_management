@@ -79,12 +79,12 @@ export default class CoursesCarousel extends Component {
                                 marginTop: 5
                             }}>
                                 <Text style={{
-                                    fontSize: 15,
+                                    fontSize: width / 25,
                                     color: 'black',
                                     marginTop: 5,
                                     fontFamily: 'Oswald'
                                 }}>Istruttore:</Text>
-                                <Text style={{fontSize: 20, fontFamily: 'Oswald', color: 'black',}}>{' ' + item['instructor']}</Text>
+                                <Text style={{fontSize: width / 20, fontFamily: 'Oswald', color: 'black',}}>{' ' + item['instructor']}</Text>
                             </View>
 
                             <View style={{
@@ -93,7 +93,7 @@ export default class CoursesCarousel extends Component {
                                 marginTop: 5
                             }}>
                                 <Text style={{
-                                    fontSize: 15,
+                                    fontSize: width / 25,
                                     color: 'black',
                                     marginTop: 5,
                                     fontFamily: 'Oswald'
@@ -104,7 +104,7 @@ export default class CoursesCarousel extends Component {
                                     {
 
                                         item['weeklyFrequency'].map((workDay, index) =>(
-                                            <Text key={index} style={{fontSize: 18, marginTop: 2, fontFamily: 'Oswald', color: 'black'}}>{' ' + workDay.day + ' - ' + workDay.startTime.hour + ':' + workDay.endTime.minutes}</Text>
+                                            <Text key={index} style={{fontSize: width / 20, marginTop: 2, fontFamily: 'Oswald', color: 'black'}}>{' ' + workDay.day + ' - ' + workDay.startTime.hour + ':' + workDay.endTime.minutes + ' | ' + workDay.endTime.hour + ':' + workDay.endTime.minutes}</Text>
                                         ))
 
                                     }
@@ -119,13 +119,13 @@ export default class CoursesCarousel extends Component {
                                 marginTop: 5
                             }}>
                                 <Text style={{
-                                    fontSize: 15,
+                                    fontSize: width / 25,
                                     color: 'black',
                                     marginTop: 5,
                                     fontFamily: 'Oswald'
                                 }}>Inizio:</Text>
                                 <Text
-                                    style={{fontSize: 20, fontFamily: 'Oswald', color: 'black'}}>{' ' + item['period'].startDate }</Text>
+                                    style={{fontSize: width / 20, fontFamily: 'Oswald', color: 'black'}}>{' ' + item['period'].startDate }</Text>
                             </View>
 
 
@@ -186,12 +186,12 @@ export default class CoursesCarousel extends Component {
                                     marginTop: 5
                                 }}>
                                     <Text style={{
-                                        fontSize: 15,
+                                        fontSize: width / 25,
                                         color: 'black',
                                         marginTop: 5,
                                         fontFamily: 'Oswald'
                                     }}>Istruttore:</Text>
-                                    <Text style={{fontSize: 20, fontFamily: 'Oswald', color: 'black',}}>{' ' + item['instructor']}</Text>
+                                    <Text style={{fontSize: width / 20, fontFamily: 'Oswald', color: 'black',}}>{' ' + item['instructor']}</Text>
                                 </View>
 
                                 <View style={{
@@ -200,7 +200,7 @@ export default class CoursesCarousel extends Component {
                                     marginTop: 5
                                 }}>
                                     <Text style={{
-                                        fontSize: 15,
+                                        fontSize: width / 25,
                                         color: 'black',
                                         marginTop: 5,
                                         fontFamily: 'Oswald'
@@ -211,7 +211,7 @@ export default class CoursesCarousel extends Component {
                                         {
 
                                             item['weeklyFrequency'].map((workDay, index) =>(
-                                                <Text key={index} style={{fontSize: 18, marginTop: 2, fontFamily: 'Oswald', color: 'black'}}>{' ' + workDay.day + ' - ' + workDay.startTime.hour + ':' + workDay.endTime.minutes}</Text>
+                                                <Text key={index} style={{fontSize: width / 20, marginTop: 2, fontFamily: 'Oswald', color: 'black'}}>{' ' + workDay.day + ' - ' + workDay.startTime.hour + ':' + workDay.endTime.minutes + ' | ' + workDay.endTime.hour + ':' + workDay.endTime.minutes}</Text>
                                             ))
 
                                         }
@@ -220,36 +220,6 @@ export default class CoursesCarousel extends Component {
 
                                 </View>
 
-                                <View style={{
-                                    justifyContent: 'flex-start',
-                                    flexDirection: 'row',
-                                    marginTop: 5
-                                }}>
-                                    <Text style={{
-                                        fontSize: 15,
-                                        color: 'black',
-                                        marginTop: 5,
-                                        fontFamily: 'Oswald'
-                                    }}>Inizio:</Text>
-                                    <Text
-                                        style={{fontSize: 20, fontFamily: 'Oswald', color: 'black'}}>{' ' + item['period'].startDate }</Text>
-                                </View>
-
-
-                                <View style={{
-                                    justifyContent: 'flex-start',
-                                    flexDirection: 'row',
-                                    marginTop: 5
-                                }}>
-                                    <Text style={{
-                                        fontSize: 15,
-                                        color: 'black',
-                                        marginTop: 5,
-                                        fontFamily: 'Oswald'
-                                    }}>Fine:</Text>
-                                    <Text
-                                        style={{fontSize: 20, fontFamily: 'Oswald', color: 'black',}}>{' ' + item['period'].endDate}</Text>
-                                </View>
 
                             </View>
                         </View>

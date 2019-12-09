@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 
-import {StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View, TouchableOpacity, Dimensions} from 'react-native';
 import firebase from "react-native-firebase";
-// import styles from './styles';
+import {Divider} from "react-native-paper";
+const { height, width } = Dimensions.get("window");
+
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 export default class ProfileTabOne extends Component {
     constructor(props) {
@@ -31,6 +34,24 @@ export default class ProfileTabOne extends Component {
                 <Text style={styles.mainTitle}>Telefono</Text>
                 <Text style={styles.subtitle}>{this.props.userInfo ? this.props.userInfo['telephoneNumber'] : ' '}</Text>
 
+                <Divider/>
+
+                <TouchableOpacity
+                    style={{
+                        paddingTop: 5,
+                        paddingRight: 10,
+                        paddingLeft: 10,
+                        paddingBottom: 10,
+                        backgroundColor: 'gray',
+                        borderRadius: 10,
+                        width: width / 2,
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                        marginTop: 10
+                    }}
+                    onPress={() => {this.props.changePassword()}}>
+                    <Text style={styles.passTitle}>Cambia Password <Ionicons name={Platform.OS === 'ios' ? 'ios-lock' : 'md-lock'} style={{color: 'white'}} size={20} /></Text>
+                </TouchableOpacity>
             </View>
         );
     }
@@ -45,6 +66,11 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 25,
         fontFamily: 'Oswald'
+    },
+    passTitle: {
+        color: 'white',
+        fontFamily: 'Oswald',
+        fontSize: 20,
     }
 
 });

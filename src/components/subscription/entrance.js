@@ -45,18 +45,8 @@ export default class Entrance extends Component {
 
                 <Text style={{color: 'black', fontFamily: 'Oswald'}}>Entrate rimanenti</Text>
 
-                <View style={{flexDirection: 'row', marginTop: 5, marginBottom: 5, flexWrap: "wrap"}}>
-                    {
-                        this.state.remain.map((index) => (
-                            <Fontisto key={index} name={'ticket'} style={{color: 'green', marginLeft: (index > 0) ? 10 : 0}} size={30}/>
-                        ))
-                    }
-
-                    {
-                        this.state.total.map((index) => (
-                            <Fontisto key={index} name={'ticket'} style={{color: 'red', marginLeft: 10}} size={30}/>
-                        ))
-                    }
+                <View style={{flexDirection: 'row', marginTop: 5, marginBottom: 5}}>
+                    <Text style={{fontSize: 20, color: 'black', fontFamily: 'Oswald'}}>{this.props.entrance}</Text>
                 </View>
 
 

@@ -27,7 +27,7 @@ export default class WorkoutTime extends Component {
             },
             animationFill: 0, //STARTING ANIMATION POINT
             workOrRest: true, //WORK OR REST
-            progressColor: '#00e0ff', //PROGRESS COLOR
+            progressColor: 'gray', //PROGRESS COLOR
             timeOrAction: false, //SHOW ACTION OR TIMEOUT
             paused: false, //PAUSE CHRONO
             isWorking: false, //CHRONO IS ACTIVE
@@ -91,7 +91,7 @@ export default class WorkoutTime extends Component {
         timer.clearTimeout(this);
         this.setState({
             timeOrAction: true,
-            progressColor: '#00e0ff',
+            progressColor: 'gray',
             paused: false
         });
         timer.setInterval(this, 'workCounter', () => {
