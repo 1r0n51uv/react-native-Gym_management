@@ -61,7 +61,7 @@ class DescriptionAndLink extends Component {
                     </CardView>
                 </Animatable.View>
 
-                { this.props.link.length > 0 && <Animatable.View animation="fadeInLeftBig">
+                { (this.props.link !== null && this.props.link.length) > 0 && <Animatable.View animation="fadeInLeftBig">
 
                     <View>
 
