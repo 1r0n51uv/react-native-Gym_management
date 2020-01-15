@@ -42,7 +42,7 @@ class CardDay extends Component {
     getTrainingCard(id) {
         firebase.firestore().collection('TrainingCards').where('idUserDatabase', '==', id)
             .where('isActive', '==', true).get().then(value => {
-                Reactotron.log(value.docs.length);
+            Reactotron.log(value.docs.length);
             if  (value.docs.length > 0 ) {
                 this.setState({
                     workouts: value.docs[0].data().exercises,
@@ -61,14 +61,29 @@ class CardDay extends Component {
         })
     }
 
+
     retriveDays() {
-        let tmp_day = [];
-        this.state.workouts.map(work => {
-            tmp_day.push(work.day);
+
+        let days = [];
+        this.state.workouts.map((work, index) => {
+            switch (work.day) {
+                case 'Lunedi': days[0] = work.day; break;
+                case 'Martedi': days[1] = work.day; break;
+                case 'Mercoledi': days[2] = work.day; break;
+                case 'Giovedi': days[3] = work.day; break;
+                case 'Venerdi': days[4] = work.day; break;
+                case 'Sabato': days[5] = work.day; break;
+            }
         });
+        let days_ok = [];
+        days.map(value => {
+            days_ok.push(value);
+        });
+        Reactotron.log(days);
         this.setState({
-            days: [...new Set(tmp_day)]
+            days: days_ok
         })
+
     }
 
     render() {
@@ -97,37 +112,40 @@ class CardDay extends Component {
 
                             ( this.state.tcardActive === true && this.state.days.length > 0 ? (
 
+
                                 this.state.days.map((day, index) => (
 
-                                    <Animatable.View key={index} animation={(index % 2 === 0) ? "fadeInLeftBig" : "fadeInRightBig"} >
+                                    day !== '' && <Animatable.View key={index} animation={(index % 2 === 0) ? "fadeInLeftBig" : "fadeInRightBig"} >
 
-                                        <TouchableOpacity
-                                            activeOpacity={0.5} onPress={() => this.props.navigation.push('StartWorkout', {day})}>
+                                            <TouchableOpacity
+                                                activeOpacity={0.5} onPress={() => this.props.navigation.push('StartWorkout', {day})}>
 
-                                            <CardView
-                                                cardElevation={7}
-                                                cardMaxElevation={2}
-                                                cornerRadius={8}
-                                                style={{
-                                                    marginTop: width / 20,
-                                                    marginLeft: width / 10,
-                                                    marginRight: width / 10,
-                                                    marginBottom: width / 35,
-                                                    backgroundColor: (index % 2 === 0) ? 'black' : 'white',
-                                                    opacity: 0.7
-                                                }}>
+                                                <CardView
+                                                    cardElevation={7}
+                                                    cardMaxElevation={2}
+                                                    cornerRadius={8}
+                                                    style={{
+                                                        marginTop: width / 20,
+                                                        marginLeft: width / 10,
+                                                        marginRight: width / 10,
+                                                        marginBottom: width / 35,
+                                                        backgroundColor: (index % 2 === 0) ? 'black' : 'white',
+                                                        opacity: 0.7
+                                                    }}>
 
 
-                                                <View style={{height: height/6, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', borderRadius: 10}}>
-                                                    <Text style={{fontSize: width / 8, fontFamily: 'Oswald', color: (index % 2 === 0) ? 'white' : 'black'}}>{day.toUpperCase()}</Text>
-                                                </View>
-                                            </CardView>
+                                                    <View style={{height: height/6, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', borderRadius: 10}}>
+                                                        <Text style={{fontSize: width / 8, fontFamily: 'Oswald', color: (index % 2 === 0) ? 'white' : 'black'}}>{day.toUpperCase()}</Text>
+                                                    </View>
+                                                </CardView>
 
-                                        </TouchableOpacity>
+                                            </TouchableOpacity>
 
-                                    </Animatable.View>
+                                        </Animatable.View>
 
-                                ))
+                                    )
+
+                                )
                             ): (<NoTrainingCard />))}
 
                     </ScrollView>
