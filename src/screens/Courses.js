@@ -151,23 +151,6 @@ export default class  extends Component {
                             ) : (
 
                                 <View style={{justifyContent: 'space-between', flexDirection: 'column'}}>
-                                    <CardView
-                                        cardElevation={7}
-                                        cardMaxElevation={2}
-                                        cornerRadius={8}
-                                        style={{
-                                            marginTop: width / 20,
-                                            marginLeft: width / 10,
-                                            marginRight: width / 10,
-                                            marginBottom: width / 35,
-                                            opacity: 0.7,
-                                            backgroundColor: 'white',
-                                        }}>
-
-                                        <View style={{height: height/6, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
-                                            <Text style={{fontSize: width / 12, fontFamily: 'Oswald', color: 'black'}}>Nessun corso attivo</Text>
-                                        </View>
-                                    </CardView>
 
                                     <View style={{flexDirection: 'column'}}>
 

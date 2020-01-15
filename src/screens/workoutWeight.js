@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import {Button, SafeAreaView, Image, Text, TouchableOpacity, View, Dimensions, Easing, ScrollView, Platform, ImageBackground, Linking} from 'react-native';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import {Divider} from "react-native-paper";
+import {Divider, TextInput} from "react-native-paper";
 import firebase from 'react-native-firebase';
 
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
@@ -44,7 +44,8 @@ export default class WorkoutWeight extends Component {
             circularProgressAction: 'Inizia', //ACTION
             restSeries: 0,
             size: 180,
-            tmpCard: []
+            tmpCard: [],
+            textShow: false
         };
 
         this.setWorkoutDone = this.setWorkoutDone.bind(this);
@@ -178,7 +179,7 @@ export default class WorkoutWeight extends Component {
         firebase.firestore().collection('TrainingCards').doc(this.props.navigation.getParam('idCard')).get().then(card => {
             let tmpCard = card.data();
             tmpCard.exercises.map(val => {
-                if (val.name === this.state.name) {
+                if ((val.name === this.state.name) && this.state.weight > 1) {
                     val.weight = this.state.weight;
                 }
             });
@@ -193,6 +194,12 @@ export default class WorkoutWeight extends Component {
 
     componentDidMount() {
 
+
+        if(this.state.weight != 0) {
+            this.setState({
+                textShow: true
+            })
+        }
 
         this.setState({
             restSeries: this.state.numberOfSeries,
@@ -304,19 +311,34 @@ export default class WorkoutWeight extends Component {
                                     </View>
 
                                     <View style={{ flexDirection: 'column' }}>
-                                        <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
+
+
+                                        {
+                                            this.state.textShow ?
+                                            (<View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
                                             <Text style={{fontFamily: 'Oswald', fontSize: 25, color: 'black'}}>Peso:</Text>
 
 
                                             <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-                                                <Fontisto style={{marginTop: 10, color: '#980f00', paddingRight: 10}} size={28} name={'minus-a'} onPress={() => {this.minusWeight()}}/>
-                                                <Text style={{fontFamily: 'Oswald', fontSize: 25}}>{this.state.weight + ' kg'}</Text>
-                                                <Fontisto style={{marginTop: 10, color: '#4CD964', paddingLeft: 10}} size={28} name={'plus-a'} onPress={() => {this.plusWeight()}}/>
+
+                                                <TextInput
+                                                    keyboardType={'number-pad'}
+                                                    mode='outlined'
+                                                    value={this.state.weight}
+                                                    placeholder={this.state.weight}
+                                                    onChangeText={weight => this.setState({ weight })}
+                                                    theme={{
+                                                        colors: {
+                                                            primary: 'black',
+                                                        }
+                                                    }}
+                                                />
 
                                             </View>
 
 
-                                        </View>
+                                        </View>) : (<View/>)}
+
 
                                         <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
                                             <Text style={{fontFamily: 'Oswald', fontSize: 25, color: 'black'}}>Serie:</Text>

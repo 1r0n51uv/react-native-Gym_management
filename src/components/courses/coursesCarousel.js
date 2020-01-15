@@ -177,7 +177,7 @@ export default class CoursesCarousel extends Component {
                     <Card.Cover source={{ uri: item.image }} />
                     <Card.Content>
                         <View>
-                            <Title style={{ fontFamily: 'Oswald', fontSize: 30, paddingTop: 10, color: 'black'}}>{item.name}</Title>
+                            <Title style={{ fontFamily: 'Oswald', fontSize: 25, paddingTop: 10, color: 'black'}}>{item.name}</Title>
                             <Divider/>
                             <View>
                                 <View style={{
@@ -186,12 +186,12 @@ export default class CoursesCarousel extends Component {
                                     marginTop: 5
                                 }}>
                                     <Text style={{
-                                        fontSize: width / 25,
+                                        fontSize: width / 28,
                                         color: 'black',
                                         marginTop: 5,
                                         fontFamily: 'Oswald'
                                     }}>Istruttore:</Text>
-                                    <Text style={{fontSize: width / 20, fontFamily: 'Oswald', color: 'black',}}>{' ' + item['instructor']}</Text>
+                                    <Text style={{fontSize: width / 25, fontFamily: 'Oswald', color: 'black',}}>{' ' + item['instructor']}</Text>
                                 </View>
 
                                 <View style={{
@@ -200,7 +200,7 @@ export default class CoursesCarousel extends Component {
                                     marginTop: 5
                                 }}>
                                     <Text style={{
-                                        fontSize: width / 25,
+                                        fontSize: width / 28,
                                         color: 'black',
                                         marginTop: 5,
                                         fontFamily: 'Oswald'
@@ -211,7 +211,7 @@ export default class CoursesCarousel extends Component {
                                         {
 
                                             item['weeklyFrequency'].map((workDay, index) =>(
-                                                <Text key={index} style={{fontSize: width / 20, marginTop: 2, fontFamily: 'Oswald', color: 'black'}}>{' ' + workDay.day + ' - ' + workDay.startTime.hour + ':' + workDay.endTime.minutes + ' | ' + workDay.endTime.hour + ':' + workDay.endTime.minutes}</Text>
+                                                <Text key={index} style={{fontSize: width / 25, marginTop: 2, fontFamily: 'Oswald', color: 'black'}}>{' ' + workDay.day + ' - ' + workDay.startTime.hour + ':' + workDay.endTime.minutes + ' | ' + workDay.endTime.hour + ':' + workDay.endTime.minutes}</Text>
                                             ))
 
                                         }
