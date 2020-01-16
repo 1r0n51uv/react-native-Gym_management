@@ -29,6 +29,9 @@ class CardDay extends Component {
     }
 
     componentDidMount() {
+
+        Reactotron.log(this.props.navigation.getParam('day'));
+
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.getTrainingCard(user.uid);
@@ -42,7 +45,6 @@ class CardDay extends Component {
     getTrainingCard(id) {
         firebase.firestore().collection('TrainingCards').where('idUserDatabase', '==', id)
             .where('isActive', '==', true).get().then(value => {
-            Reactotron.log(value.docs.length);
             if  (value.docs.length > 0 ) {
                 this.setState({
                     workouts: value.docs[0].data().exercises,
@@ -79,12 +81,13 @@ class CardDay extends Component {
         days.map(value => {
             days_ok.push(value);
         });
-        Reactotron.log(days);
         this.setState({
             days: days_ok
         })
 
     }
+
+
 
     render() {
         return (
@@ -103,7 +106,7 @@ class CardDay extends Component {
                         leftIconName="arrow-left"
                         leftIconType="EvilIcons"
                         leftIconSize={45}
-                        leftIconOnPress={() => this.props.navigation.pop()}
+                        leftIconOnPress={() => this.props.navigation.navigate('Welcome')}
                         leftIconColor='#ffffff'
                     />
 
@@ -118,9 +121,10 @@ class CardDay extends Component {
                                     day !== '' && <Animatable.View key={index} animation={(index % 2 === 0) ? "fadeInLeftBig" : "fadeInRightBig"} >
 
                                             <TouchableOpacity
-                                                activeOpacity={0.5} onPress={() => this.props.navigation.push('StartWorkout', {day})}>
+                                                activeOpacity={0.5} onPress={() => this.props.navigation.navigate('StartWorkout', {day})}>
 
                                                 <CardView
+                                                    cardElevation={7}
                                                     cardElevation={7}
                                                     cardMaxElevation={2}
                                                     cornerRadius={8}

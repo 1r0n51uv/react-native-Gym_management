@@ -15,6 +15,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import DescriptionAndLink from "../components/workouts/descriptionAndLink";
 import gymWallpaper from "../assets/pelo.jpeg";
 import * as Animatable from 'react-native-animatable';
+import Spinner from "react-native-loading-spinner-overlay";
 
 const timer = require('react-native-timer');
 
@@ -45,7 +46,9 @@ export default class WorkoutWeight extends Component {
             restSeries: 0,
             size: 180,
             tmpCard: [],
-            textShow: false
+            textShow: false,
+            spinner: false,
+            toRedid: false
         };
 
         this.setWorkoutDone = this.setWorkoutDone.bind(this);
@@ -55,10 +58,33 @@ export default class WorkoutWeight extends Component {
         this.navigateBack = this.navigateBack.bind(this);
         this.startWorkout = this.startWorkout.bind(this);
         this.stopWorkouTimer = this.stopWorkouTimer.bind(this);
-        this.plusWeight = this.plusWeight.bind(this);
 
     }
 
+    updateWeight = () => {
+        this.setState({
+            spinner: true
+        });
+        firebase.firestore().collection('TrainingCards').doc(this.props.navigation.getParam('idCard')).get().then(card => {
+            let tmpCard = card.data();
+            tmpCard.exercises.map(val => {
+                if ((val.name === this.state.name) && this.state.weight > 1) {
+                    val.weight = this.state.weight;
+                }
+            });
+            firebase.firestore().collection('TrainingCards').doc(this.props.navigation.getParam('idCard')).set(tmpCard).then(() => {
+                this.setState({
+                    spinner: false,
+                    toRedir: true
+                })
+            }).catch(err => {
+                Reactotron.log(err);
+            })
+        }).catch(err => {
+            Reactotron.log(err);
+        })
+
+    }
 
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -176,24 +202,9 @@ export default class WorkoutWeight extends Component {
         clearInterval(this);
         clearTimeout(this);
         this.circularProgress.animate().stop();
-        firebase.firestore().collection('TrainingCards').doc(this.props.navigation.getParam('idCard')).get().then(card => {
-            let tmpCard = card.data();
-            tmpCard.exercises.map(val => {
-                if ((val.name === this.state.name) && this.state.weight > 1) {
-                    val.weight = this.state.weight;
-                }
-            });
-            firebase.firestore().collection('TrainingCards').doc(this.props.navigation.getParam('idCard')).set(tmpCard).then(() => {
-                Reactotron.log('pelo');
-            })
-        }).catch(err => {
-            Reactotron.log(err);
-        })
-
     }
 
     componentDidMount() {
-
 
         if(this.state.weight != 0) {
             this.setState({
@@ -228,17 +239,6 @@ export default class WorkoutWeight extends Component {
 
     }
 
-    plusWeight() {
-        this.setState({
-            weight: Number(this.state.weight) + 1
-        });
-    }
-
-    minusWeight() {
-        this.setState({
-            weight: Number(this.state.weight) - 1
-        });
-    }
 
 
     render() {
@@ -263,7 +263,9 @@ export default class WorkoutWeight extends Component {
                         leftIconOnPress={() => {
                             this.state.doneWorkout ? (this.navigateBack())
                                 :
-                                this.props.navigation.replace('CardDay');
+                                this.state.toRedir ? (this.props.navigation.navigate('StartWorkout', {dayer: this.props.navigation.getParam('day2')}))
+                                    :
+                                    (this.props.navigation.pop())
                         }}
                         leftIconColor='#ffffff'
                     />
@@ -271,239 +273,243 @@ export default class WorkoutWeight extends Component {
 
                     <ScrollView>
 
+                        {this.state.spinner ? (<Spinner visible={this.state.spinner}/>) :
 
-                        <Animatable.View animation="fadeIn" >
-                            <CardView
-                                cardElevation={7}
-                                cardMaxElevation={2}
-                                cornerRadius={8}
+                            <View>
+                                <Animatable.View animation="fadeIn" >
+                                    <CardView
+                                        cardElevation={7}
+                                        cardMaxElevation={2}
+                                        cornerRadius={8}
 
-                                style={{
-                                    marginLeft: 24,
-                                    marginRight: 24,
-                                    marginTop: 10,
-                                    flexDirection: 'column',
-                                    justifyContent: 'space-between',
-                                    backgroundColor: 'white',
-                                    opacity: 0.7
-                                }}>
-
-                                <View>
-
-                                    <View>
-                                        <Text style={{
-                                            color: 'black',
-                                            fontFamily: 'Oswald',
-                                            fontSize: width / 12,
-                                            alignSelf: 'center',
-                                            paddingRight: 10,
-                                            paddingLeft: 10,
-                                            paddingBottom: 10
-                                        }}>{this.state.name}</Text>
+                                        style={{
+                                            marginLeft: 24,
+                                            marginRight: 24,
+                                            marginTop: 10,
+                                            flexDirection: 'column',
+                                            justifyContent: 'space-between',
+                                            backgroundColor: 'white',
+                                            opacity: 0.7
+                                        }}>
 
                                         <View>
-                                            <Divider style={{height: 3, backgroundColor: 'black'}}/>
-                                        </View>
-                                    </View>
 
-                                    <View style={{backgroundColor: '#EFF0F0'}}>
-                                        <ImageBackground resizeMode={'contain'} source={{uri: this.state.gif}} style={{width: '100%', height: height/3.8}}/>
-                                    </View>
+                                            <View>
+                                                <Text style={{
+                                                    color: 'black',
+                                                    fontFamily: 'Oswald',
+                                                    fontSize: width / 12,
+                                                    alignSelf: 'center',
+                                                    paddingRight: 10,
+                                                    paddingLeft: 10,
+                                                    paddingBottom: 10
+                                                }}>{this.state.name}</Text>
 
-                                    <View style={{ flexDirection: 'column' }}>
-
-
-                                        {
-                                            this.state.textShow ?
-                                            (<View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
-                                            <Text style={{fontFamily: 'Oswald', fontSize: 25, color: 'black'}}>Peso:</Text>
-
-
-                                            <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-
-                                                <TextInput
-                                                    keyboardType={'number-pad'}
-                                                    mode='outlined'
-                                                    value={this.state.weight}
-                                                    placeholder={this.state.weight}
-                                                    onChangeText={weight => this.setState({ weight })}
-                                                    theme={{
-                                                        colors: {
-                                                            primary: 'black',
-                                                        }
-                                                    }}
-                                                />
-
+                                                <View>
+                                                    <Divider style={{height: 3, backgroundColor: 'black'}}/>
+                                                </View>
                                             </View>
 
+                                            <View style={{backgroundColor: '#EFF0F0'}}>
+                                                <ImageBackground resizeMode={'contain'} source={{uri: this.state.gif}} style={{width: '100%', height: height/3.8}}/>
+                                            </View>
 
-                                        </View>) : (<View/>)}
-
-
-                                        <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
-                                            <Text style={{fontFamily: 'Oswald', fontSize: 25, color: 'black'}}>Serie:</Text>
-                                            <Text style={{fontFamily: 'Oswald', fontSize: 25}}>{this.state.numberOfSeries}</Text>
-                                        </View>
-
-                                        <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
-                                            <Text style={{fontFamily: 'Oswald', fontSize: 25, color: 'black'}}>Ripetizioni:</Text>
-                                            <Text style={{fontFamily: 'Oswald', fontSize: 25}}>{this.state.numberOfRepetitions}</Text>
-                                        </View>
-
-                                        <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
-                                            <Text style={{fontFamily: 'Oswald', fontSize: 25, color: 'black'}}>Riposo:</Text>
-                                            <Text style={{fontFamily: 'Oswald', fontSize: 25}}>{this.state.snapshot.rest.min + 'm' +
-
-                                            ((this.state.snapshot.rest.sec !== 0 ||
-                                                this.state.snapshot.rest.sec !== '0' ||
-                                                this.state.snapshot.rest.sec !== '00') ? (' ' + this.state.snapshot.rest.sec + 's') : (''))}</Text>
-
-                                        </View>
-                                    </View>
-
-                                    <View style={{flexDirection: 'column', justifyContent:'center', padding: 10}}>
+                                            <View style={{ flexDirection: 'column' }}>
 
 
-                                        <AnimatedCircularProgress
-                                            ref={(ref) => this.circularProgress = ref}
-                                            size={this.state.size}
-                                            width={30}
-                                            rotation={0}
-                                            fill={this.state.doneWorkout ? 100 : this.state.animationFill}
-                                            backgroundColor={'#FFFFFF'}
-                                            tintColor={this.state.doneWorkout ? '#4CD964' : this.state.progressColor }
-                                            style={{alignSelf:'center'}}>
-                                            {
-                                                (fill) => (
-
-                                                    //CHECK IF WORKOUT IS DONE
-
-                                                    this.state.doneWorkout ?
+                                                {
+                                                    this.state.textShow ?
+                                                        (<View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
+                                                            <Text style={{fontFamily: 'Oswald', fontSize: 25, color: 'black'}}>Peso:</Text>
 
 
-                                                        (
-                                                            //IF TRUE RENDER COMPLETED CIRCULAR PROGRESS GO AHEAD
+                                                            <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
 
-                                                            <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                                                                <TouchableOpacity onPress={() => {
-                                                                    this.navigateBack();
-                                                                }}>
-                                                                    <Text style={{fontSize: 35, color: '#4CD964', fontFamily: 'Oswald' }} >{this.state.circularProgressAction}</Text>
-                                                                    <Fontisto style={{alignSelf: 'center', justifyContent: 'center', marginTop: 10, color: '#4CD964'}} size={30} name={'angle-dobule-right'}/>
+                                                                <TextInput
+                                                                    onSubmitEditing={() => this.updateWeight()}
+                                                                    keyboardType={'number-pad'}
+                                                                    mode='outlined'
+                                                                    value={this.state.weight}
+                                                                    placeholder={this.state.weight}
+                                                                    onChangeText={weight => this.setState({ weight })}
+                                                                    theme={{
+                                                                        colors: {
+                                                                            primary: 'black',
+                                                                        }
+                                                                    }}
+                                                                />
 
-                                                                </TouchableOpacity>
                                                             </View>
 
-                                                        ) :
 
-                                                        (
-                                                            //IF FALSE, CHECK IF RENDER WORK OR REST CIRCULAR PROGRESS
+                                                        </View>) : (<View/>)}
 
-                                                            this.state.workOrRest ?
+
+                                                <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
+                                                    <Text style={{fontFamily: 'Oswald', fontSize: 25, color: 'black'}}>Serie:</Text>
+                                                    <Text style={{fontFamily: 'Oswald', fontSize: 25}}>{this.state.numberOfSeries}</Text>
+                                                </View>
+
+                                                <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
+                                                    <Text style={{fontFamily: 'Oswald', fontSize: 25, color: 'black'}}>Ripetizioni:</Text>
+                                                    <Text style={{fontFamily: 'Oswald', fontSize: 25}}>{this.state.numberOfRepetitions}</Text>
+                                                </View>
+
+                                                <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
+                                                    <Text style={{fontFamily: 'Oswald', fontSize: 25, color: 'black'}}>Riposo:</Text>
+                                                    <Text style={{fontFamily: 'Oswald', fontSize: 25}}>{this.state.snapshot.rest.min + 'm' +
+
+                                                    ((this.state.snapshot.rest.sec !== 0 ||
+                                                        this.state.snapshot.rest.sec !== '0' ||
+                                                        this.state.snapshot.rest.sec !== '00') ? (' ' + this.state.snapshot.rest.sec + 's') : (''))}</Text>
+
+                                                </View>
+                                            </View>
+
+                                            <View style={{flexDirection: 'column', justifyContent:'center', padding: 10}}>
+
+
+                                                <AnimatedCircularProgress
+                                                    ref={(ref) => this.circularProgress = ref}
+                                                    size={this.state.size}
+                                                    width={30}
+                                                    rotation={0}
+                                                    fill={this.state.doneWorkout ? 100 : this.state.animationFill}
+                                                    backgroundColor={'#FFFFFF'}
+                                                    tintColor={this.state.doneWorkout ? '#4CD964' : this.state.progressColor }
+                                                    style={{alignSelf:'center'}}>
+                                                    {
+                                                        (fill) => (
+
+                                                            //CHECK IF WORKOUT IS DONE
+
+                                                            this.state.doneWorkout ?
+
 
                                                                 (
-                                                                    //IF TRUE, RENDER WORKOUT CIRCULAR PROGRESS
+                                                                    //IF TRUE RENDER COMPLETED CIRCULAR PROGRESS GO AHEAD
+
                                                                     <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                                                                        <TouchableOpacity onPress={() => {
+                                                                            this.navigateBack();
+                                                                        }}>
+                                                                            <Text style={{fontSize: 35, color: '#4CD964', fontFamily: 'Oswald' }} >{this.state.circularProgressAction}</Text>
+                                                                            <Fontisto style={{alignSelf: 'center', justifyContent: 'center', marginTop: 10, color: '#4CD964'}} size={30} name={'angle-dobule-right'}/>
 
-
-                                                                        {/* CHECK IF RENDER TIMER OR ACTION*/}
-                                                                        {this.state.timeOrAction ?
-
-                                                                            //IF TRUE RENDER TIMER
-                                                                            (
-                                                                                <TouchableOpacity onPress={() => {
-                                                                                    this.stopWorkouTimer()
-                                                                                }}>
-                                                                                    <Text style={{fontSize: 35, color: 'black', fontFamily: 'Oswald' }}>
-                                                                                        {this.state.circularProgressAction}
-                                                                                    </Text>
-                                                                                </TouchableOpacity>
-                                                                            )
-
-                                                                            :
-
-                                                                            //IF FALSE RENDER ACTION
-                                                                            (
-                                                                                <TouchableOpacity onPress={() => {
-                                                                                    this.startWorkout()
-                                                                                }}>
-
-                                                                                    <Text style={{fontSize: 35, color: 'black', fontFamily: 'Oswald' }}>
-                                                                                        {this.state.circularProgressAction}
-                                                                                    </Text>
-
-                                                                                    {
-                                                                                        this.state.circularProgressAction === 'Allenati' ?
-                                                                                            (<Fontisto style={{alignSelf: 'center', justifyContent: 'center', marginTop: 10}} size={30} name={'play'}/>)
-                                                                                            :
-                                                                                            (<View/>)
-                                                                                    }
-
-                                                                                </TouchableOpacity>
-                                                                            )
-
-                                                                        }
-
-
+                                                                        </TouchableOpacity>
                                                                     </View>
-                                                                )
 
-                                                                :
+                                                                ) :
 
                                                                 (
-                                                                    //IF FALSE, RENDER REST CIRCULAR PROGRESS
-                                                                    <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                                                                    //IF FALSE, CHECK IF RENDER WORK OR REST CIRCULAR PROGRESS
+
+                                                                    this.state.workOrRest ?
+
+                                                                        (
+                                                                            //IF TRUE, RENDER WORKOUT CIRCULAR PROGRESS
+                                                                            <View style={{alignItems: 'center', justifyContent: 'center'}}>
 
 
-                                                                        {/* CHECK IF RENDER TIMER OR ACTION*/}
-                                                                        {this.state.timeOrAction ?
+                                                                                {/* CHECK IF RENDER TIMER OR ACTION*/}
+                                                                                {this.state.timeOrAction ?
 
-                                                                            //IF TRUE RENDER TIMER
-                                                                            (
+                                                                                    //IF TRUE RENDER TIMER
+                                                                                    (
+                                                                                        <TouchableOpacity onPress={() => {
+                                                                                            this.stopWorkouTimer()
+                                                                                        }}>
+                                                                                            <Text style={{fontSize: 35, color: 'black', fontFamily: 'Oswald' }}>
+                                                                                                {this.state.circularProgressAction}
+                                                                                            </Text>
+                                                                                        </TouchableOpacity>
+                                                                                    )
 
-                                                                                <Text style={{fontSize: 35}}>
-                                                                                    {this.state.rest.min + ':' + this.state.rest.sec}
-                                                                                </Text>
+                                                                                    :
 
-                                                                            )
+                                                                                    //IF FALSE RENDER ACTION
+                                                                                    (
+                                                                                        <TouchableOpacity onPress={() => {
+                                                                                            this.startWorkout()
+                                                                                        }}>
 
-                                                                            :
+                                                                                            <Text style={{fontSize: 35, color: 'black', fontFamily: 'Oswald' }}>
+                                                                                                {this.state.circularProgressAction}
+                                                                                            </Text>
 
-                                                                            //IF FALSE RENDER ACTION
-                                                                            (
+                                                                                            {
+                                                                                                this.state.circularProgressAction === 'Allenati' ?
+                                                                                                    (<Fontisto style={{alignSelf: 'center', justifyContent: 'center', marginTop: 10}} size={30} name={'play'}/>)
+                                                                                                    :
+                                                                                                    (<View/>)
+                                                                                            }
 
-                                                                                <Text style={{fontSize: 35}}>
-                                                                                    {this.state.circularProgressAction}
-                                                                                </Text>
-                                                                            )
-                                                                        }
+                                                                                        </TouchableOpacity>
+                                                                                    )
+
+                                                                                }
 
 
-                                                                    </View>
+                                                                            </View>
+                                                                        )
+
+                                                                        :
+
+                                                                        (
+                                                                            //IF FALSE, RENDER REST CIRCULAR PROGRESS
+                                                                            <View style={{alignItems: 'center', justifyContent: 'center'}}>
+
+
+                                                                                {/* CHECK IF RENDER TIMER OR ACTION*/}
+                                                                                {this.state.timeOrAction ?
+
+                                                                                    //IF TRUE RENDER TIMER
+                                                                                    (
+
+                                                                                        <Text style={{fontSize: 35}}>
+                                                                                            {this.state.rest.min + ':' + this.state.rest.sec}
+                                                                                        </Text>
+
+                                                                                    )
+
+                                                                                    :
+
+                                                                                    //IF FALSE RENDER ACTION
+                                                                                    (
+
+                                                                                        <Text style={{fontSize: 35}}>
+                                                                                            {this.state.circularProgressAction}
+                                                                                        </Text>
+                                                                                    )
+                                                                                }
+
+
+                                                                            </View>
+
+                                                                        )
 
                                                                 )
 
                                                         )
+                                                    }
 
-                                                )
-                                            }
-
-                                        </AnimatedCircularProgress>
+                                                </AnimatedCircularProgress>
 
 
 
-                                    </View>
-                                </View>
+                                            </View>
+                                        </View>
 
-                            </CardView>
-                        </Animatable.View>
+                                    </CardView>
+                                </Animatable.View>
 
 
-                        <DescriptionAndLink
-                            description={this.state.description}
-                            link={this.state.link}
-                        />
-
+                                <DescriptionAndLink
+                                    description={this.state.description}
+                                    link={this.state.link}
+                                />
+                            </View>
+                        }
 
                     </ScrollView>
 

@@ -6,19 +6,14 @@ import {
     Text,
     SafeAreaView,
     Dimensions,
-    Platform,
     TouchableOpacity,
     ScrollView, ImageBackground,
 } from 'react-native';
 const { height, width } = Dimensions.get("window");
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import WorkoutCard from '../components/workouts/WorkoutCard';
-import EditModal from '../components/modals/editModal';
-import InfoModal from '../components/modals/infoModal';
 import firebase from "react-native-firebase";
 import Spinner from "react-native-loading-spinner-overlay";
 import AsyncStorage from '@react-native-community/async-storage';
-import startWork from './../assets/startworkout.gif'
 import gymWallpaper from "../assets/pelo.jpeg";
 import {ModernHeader} from "@freakycoder/react-native-header-view";
 import * as Animatable from 'react-native-animatable';
@@ -33,7 +28,8 @@ export default class StartWorkouts extends Component {
             infoModalVisible: false,
             workouts: [],
             spinner: true,
-            idCard: ''
+            idCard: '',
+            uid: null
         };
         this.returnData = this.returnData.bind(this);
         this.setInfoModalVisible = this.setInfoModalVisible.bind(this);
@@ -44,16 +40,21 @@ export default class StartWorkouts extends Component {
 
 
     componentDidMount() {
+
+        //Reactotron.log(this.props.navigation.getParam('day'));
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.getTrainingCard(user.uid);
                 this.setState({
-                    spinner: false
+                    spinner: false,
+                    uid: user.uid
                 })
             } else {
                 Reactotron.log('NO USER');
             }
         })
+
+
     }
 
     getTrainingCard(id) {
@@ -96,8 +97,6 @@ export default class StartWorkouts extends Component {
 
     }
 
-
-
     componentWillUnmount() {
         this.setEditModalVisible(false);
         this.setInfoModalVisible(false);
@@ -108,7 +107,14 @@ export default class StartWorkouts extends Component {
         workout.atTime ?
             this.props.navigation.push('WorkoutTime', {workout: workout, workID: id, statusID: false, returnData: this.returnData.bind(this)})
             :
-            this.props.navigation.push('WorkoutWeight', {workout: workout, workID: id, statusID: false, returnData: this.returnData.bind(this), idCard: idCard})
+            this.props.navigation.push('WorkoutWeight', {workout: workout, workID: id, statusID: false, returnData: this.returnData.bind(this), idCard: idCard, day2: this.props.navigation.getParam('day')})
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.navigation.getParam('dayer') !== undefined) {
+            this.getTrainingCard(this.state.uid);
+            //this.forceUpdate();
+        }
     }
 
     render() {
@@ -133,11 +139,7 @@ export default class StartWorkouts extends Component {
                     />
 
 
-
-
                     <ScrollView contentContainerStyle={{paddingBottom: 20}}>
-
-
                         {
                             this.state.workouts.length > 0 ? (
 
@@ -195,8 +197,6 @@ export default class StartWorkouts extends Component {
                                 ) :
                                 (<Spinner visible={this.state.spinner}/>)
                         }
-
-
 
                     </ScrollView>
 

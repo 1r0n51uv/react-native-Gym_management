@@ -191,7 +191,7 @@ export default class CoursesCarousel extends Component {
                                         marginTop: 5,
                                         fontFamily: 'Oswald'
                                     }}>Istruttore:</Text>
-                                    <Text style={{fontSize: width / 25, fontFamily: 'Oswald', color: 'black',}}>{' ' + item['instructor']}</Text>
+                                    <Text style={{fontSize: width / 25, fontFamily: 'Oswald', color: 'black', marginTop: width / 140}}>{' ' + item['instructor']}</Text>
                                 </View>
 
                                 <View style={{
