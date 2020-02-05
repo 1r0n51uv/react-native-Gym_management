@@ -21,6 +21,7 @@ import gymWallpaper from "../assets/pelo.jpeg";
 import {Divider} from "react-native-paper";
 import LinearGradient from "react-native-linear-gradient";
 import {ModernHeader} from "@freakycoder/react-native-header-view";
+import GymHours from "../components/courses/gymHours";
 
 @observer
 export default class  extends Component {
@@ -99,25 +100,27 @@ export default class  extends Component {
                         leftIconColor='#ffffff'
                     />
 
+
+
                     {this.state.spinner ? (<Spinner visible={this.state.spinner}/>) : (<ScrollView>
 
                         {
 
                             this.state.fireCourse.length > 0  ? (
 
+
                                 <View>
+                                    <GymHours />
 
                                     <View style={{flexDirection: 'column'}}>
-                                        <View style={{backgroundColor: 'white', opacity: 0.7}}>
+
                                             <Text style={{
-                                                color: 'black',
+                                                color: 'white',
                                                 fontFamily: 'Oswald',
                                                 fontSize: width / 10,
-                                                alignSelf: 'center',
-                                                marginBottom: 15,
-                                                marginTop: 10,
-                                            }}>I TUOI CORSI</Text>
-                                        </View>
+                                                marginLeft: 60
+                                            }}>I tuoi corsi</Text>
+
 
                                         <CoursesCarousel
                                             courses={this.state.fireCourse}
@@ -126,18 +129,16 @@ export default class  extends Component {
 
                                     </View>
 
+                                    <Divider/>
+
                                     <View style={{flexDirection: 'column'}}>
 
-                                        <View style={{backgroundColor: 'black', opacity: 0.7}}>
-                                            <Text style={{
-                                                color: 'white',
-                                                fontFamily: 'Oswald',
-                                                fontSize: width / 10,
-                                                alignSelf: 'center',
-                                                marginBottom: 15,
-                                                marginTop: 10,
-                                            }}>SCOPRI ALTRI CORSI</Text>
-                                        </View>
+                                        <Text style={{
+                                            color: 'white',
+                                            fontFamily: 'Oswald',
+                                            fontSize: width / 10,
+                                            marginLeft: 60
+                                        }}>Scopri altri corsi</Text>
 
                                         <CoursesCarousel
                                             courses={this.state.allCourse}
@@ -157,7 +158,7 @@ export default class  extends Component {
                                         <Text style={{
                                             color: 'white',
                                             fontFamily: 'Oswald',
-                                            fontSize: 40,
+                                            fontSize: width / 10,
                                             marginLeft: 60
                                         }}>I nostri corsi</Text>
 

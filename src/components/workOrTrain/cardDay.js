@@ -139,11 +139,14 @@ class CardDay extends Component {
 
 
                                                     <View style={{height: height/6, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', borderRadius: 10}}>
-                                                        <Text style={{fontSize: width / 8, fontFamily: 'Oswald', color: (index % 2 === 0) ? 'white' : 'black'}}>{day.toUpperCase()}</Text>
+                                                        <Text style={{fontSize: width / 8, fontFamily: 'Oswald', color: (index % 2 === 0) ? 'white' : 'black'}}>{day}</Text>
                                                     </View>
                                                 </CardView>
 
                                             </TouchableOpacity>
+
+
+
 
                                         </Animatable.View>
 
