@@ -4,20 +4,21 @@ import {Button, SafeAreaView, Image, Text, TouchableOpacity, View, Dimensions, E
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {Divider, TextInput} from "react-native-paper";
 import firebase from 'react-native-firebase';
-
+import Sound from 'react-native-sound';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
-
 import {ModernHeader} from '@freakycoder/react-native-header-view';
 import CardView from 'react-native-cardview';
 const { height, width } = Dimensions.get("window");
 import Reactotron from 'reactotron-react-native'
-import AsyncStorage from '@react-native-community/async-storage';
 import DescriptionAndLink from "../components/workouts/descriptionAndLink";
 import gymWallpaper from "../assets/pelo.jpeg";
 import * as Animatable from 'react-native-animatable';
 import Spinner from "react-native-loading-spinner-overlay";
+import reactotron from "reactotron-react-native";
 
 const timer = require('react-native-timer');
+
+
 
 
 export default class WorkoutWeight extends Component {
@@ -48,7 +49,8 @@ export default class WorkoutWeight extends Component {
             tmpCard: [],
             textShow: false,
             spinner: false,
-            toRedid: false
+            toRedid: false,
+
         };
 
         this.setWorkoutDone = this.setWorkoutDone.bind(this);
@@ -61,28 +63,34 @@ export default class WorkoutWeight extends Component {
 
     }
 
+
+
     updateWeight = () => {
         this.setState({
             spinner: true
-        });
-        firebase.firestore().collection('TrainingCards').doc(this.props.navigation.getParam('idCard')).get().then(card => {
-            let tmpCard = card.data();
-            tmpCard.exercises.map(val => {
-                if ((val.name === this.state.name) && this.state.weight > 1) {
-                    val.weight = this.state.weight;
-                }
-            });
-            firebase.firestore().collection('TrainingCards').doc(this.props.navigation.getParam('idCard')).set(tmpCard).then(() => {
-                this.setState({
-                    spinner: false,
-                    toRedir: true
+        }, () => {
+            firebase.firestore().collection('TrainingCards').doc(this.props.navigation.getParam('idCard')).get().then(card => {
+                let tmpCard = card.data();
+                tmpCard.exercises.map(val => {
+                    if ((val.name === this.state.name) && this.state.weight > 1) {
+                        val.weight = this.state.weight;
+                    }
+                });
+                firebase.firestore().collection('TrainingCards').doc(this.props.navigation.getParam('idCard')).set(tmpCard).then(() => {
+                    this.setState({
+                        spinner: false,
+                        toRedir: true
+                    }, () => {
+                        reactotron.log('updated')
+                    })
+                }).catch(err => {
+                    Reactotron.log(err);
                 })
             }).catch(err => {
                 Reactotron.log(err);
             })
-        }).catch(err => {
-            Reactotron.log(err);
-        })
+        });
+
 
     }
 
@@ -111,7 +119,7 @@ export default class WorkoutWeight extends Component {
             circularProgressAction: 'Allenati',
             progressColor: '#4CD964'
         })
-        this.circularProgress.animate(100, 1000, Easing.quad);
+        this.circularProgress.animate(100, 1000, Easing.linear);
     }
 
     startRestTimer() {
@@ -127,6 +135,8 @@ export default class WorkoutWeight extends Component {
         }
         timer.clearTimeout(this);
         this.setState({timeOrAction: true, progressColor: '#FCD533'});
+
+
         timer.setInterval(this, 'restCounter', () => {
             this.setState({
                 rest: {
@@ -136,12 +146,27 @@ export default class WorkoutWeight extends Component {
             })
         }, 1000);
 
+
         this.circularProgress.animate(100, (this.state.rest.min * 60 * 1000) +
-            (this.state.rest.sec * 1000), Easing.quad);
+            (this.state.rest.sec * 1000), Easing.linear);
 
     }
 
     stopRestTimer() {
+
+        const sound = new Sound('https://fitandfight.it/ding.mp3',
+            undefined,
+            error => {
+                if (error) {
+                    reactotron.log(error)
+                } else {
+                    reactotron.log("Playing sound");
+                    sound.play(() => {
+                        // Release when it's done so we're not using up resources
+                        sound.release();
+                    });
+                }
+            });
 
         this.setState({
             timeOrAction: false,
@@ -160,23 +185,67 @@ export default class WorkoutWeight extends Component {
                 Reactotron.log(this.state.restSeries + ' ' + this.state.numberOfSeries);
             }}, 2000);
 
-        this.circularProgress.animate(0, 2000, Easing.quad);
+        this.circularProgress.animate(0, 2000, Easing.linear);
 
 
     }
 
 
 
+    stopWorkouTimer() {
+
+
+        const sound = new Sound('ding.mp3',
+            undefined,
+            error => {
+                if (error) {
+                    reactotron.log(error)
+                    reactotron.log("hey")
+                } else {
+                    reactotron.log("Playing sound");
+                    sound.play(() => {
+                        // Release when it's done so we're not using up resources
+                        sound.release();
+
+                    });
+                }
+            });
+
+        this.setState({
+            timeOrAction: false,
+            progressColor: '#4CD964',
+            circularProgressAction: 'Riposo',
+        }, () => {
+
+        }) ;
+        timer.clearInterval(this);
+        timer.setTimeout(this, 'workCounter', () => {
+            this.setState({
+                workOrRest: false,
+                rest: {
+                    min: this.state.snapshot.rest.min,
+                    sec: this.state.snapshot.rest.sec
+                }
+            });
+            this.startRestTimer();
+        }, 2000);
+        this.setState({numberOfSeries: this.state.numberOfSeries - 1});
+
+        this.circularProgress.animate(0, 2000, Easing.linear);
+
+    }
+
 
 //SET ENVIROMENT TO END WORKOUT
     setWorkoutDone() {
+
         this.setState({
             doneWorkout: true,
             progressColor: '#4CD964',
             circularProgressAction: 'Avanti'
         });
         Reactotron.log('end');
-        this.circularProgress.animate(100, 0, Easing.quad)
+        this.circularProgress.animate(100, 0, Easing.linear)
 
     }
 
@@ -184,7 +253,7 @@ export default class WorkoutWeight extends Component {
 
     resetTimer() {
         this.pauseTimer();
-        this.circularProgress.animate(0,0,Easing.quad);
+        this.circularProgress.animate(0,0,Easing.linear);
         this.setState({
             rest: this.state.snapshot.rest,
             timeOrAction: false
@@ -212,30 +281,16 @@ export default class WorkoutWeight extends Component {
             })
         }
 
+
+
         this.setState({
             restSeries: this.state.numberOfSeries,
         })
     }
 
-    stopWorkouTimer() {
-        this.setState({
-            timeOrAction: false,
-            progressColor: '#4CD964',
-            circularProgressAction: 'Riposo',
-        });
-        timer.clearInterval(this);
-        timer.setTimeout(this, 'workCounter', () => {
-            this.setState({
-                workOrRest: false,
-                rest: {
-                    min: this.state.snapshot.rest.min,
-                    sec: this.state.snapshot.rest.sec
-                }
-            });
-            this.startRestTimer();
-        }, 2000);
-        this.setState({numberOfSeries: this.state.numberOfSeries - 1});
-        this.circularProgress.animate(0, 2000, Easing.quad);
+
+
+    playSound = () => {
 
     }
 
@@ -325,10 +380,17 @@ export default class WorkoutWeight extends Component {
 
                                                             <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
 
+
+
+
+
                                                                 <TextInput
+                                                                    onBlur={() => this.updateWeight()}
                                                                     onSubmitEditing={() => this.updateWeight()}
                                                                     keyboardType={'number-pad'}
                                                                     mode='outlined'
+                                                                    width={width / 6}
+                                                                    onFocus={() => this.setState({weight: null})}
                                                                     value={this.state.weight}
                                                                     placeholder={this.state.weight}
                                                                     onChangeText={weight => this.setState({ weight })}

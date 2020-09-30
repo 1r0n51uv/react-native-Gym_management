@@ -45,6 +45,8 @@ target 'fitandfight' do
 
   pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
 
+  pod 'RNSound', :path => '../node_modules/react-native-sound'
+
   target 'fitandfightTests' do
     inherit! :search_paths
     # Pods for testing

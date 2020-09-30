@@ -11,6 +11,7 @@ import gymWallpaper from "./../assets/pelo.jpeg";
 import logo from "../assets/lastLogo.png";
 import * as Animatable from "react-native-animatable";
 import Privacy from "./privacy";
+import reactotron from "reactotron-react-native";
 
 
 export default class Login extends Component {

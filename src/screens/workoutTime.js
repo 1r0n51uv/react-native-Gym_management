@@ -11,8 +11,14 @@ import Reactotron from 'reactotron-react-native'
 import DescriptionAndLink from "../components/workouts/descriptionAndLink";
 import gymWallpaper from "../assets/pelo.jpeg";
 import * as Animatable from "react-native-animatable";
+import reactotron from "reactotron-react-native";
+import {ding} from "../../android/app/src/main/res/raw/ding.mp3";
 
 const timer = require('react-native-timer');
+
+const Sound = require('react-native-sound');
+Sound.setCategory('Playback');
+
 
 
 export default class WorkoutTime extends Component {
@@ -34,7 +40,12 @@ export default class WorkoutTime extends Component {
             doneWorkout: false, //WORKOUT IS DONE
             circularProgressAction: 'Inizia', //ACTION
             restSeries: 0,
-            size: 180
+            size: 180,
+            player: new Sound(ding, Sound.MAIN_BUNDLE, (error) => {
+                if (error) {
+                    reactotron.log('failed to load the sound', error);
+                }
+            })
         };
 
         this.setWorkoutDone = this.setWorkoutDone.bind(this);
@@ -86,6 +97,7 @@ export default class WorkoutTime extends Component {
                     sec: 60
                 }
             })
+
         }
 
         timer.clearTimeout(this);
@@ -113,7 +125,9 @@ export default class WorkoutTime extends Component {
         this.setState({
             paused: true
         });
+
         timer.clearInterval(this);
+
         this.circularProgress.animate().stop();
     }
 
@@ -245,6 +259,7 @@ export default class WorkoutTime extends Component {
                     sec: 60
                 }
             })
+
         }
 
         if (this.state.rest.sec === 0 || this.state.rest.sec === '0' || this.state.rest.sec === '00') {

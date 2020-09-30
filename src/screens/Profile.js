@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
-
-import {View, Text, ScrollView, SafeAreaView, TouchableOpacity, Platform, Image, ImageBackground} from 'react-native';
+import {
+    View,
+    Dimensions,
+    ScrollView,
+    SafeAreaView,
+    TouchableOpacity,
+    Platform,
+    Image,
+    ImageBackground,
+    Text
+} from 'react-native';
 import {Avatar, Button, Divider, TextInput} from 'react-native-paper';
 import avatar from './../assets/ProfileInfo.png'
 import CardView from 'react-native-cardview'
@@ -36,7 +45,8 @@ export default class Profile extends Component {
             spinner: true,
             anemic: null,
             subscription: null,
-            userInfo: null
+            userInfo: null,
+            anemicID: null
         };
 
         this.retrieveInfo2 = this.retrieveInfo2.bind(this);
@@ -80,6 +90,7 @@ export default class Profile extends Component {
 
             this.setState({
                 anemic: value.docs[0].data(),
+                anemicID: value.docs[0].id,
                 spinner: false,
 
             }).catch(err => {
@@ -130,6 +141,8 @@ export default class Profile extends Component {
     changePassword() {
         this.props.navigation.navigate('ChangePassword');
     }
+
+
 
     render() {
 
@@ -196,7 +209,7 @@ export default class Profile extends Component {
                                     { this.state.active === 0 && <ProfileTabOne changePassword={() => this.changePassword()} userInfo={this.state.userInfo}/>
                                     }
 
-                                    { this.state.active === 1 && <ProfileTabTwo userAnemic={this.state.anemic}/> }
+                                    { this.state.active === 1 && <ProfileTabTwo userAnemic={this.state.anemic} anemicID={this.state.anemicID}/> }
 
                                     { this.state.active === 2 && <ProfileTabThree navigation={this.props.navigation} userSubscription={this.state.subscription}/> }
 
