@@ -12,12 +12,10 @@ import DescriptionAndLink from "../components/workouts/descriptionAndLink";
 import gymWallpaper from "../assets/pelo.jpeg";
 import * as Animatable from "react-native-animatable";
 import reactotron from "reactotron-react-native";
-import {ding} from "../../android/app/src/main/res/raw/ding.mp3";
 
 const timer = require('react-native-timer');
 
 const Sound = require('react-native-sound');
-Sound.setCategory('Playback');
 
 
 
@@ -40,12 +38,7 @@ export default class WorkoutTime extends Component {
             doneWorkout: false, //WORKOUT IS DONE
             circularProgressAction: 'Inizia', //ACTION
             restSeries: 0,
-            size: 180,
-            player: new Sound(ding, Sound.MAIN_BUNDLE, (error) => {
-                if (error) {
-                    reactotron.log('failed to load the sound', error);
-                }
-            })
+            size: 180
         };
 
         this.setWorkoutDone = this.setWorkoutDone.bind(this);
@@ -116,7 +109,7 @@ export default class WorkoutTime extends Component {
         }, 1000);
 
         this.circularProgress.animate(100, (this.state.work.min * 60 * 1000) +
-            (this.state.work.sec * 1000), Easing.quad);
+            (this.state.work.sec * 1000), Easing.linear);
 
 
     }
@@ -133,6 +126,23 @@ export default class WorkoutTime extends Component {
 
 
     stopWorkouTimer() {
+
+        const sound = new Sound('clock.mp3',
+            undefined,
+            error => {
+                if (error) {
+                    reactotron.log(error)
+                    reactotron.log("hey")
+                } else {
+                    reactotron.log("Playing sound");
+                    sound.play(() => {
+                        // Release when it's done so we're not using up resources
+                        sound.release();
+
+                    });
+                }
+            });
+
         this.setState({
             timeOrAction: false,
             progressColor: '#4CD964',
@@ -148,14 +158,15 @@ export default class WorkoutTime extends Component {
                 }
             });
             this.startRestTimer();
-        }, 2000);
+        }, 3000);
         this.setState({numberOfSeries: this.state.numberOfSeries - 1})
-        this.circularProgress.animate(0, 2000, Easing.quad);
+        this.circularProgress.animate(0, 3000, Easing.linear);
 
     }
 
 
     startRestTimer() {
+
         if (this.state.rest.sec === 0 || this.state.rest.sec === '0' || this.state.rest.sec === '00') {
             Reactotron.log(this.state.rest);
 
@@ -178,11 +189,25 @@ export default class WorkoutTime extends Component {
         }, 1000);
 
         this.circularProgress.animate(100, (this.state.rest.min * 60 * 1000) +
-            (this.state.rest.sec * 1000), Easing.quad);
+            (this.state.rest.sec * 1000), Easing.linear);
 
     }
 
     stopRestTimer() {
+
+        const sound = new Sound('clock.mp3',
+            undefined,
+            error => {
+                if (error) {
+                    reactotron.log(error)
+                } else {
+                    reactotron.log("Playing sound");
+                    sound.play(() => {
+                        // Release when it's done so we're not using up resources
+                        sound.release();
+                    });
+                }
+            });
 
         this.setState({
             timeOrAction: false,
@@ -203,9 +228,9 @@ export default class WorkoutTime extends Component {
                 this.setWorkoutDone();
             } else {
                 Reactotron.log(this.state.restSeries + ' ' + this.state.numberOfSeries);
-            }}, 2000);
+            }}, 3000);
 
-        this.circularProgress.animate(0, 2000, Easing.quad);
+        this.circularProgress.animate(0, 3000, Easing.linear);
 
 
     }
@@ -221,7 +246,7 @@ export default class WorkoutTime extends Component {
             circularProgressAction: 'Avanti'
         });
         Reactotron.log('end');
-        this.circularProgress.animate(100, 0, Easing.quad)
+        this.circularProgress.animate(100, 0, Easing.linear)
 
     }
 
@@ -229,7 +254,7 @@ export default class WorkoutTime extends Component {
 
     resetTimer() {
         this.pauseTimer();
-        this.circularProgress.animate(0,0,Easing.quad);
+        this.circularProgress.animate(0,0,Easing.linear);
         this.setState({
             work: this.state.snapshot.work,
             rest: this.state.snapshot.rest,

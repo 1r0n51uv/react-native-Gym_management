@@ -4,7 +4,7 @@ import {Button, SafeAreaView, Image, Text, TouchableOpacity, View, Dimensions, E
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {Divider, TextInput} from "react-native-paper";
 import firebase from 'react-native-firebase';
-import Sound from 'react-native-sound';
+const Sound = require('react-native-sound');
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import {ModernHeader} from '@freakycoder/react-native-header-view';
 import CardView from 'react-native-cardview';
@@ -154,7 +154,7 @@ export default class WorkoutWeight extends Component {
 
     stopRestTimer() {
 
-        const sound = new Sound('https://fitandfight.it/ding.mp3',
+        const sound = new Sound('clock.mp3',
             undefined,
             error => {
                 if (error) {
@@ -194,22 +194,6 @@ export default class WorkoutWeight extends Component {
 
     stopWorkouTimer() {
 
-
-        const sound = new Sound('ding.mp3',
-            undefined,
-            error => {
-                if (error) {
-                    reactotron.log(error)
-                    reactotron.log("hey")
-                } else {
-                    reactotron.log("Playing sound");
-                    sound.play(() => {
-                        // Release when it's done so we're not using up resources
-                        sound.release();
-
-                    });
-                }
-            });
 
         this.setState({
             timeOrAction: false,

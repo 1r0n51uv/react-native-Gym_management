@@ -75,6 +75,7 @@ class CardDay extends Component {
                 case 'Giovedi': days[3] = work.day; break;
                 case 'Venerdi': days[4] = work.day; break;
                 case 'Sabato': days[5] = work.day; break;
+                case 'Domenica': days[6] = work.day; break;
             }
         });
         let days_ok = [];

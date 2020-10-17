@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* fitandfightTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* fitandfightTests.m */; };
 		0889ADBF237C0E9F00DCAE18 /* Oswald-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0889ADBE237C0E9E00DCAE18 /* Oswald-Regular.ttf */; };
+		08B3E7E0252760DA0092ADC6 /* clock.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 08B3E7DF252760DA0092ADC6 /* clock.mp3 */; };
 		08F71C092372BB2100171C10 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08F71C082372BB2100171C10 /* GoogleService-Info.plist */; };
-		08F802222520DB3600C1318A /* ding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 08F802212520DB3500C1318A /* ding.mp3 */; };
 		093FD86081134DBF8242ADE6 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96333446DA0449DAAF072B39 /* Entypo.ttf */; };
 		0A2569B35FF24A8A8329F82D /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 774D82C8EB6F433EBEEABBF7 /* AntDesign.ttf */; };
 		1375A6DB089142768F3A6D5C /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6621EE7AF3B84F77B679FDD8 /* FontAwesome.ttf */; };
@@ -74,8 +74,8 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* fitandfightTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = fitandfightTests.m; sourceTree = "<group>"; };
 		0889ADBE237C0E9E00DCAE18 /* Oswald-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Regular.ttf"; sourceTree = "<group>"; };
+		08B3E7DF252760DA0092ADC6 /* clock.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clock.mp3; sourceTree = SOURCE_ROOT; };
 		08F71C082372BB2100171C10 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		08F802212520DB3500C1318A /* ding.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = ding.mp3; path = ../android/app/src/main/res/raw/ding.mp3; sourceTree = "<group>"; };
 		124DE8994DA6456E487A95DC /* Pods-fitandfightTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fitandfightTests.release.xcconfig"; path = "Target Support Files/Pods-fitandfightTests/Pods-fitandfightTests.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* fitandfight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fitandfight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = fitandfight/AppDelegate.h; sourceTree = "<group>"; };
@@ -232,7 +232,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				08F802212520DB3500C1318A /* ding.mp3 */,
+				08B3E7DF252760DA0092ADC6 /* clock.mp3 */,
 				08F71C082372BB2100171C10 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* fitandfight */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -449,7 +449,6 @@
 				08F71C092372BB2100171C10 /* GoogleService-Info.plist in Resources */,
 				8D8A8E8B8F0F4251B5D68A87 /* Foundation.ttf in Resources */,
 				3773FACAA280427FA5F59964 /* Ionicons.ttf in Resources */,
-				08F802222520DB3600C1318A /* ding.mp3 in Resources */,
 				47199EA129FA4D28AA6EE4A1 /* MaterialCommunityIcons.ttf in Resources */,
 				BC3CBFCC09844EABB825A908 /* MaterialIcons.ttf in Resources */,
 				9419A8B1D6924B7EAE0EA746 /* Octicons.ttf in Resources */,
@@ -464,6 +463,7 @@
 				0889ADBF237C0E9F00DCAE18 /* Oswald-Regular.ttf in Resources */,
 				2B2AABDC278343E1853268D4 /* ProfileInfo.png in Resources */,
 				E2E0A8EA34EA4986BE21F231 /* test.gif in Resources */,
+				08B3E7E0252760DA0092ADC6 /* clock.mp3 in Resources */,
 				BF45C230974949309EA89F81 /* testgif.gif in Resources */,
 				8124F11D0F8849F6994824F6 /* wall1.jpeg in Resources */,
 			);
@@ -806,11 +806,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1.2;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = fitandfight/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -830,10 +831,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1.2;
 				DEVELOPMENT_TEAM = UXUWMR94SC;
 				INFOPLIST_FILE = fitandfight/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

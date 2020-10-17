@@ -17,6 +17,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 import gymWallpaper from "../assets/pelo.jpeg";
 import {ModernHeader} from "@freakycoder/react-native-header-view";
 import * as Animatable from 'react-native-animatable';
+import reactotron from "reactotron-react-native";
+import moment from "moment";
 
 export default class StartWorkouts extends Component {
     constructor(props) {
@@ -57,19 +59,47 @@ export default class StartWorkouts extends Component {
 
     }
 
+
+
     getTrainingCard(id) {
+
         firebase.firestore().collection('TrainingCards').where('idUserDatabase', '==', id)
             .where('isActive', '==', true).get().then(value => {
             let dayOK = [];
+            let updateExField = [];
+
+
             value.docs[0].data().exercises.map(work => {
-                if (work.day === this.props.navigation.getParam('day')) {
-                    dayOK.push(work);
+
+                    if (work.status === undefined) {
+                        updateExField.push({...work, status: ""})
+                    } else {
+                        updateExField.push(this.checkDate(work))
+                    }
+
+                    if (work.day === this.props.navigation.getParam('day')) {
+                        dayOK.push(work);
+                    }
                 }
-            });
+            );
+
+
 
             this.setState({
                 workouts: dayOK,
-                idCard: value.docs[0].id
+                idCard: value.docs[0].id,
+                spinner: true
+            }, () => {
+                if (updateExField.length > 0) {
+                    firebase.firestore().collection('TrainingCards').doc(value.docs[0].id).update({exercises: updateExField})
+                        .then(() => {
+                            this.setState({spinner: false}, () => {
+                                reactotron.log("appost")
+                            })
+                        }).catch((err => {
+                        reactotron.log(err)
+                    }));
+                }
             })
 
 
@@ -80,7 +110,22 @@ export default class StartWorkouts extends Component {
 
     returnData(id, status) {
         let tmp = [...this.state.workouts];
-        tmp[id].status = status;
+        if (status) {
+            let date = new Date();
+            let today = date.getDate()+'-'+(date.getMonth()+1)+"-"+date.getFullYear();
+            tmp[id].status = today;
+            this.setState({
+                spinner: true
+            }, () => {
+                firebase.firestore().collection("TrainingCards").doc(this.state.idCard).update({
+                    exercises: tmp
+                }).then(() => {
+                    this.setState({spinner: false})
+                })
+            })
+
+        }
+
         this.setState({
             workouts: tmp
         })
@@ -116,6 +161,19 @@ export default class StartWorkouts extends Component {
             //this.forceUpdate();
         }
     }
+
+    checkDate = (work) => {
+        let date = new Date();
+        let mom = moment(work.status, "DD-MM-YYYY");
+        if (date.getDate() > mom.date()) {
+            work.status = "";
+            return work;
+        } else {
+            return work;
+        }
+    }
+
+
 
     render() {
         return (
@@ -161,13 +219,15 @@ export default class StartWorkouts extends Component {
 
                                                 (
                                                     <Animatable.View key={index} animation={(index % 2 === 0) ? "fadeInLeft" : "fadeInRight"} >
+                                                        <TouchableOpacity activeOpacity={0.5} delayPressIn={50} key={index} onPress={() => {
+                                                            this.startTraining(workout, index, this.state.idCard);
+                                                        }}>
+                                                            <WorkoutCard key={index}
+                                                                         bgColor={'#4CD964'}
+                                                                         workout={workout}
 
-                                                        <WorkoutCard key={index}
-                                                                     bgColor={'#4CD964'}
-                                                                     doneWorkout={workout.status}
-                                                                     workout={workout}
-
-                                                        />
+                                                            />
+                                                        </TouchableOpacity>
                                                     </Animatable.View>
                                                 )
 
