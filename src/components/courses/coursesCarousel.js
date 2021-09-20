@@ -139,7 +139,7 @@ export default class CoursesCarousel extends Component {
                                             ' - ' +
                                             workDay.startTime.hour +
                                             ':' +
-                                            workDay.endTime.minutes +
+                                            workDay.startTime.minutes +
                                             ' | ' +
                                             workDay.endTime.hour +
                                             ':' +
@@ -302,7 +302,7 @@ export default class CoursesCarousel extends Component {
                                                 ' - ' +
                                                 workDay.startTime.hour +
                                                 ':' +
-                                                workDay.endTime.minutes +
+                                                workDay.startTime.minutes +
                                                 ' | ' +
                                                 workDay.endTime.hour +
                                                 ':' +
