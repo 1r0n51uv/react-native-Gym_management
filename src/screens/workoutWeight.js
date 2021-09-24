@@ -307,6 +307,8 @@ export default class WorkoutWeight extends Component {
                                     (this.props.navigation.pop())
                         }}
                         leftIconColor='#ffffff'
+                        backgroundColor="#000000"
+
                     />
 
 

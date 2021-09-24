@@ -91,6 +91,8 @@ export default class Welcome extends Component {
                         rightIconColor='#ffffff'
                         text="FIT&FIGHT"
                         textStyle={{fontSize: 35, color: '#ffffff', fontFamily: 'Oswald'}}
+                        backgroundColor="#000000"
+
                     />
 
                     <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around', flex: 1}}>

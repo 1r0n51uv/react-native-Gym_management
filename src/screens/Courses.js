@@ -98,6 +98,7 @@ export default class  extends Component {
                         leftIconSize={45}
                         leftIconOnPress={() => {this.props.navigation.pop()}}
                         leftIconColor='#ffffff'
+                        backgroundColor="#000000"
                     />
 
 

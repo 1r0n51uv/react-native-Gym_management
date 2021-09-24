@@ -11,7 +11,6 @@ export default class TrainOrCourseNav extends Component {
         return (
 
                 <ModernHeader
-                    backgroundColor='black'
                     leftIconName='ios-arrow-back'
                     leftIconOnPress={() => this.props.navigation.pop()}
                     rightComponent={
@@ -22,6 +21,8 @@ export default class TrainOrCourseNav extends Component {
                             <EvilIcons name="user" type="EvilIcons" size={40} color='#FFFFFF'/>
                         </TouchableOpacity>
                     }
+                    backgroundColor="#000000"
+
                 />
 
         );

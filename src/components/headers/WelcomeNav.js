@@ -19,6 +19,7 @@ export default class WelcomeNav extends Component {
                     rightIconColor='#ffffff'
                     text="FIT&FIGHT"
                     textStyle={{fontSize: 35, color: '#ffffff', fontFamily: 'Oswald'}}
+                    backgroundColor="#000000"
                 />
 
         );

@@ -332,6 +332,8 @@ export default class WorkoutTime extends Component {
                                 this.props.navigation.pop();
                         }}
                         leftIconColor='#ffffff'
+                        backgroundColor="#000000"
+
                     />
 
 

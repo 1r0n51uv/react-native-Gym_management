@@ -25,7 +25,7 @@ export default class WorkoutNav extends Component {
         return (
 
                 <ModernHeader
-                    backgroundColor='black'
+                    backgroundColor="#000000"
                     leftIconComponent={
                         <TouchableOpacity
                             onPress={() => {

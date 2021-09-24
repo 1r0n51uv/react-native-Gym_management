@@ -161,6 +161,7 @@ export default class Profile extends Component {
                         leftIconSize={45}
                         leftIconOnPress={() => this.props.navigation.pop()}
                         leftIconColor='#ffffff'
+                        backgroundColor="#000000"
                     />
 
                 {this.state.userInfo ?
