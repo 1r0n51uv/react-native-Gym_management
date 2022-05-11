@@ -103,7 +103,7 @@ export default class Login extends Component {
         }).catch(err => {
             Reactotron.log(err);
             this.bounce();
-            this.setState({loading: false, visible: true, login_err: this.parseError(err.code)})
+            this.setState({loading: false, visible: true, login_err: this.parseError(err.message)})
         })
 
     }
@@ -121,7 +121,7 @@ export default class Login extends Component {
             case 'auth/user-disabled':
                 return 'Utente disabilitato';
             case 'auth/unknown':
-                return 'Errore generico, controlla la connessione e riprova';
+                return err;
             default:
                 return err;
         }

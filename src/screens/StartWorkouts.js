@@ -89,17 +89,6 @@ export default class StartWorkouts extends Component {
                 workouts: dayOK,
                 idCard: value.docs[0].id,
                 spinner: true
-            }, () => {
-                if (updateExField.length > 0) {
-                    firebase.firestore().collection('TrainingCards').doc(value.docs[0].id).update({exercises: updateExField})
-                        .then(() => {
-                            this.setState({spinner: false}, () => {
-                                reactotron.log("appost")
-                            })
-                        }).catch((err => {
-                        reactotron.log(err)
-                    }));
-                }
             })
 
 
