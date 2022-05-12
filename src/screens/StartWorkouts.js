@@ -105,13 +105,7 @@ export default class StartWorkouts extends Component {
             tmp[id].status = today;
             this.setState({
                 spinner: true
-            }, () => {
-                firebase.firestore().collection("TrainingCards").doc(this.state.idCard).update({
-                    exercises: tmp
-                }).then(() => {
-                    this.setState({spinner: false})
-                })
-            })
+            }, () => { })
 
         }
 
