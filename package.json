@@ -38,7 +38,7 @@
     "react-native-modal": "^11.5.6",
     "react-native-paper": "^3.1.1",
     "react-native-pure-chart": "0.0.24",
-    "react-native-reanimated": "^1.4.0",
+    "react-native-reanimated": "^2.10.0",
     "react-native-screens": "^2.0.0-alpha.7",
     "react-native-snap-carousel": "^3.8.4",
     "react-native-sound": "^0.11.0",
